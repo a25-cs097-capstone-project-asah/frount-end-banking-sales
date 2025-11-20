@@ -1,0 +1,349 @@
+/* =========================================
+   RESET & DASAR
+========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================
+   PALET WARNA & TOKENS GLOBAL
+========================================= */
+:root {
+  /* Palet utama (sesuai tone) */
+  --brand-primary: #001a9d; /* Deep Ocean */
+  --brand-secondary: #294762; /* Denim */
+  --brand-accent: #008080; /* Teal */
+  --brand-gray: #607d8b; /* Blue Gray */
+  --brand-dark: #36454f; /* Charcoal */
+
+  /* Turunan UI */
+  --bg: #121821;
+  --bg-soft: #1a2432;
+  --bg-card: #1e2837;
+  --primary: var(--brand-primary);
+  --primary-soft: rgba(0, 26, 157, 0.22);
+  --primary-border: rgba(0, 26, 157, 0.45);
+  --accent: var(--brand-accent);
+  --accent-soft: rgba(0, 128, 128, 0.2);
+
+  --text: #f5f7fa;
+  --text-soft: #cfd8dc;
+
+  --border: rgba(255, 255, 255, 0.15);
+
+  --warning: #facc15;
+  --danger: #ef4444;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 16px 35px rgba(0, 0, 0, 0.6);
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Inter",
+    sans-serif;
+  background: radial-gradient(
+    circle at top,
+    #001a9d 0%,
+    #294762 40%,
+    #121821 100%
+  );
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Global container */
+#root {
+  min-height: 100vh;
+}
+
+/* Tipografi */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+p {
+  color: var(--text-soft);
+}
+
+/* Helpers */
+.full-width {
+  width: 100%;
+}
+
+.mb-16 {
+  margin-bottom: 1rem;
+}
+
+/* =========================================
+   BUTTONS (GLOBAL)
+========================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.7rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary),
+    var(--brand-secondary)
+  );
+  border-color: var(--primary-border);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 26, 157, 0.55);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 42px rgba(0, 128, 128, 0.7);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: rgba(245, 247, 250, 0.8);
+  color: #f5f7fa;
+}
+
+.btn-outline:hover {
+  background: rgba(245, 247, 250, 0.1);
+  border-color: #ffffff;
+}
+
+.btn-link {
+  background: transparent;
+  border: none;
+  color: var(--brand-accent);
+  font-size: 0.9rem;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   FINAL SIDEBAR LIGHT MODE – RAPIH & KONSISTEN
+   ========================================================= */
+
+/* Background sidebar */
+html.light .sidebar {
+  background: linear-gradient(135deg, #b3cfe5 0%, #4a7fa7 65%, #1a3d63 100%);
+  border-right: 1px solid #9ebcd6;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER: Banking Portal + tombol theme */
+.sidebar-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-title-row h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* tombol theme bulat */
+.theme-toggle-btn {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: #f6fafd !important;
+  border: 2px solid rgba(179, 207, 229, 0.9) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10, 25, 49, 0.25);
+}
+
+.theme-toggle-btn i {
+  font-size: 1.2rem;
+  color: #0a1931 !important;
+}
+
+/* NAV ITEMS */
+.sidebar-nav {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.4rem;
+  color: #f4f8ff !important;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  transition: 0.25s;
+}
+
+.nav-item i {
+  margin-right: 12px;
+  font-size: 1.1rem;
+  color: inherit !important;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.nav-item.active {
+  background: rgba(255, 255, 255, 0.85);
+  color: #0a1931 !important;
+}
+
+/* Badges */
+.badge {
+  margin-left: auto;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+.badge-danger {
+  background: #ff5b5b;
+}
+
+/* =============== SIDEBAR LIGHT MODE – TEKS PUTIH =============== */
+html.light .sidebar .nav-item,
+html.light .sidebar .nav-item span,
+html.light .sidebar .nav-item i {
+  color: #ffffff !important;
+}
+
+/* Judul "Banking Portal" */
+html.light .sidebar-header h3 {
+  color: #ffffff !important;
+}
+
+/* Nama & role user di bawah */
+html.light .user-profile .user-info h4,
+html.light .user-profile .user-info p {
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   DARK MODE SIDEBAR FIX
+========================================================= */
+
+/* Background utama sidebar (dark mode) */
+html:not(.light) .sidebar {
+  background: linear-gradient(180deg, #0b1523 0%, #11253b 45%, #0d1a2b 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Text menu */
+html:not(.light) .sidebar .nav-item,
+html:not(.light) .sidebar .nav-item span,
+html:not(.light) .sidebar .nav-item i {
+  color: #dbeafe;
+}
+
+/* Hover effect */
+html:not(.light) .sidebar .nav-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ACTIVE ITEM — penting supaya teks kelihatan */
+html:not(.light) .sidebar .nav-item.active {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff !important;
+}
+
+html:not(.light) .sidebar .nav-item.active span,
+html:not(.light) .sidebar .nav-item.active i {
+  color: #ffffff !important;
+}
+
+/* Footer user */
+html:not(.light) .sidebar-footer .user-avatar {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+html:not(.light) .sidebar-footer .user-info h4,
+html:not(.light) .sidebar-footer .user-info p {
+  color: #e2e8f0;
+}
+
+html:not(.light) .btn-logout {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+html:not(.light) .btn-logout:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   FIX: Tombol layout + avatar jadi warna putih
+============================================ */
+
+/* Tombol layout (ikon gear di header sidebar) */
+html.light .theme-toggle-btn {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Avatar user di footer */
+html.light .user-avatar {
+  background: #ffffff !important; /* bulatan putih */
+  color: #0a1931 !important; /* ikon orang warna navy */
+}
+
+/* ============================================
+   FIX: Tombol Logout jadi warna PUTIH di Light Mode
+============================================ */
+
+html.light .btn-logout {
+  background: #ffffff !important; /* bulatan putih */
+  color: #0a1931 !important; /* ikon gelap biar terlihat */
+  border: none !important;
+}
+
+html.light .btn-logout i {
+  color: #0a1931 !important; /* warna ikon logout */
+}
+
+html.light .btn-logout:hover {
+  background: #f4f4f4 !important;
+  transform: translateY(-2px);
+}
