@@ -1,0 +1,290 @@
+/* ===================================================
+   🌤️ DASHBOARD — FULL LIGHT MODE (FINAL)
+   Banking Blue Palette
+   =================================================== */
+
+html.light .dashboard-container {
+  background: radial-gradient(
+    circle at top,
+    #f6fafd 0%,
+    #bdd4e9 40%,
+    #edf4fa 100%
+  );
+}
+
+/* ----------------------------------------------
+   TEXT & ICON GLOBAL FIX
+---------------------------------------------- */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light p,
+html.light span,
+html.light label,
+html.light .text,
+html.light .title,
+html.light .subtitle,
+html.light .stat-label,
+html.light .chart-title {
+  color: #0a1931 !important;
+  opacity: 1 !important;
+}
+
+html.light i {
+  color: #1a3d63 !important;
+}
+
+/* ----------------------------------------------
+   HEADER SEARCH & ICONS
+---------------------------------------------- */
+html.light .search-box {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+}
+html.light .search-box i {
+  color: #1a3d63;
+}
+html.light .search-box input {
+  color: #0a1931;
+}
+html.light .search-box input::placeholder {
+  color: #90a4b8;
+}
+
+html.light .header-icon {
+  background: #ffffff !important;
+  border: 1px solid #b3cfe5 !important;
+  color: #0a1931 !important;
+}
+
+/* ----------------------------------------------
+   STAT CARDS (Top 4 cards)
+---------------------------------------------- */
+html.light .stat-card {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+html.light .stat-card i {
+  color: #1a3d63 !important;
+}
+html.light .stat-details h3 {
+  color: #1a3d63;
+}
+html.light .stat-number {
+  color: #0a1931;
+}
+html.light .stat-sub {
+  color: #4b5563;
+}
+html.light .stat-change {
+  color: #166534 !important;
+}
+
+/* ----------------------------------------------
+   CHART CARDS (Trend + Distribusi Lead Score)
+---------------------------------------------- */
+html.light .chart-card {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+/* Judul chart */
+html.light .chart-card h3,
+html.light .chart-card h4,
+html.light .chart-card .chart-title {
+  color: #0a1931 !important;
+  opacity: 1 !important;
+}
+
+/* Subtitle chart */
+html.light .chart-card .chart-subtitle,
+html.light .chart-card .chart-description {
+  color: #1a3d63 !important;
+  opacity: 1 !important;
+}
+
+/* Legend donut chart */
+html.light .chart-card .legend-item span,
+html.light .chart-card .legend-label {
+  color: #0a1931 !important;
+  opacity: 1 !important;
+}
+
+html.light .legend-dot {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown periode */
+html.light .select-period {
+  background: #f6fafd;
+  color: #0a1931;
+  border: 1px solid #b3cfe5;
+}
+
+/* ----------------------------------------------
+   LEAD PRIORITAS TINGGI
+---------------------------------------------- */
+html.light .priority-leads-card {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+html.light .priority-leads-card .card-header h3,
+html.light .priority-leads-card .card-header .btn-text {
+  color: #0a1931 !important;
+}
+
+html.light .lead-info h4 {
+  color: #000000 !important;
+  font-weight: 600;
+}
+
+html.light .lead-info p {
+  color: #1a3d63 !important;
+  opacity: 1 !important;
+}
+
+/* Score badge */
+html.light .score-circle.high {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.8);
+  color: #166534 !important;
+}
+html.light .score-circle.medium {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.8);
+  color: #854d0e !important;
+}
+html.light .score-circle.low {
+  background: rgba(248, 113, 113, 0.18);
+  border-color: rgba(239, 68, 68, 0.9);
+  color: #b91c1c !important;
+}
+
+html.light .score-label {
+  color: #1a3d63 !important;
+}
+
+/* Hover row list */
+html.light .lead-item:hover {
+  background: #e2ecf5 !important;
+}
+
+/* ----------------------------------------------
+   AKTIVITAS TERKINI (Right card)
+---------------------------------------------- */
+html.light .activity-card {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+html.light .activity-details span {
+  color: #4b5563 !important;
+}
+
+html.light .activity-icon.success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #166534;
+}
+html.light .activity-icon.info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #1d4ed8;
+}
+html.light .activity-icon.warning {
+  background: rgba(249, 115, 22, 0.15);
+  color: #b45309;
+}
+
+/* ===================================================
+   FIX FINAL LEGEND DONUT CHART — LIGHT MODE
+   =================================================== */
+
+/* Semua teks legend di dalam chart-card */
+html.light .chart-card *[class*="legend"],
+html.light .chart-card *[class*="Legend"],
+html.light .chart-card .recharts-legend-item,
+html.light .chart-card .recharts-legend-item span {
+  color: #0a1931 !important;
+  opacity: 1 !important;
+  fill: #0a1931 !important;
+}
+
+/* Bullet warna (square kecil) */
+html.light .chart-card .recharts-legend-item svg,
+html.light .chart-card svg.recharts-surface {
+  stroke: rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ===================================================
+   FIX LABEL DI Sumbu X (hari) — LIGHT MODE
+   =================================================== */
+
+html.light .chart-card .recharts-cartesian-axis-tick-value {
+  fill: #0a1931 !important;
+  opacity: 1 !important;
+  font-weight: 500;
+}
+
+/* -------- MAIN CONTENT / HEADER -------- */
+
+/* area konten kanan */
+html.light .main-content {
+  color: #0a1931;
+}
+
+/* search box */
+html.light .search-box {
+  background: #ffffff;
+  border-radius: 999px;
+  border: 1px solid #b3cfe5;
+}
+
+html.light .search-box i {
+  color: #4a7fa7;
+}
+
+html.light .search-box input {
+  color: #0a1931;
+}
+
+html.light .search-box input::placeholder {
+  color: #9ca3af;
+}
+
+/* ikon header (notifikasi, help, theme) */
+html.light .header-icon {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+  color: #0a1931;
+}
+
+/* dropdown notifikasi */
+html.light .notifications-dropdown {
+  background: #ffffff;
+  border: 1px solid #b3cfe5;
+}
+
+html.light .dropdown-header h3 {
+  color: #325896;
+}
+
+html.light .notification-item span {
+  color: #6b7280;
+}
+
+html.light .priority-leads-card .btn-action {
+  background: linear-gradient(135deg, #688cc6, #1f4ed8) !important;
+  border: 1px solid #4a7fa7 !important;
+  box-shadow: 0 4px 12px rgba(10, 25, 49, 0.25);
+}
+
+html.light .priority-leads-card .btn-action i {
+  color: #ffffff !important;
+}

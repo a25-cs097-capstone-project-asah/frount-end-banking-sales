@@ -1,3 +1,7 @@
+/* ==============================
+   DASHBOARD LAYOUT
+================================= */
+
 .dashboard-container {
   height: 100vh;
   display: grid;
@@ -323,7 +327,7 @@
   align-items: center;
   justify-content: center;
   background: var(--primary-soft);
-  border: 1px solid var(--primary-border);
+  border: 2px solid var(--primary-border);
   color: #e0f2fe;
   flex-shrink: 0;
 }
@@ -427,7 +431,10 @@
   padding: 1rem 1rem;
 }
 
-/* Lead prioritas di dashboard */
+/* =========================================
+   LEAD PRIORITAS TINGGI – FINAL PREMIUM UI
+========================================= */
+
 .leads-list {
   margin-top: 0.8rem;
   display: flex;
@@ -435,92 +442,274 @@
   gap: 0.7rem;
 }
 
+/* GRID 4 KOLOM (Stable Layout) */
 .lead-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 42px 4fr 90px 40px;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.7rem;
-  padding: 0.55rem 0.4rem;
+  gap: 1rem;
+  padding: 0.65rem 0.85rem;
   border-radius: 14px;
   cursor: pointer;
-  transition: background 0.12s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
 }
 
 .lead-item:hover {
-  background: rgba(30, 64, 175, 0.35);
+  background: rgba(30, 64, 175, 0.15);
+  transform: translateY(-1px);
 }
 
+/* AVATAR NASABAH */
 .lead-avatar {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(30, 64, 175, 0.6);
-  color: #e0f2fe;
+  background: rgba(134, 151, 207, 0.75);
+  color: #ffffff;
+  font-size: 0.9rem;
   flex-shrink: 0;
+}
+
+/* INFO NAMA + JABATAN */
+.lead-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .lead-info h4 {
   font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .lead-info p {
   font-size: 0.78rem;
+  color: #6b7280;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
+/* KOLOM SCORE (90px FIXED) */
 .lead-score {
-  text-align: right;
+  text-align: center;
   font-size: 0.78rem;
 }
 
+/* Lingkaran score */
 .score-circle {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 0.25rem;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
-  margin-bottom: 0.2rem;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
+  border: 5px solid transparent;
 }
 
+/* Warna score */
 .score-circle.high {
-  background: rgba(34, 197, 94, 0.22);
-  border: 1px solid rgba(34, 197, 94, 0.8);
-  color: #bbf7d0;
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.8);
+  color: #166534;
 }
 
 .score-circle.medium {
-  background: rgba(234, 179, 8, 0.2);
-  border: 1px solid rgba(234, 179, 8, 0.9);
-  color: #fef9c3;
+  background: rgba(234, 179, 8, 0.18);
+  border-color: rgba(234, 179, 8, 0.85);
+  color: #854d0e;
 }
 
 .score-circle.low {
-  background: rgba(248, 113, 113, 0.18);
-  border: 1px solid rgba(239, 68, 68, 0.9);
-  color: #fecaca;
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.85);
+  color: #b91c1c;
 }
 
 .score-label {
   font-size: 0.75rem;
-  color: #e5e7eb;
+  font-weight: 500;
 }
 
+/* TOMBOL TELEPON (FIX 40px) */
 .btn-action {
+  width: 40px;
+  height: 40px;
   border-radius: 999px;
-  border: none;
-  padding: 0.4rem 0.55rem;
-  background: rgba(15, 23, 42, 0.95);
-  color: #e5e7eb;
+  border: 1px solid rgba(96, 125, 139, 0.9);
+  background: #1e3a8a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
-/* Activity list */
+.btn-action:hover {
+  background: #0a1f5a;
+  border-color: #bfdbfe;
+  transform: translateY(-1px);
+}
+
+.btn-action i {
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+/* =========================================
+   LEAD PRIORITAS TINGGI – FINAL RAPIH
+========================================= */
+
+.leads-list {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* GRID 4 KOLOM */
+.lead-item {
+  display: grid;
+  grid-template-columns: 100px 4fr 90px 40px;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 14px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.lead-item:hover {
+  background: rgba(30, 64, 175, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Avatar kiri */
+.lead-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(134, 151, 207, 0.75);
+  color: #ffffff;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Info nama & jabatan */
+.lead-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lead-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.lead-info p {
+  font-size: 0.78rem;
+  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Kolom score (90px) */
+.lead-score {
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+/* Lingkaran score */
+.score-circle {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 0.25rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 5px solid transparent;
+}
+
+.score-circle.high {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.8);
+  color: #166534;
+}
+
+.score-circle.medium {
+  background: rgba(234, 179, 8, 0.18);
+  border-color: rgba(234, 179, 8, 0.85);
+  color: #854d0e;
+}
+
+.score-circle.low {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.85);
+  color: #b91c1c;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Tombol telepon (40px) */
+.btn-action {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(96, 125, 139, 0.9);
+  background: #1e3a8a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.btn-action:hover {
+  background: #0a1f5a;
+  border-color: #bfdbfe;
+  transform: translateY(-1px);
+}
+
+.btn-action i {
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+/* =========================================
+   ACTIVITY LIST
+========================================= */
+
 .activity-list {
   margin-top: 0.8rem;
   display: flex;
@@ -593,287 +782,6 @@
 .nav-item.active {
   background: rgba(15, 23, 42, 0.6);
   border-color: rgba(248, 250, 252, 0.4);
-}
-
-/* ===================================================
-   🌤️ DASHBOARD — FULL LIGHT MODE (FINAL)
-   Banking Blue Palette
-   =================================================== */
-
-html.light .dashboard-container {
-  background: radial-gradient(
-    circle at top,
-    #f6fafd 0%,
-    #bdd4e9 40%,
-    #edf4fa 100%
-  );
-}
-
-/* ----------------------------------------------
-   TEXT & ICON GLOBAL FIX
----------------------------------------------- */
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light h5,
-html.light h6,
-html.light p,
-html.light span,
-html.light label,
-html.light .text,
-html.light .title,
-html.light .subtitle,
-html.light .stat-label,
-html.light .chart-title {
-  color: #0a1931 !important;
-  opacity: 1 !important;
-}
-
-html.light i {
-  color: #1a3d63 !important;
-}
-
-/* ----------------------------------------------
-   HEADER SEARCH & ICONS
----------------------------------------------- */
-html.light .search-box {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-}
-html.light .search-box i {
-  color: #1a3d63;
-}
-html.light .search-box input {
-  color: #0a1931;
-}
-html.light .search-box input::placeholder {
-  color: #90a4b8;
-}
-
-html.light .header-icon {
-  background: #ffffff !important;
-  border: 1px solid #b3cfe5 !important;
-  color: #0a1931 !important;
-}
-
-/* ----------------------------------------------
-   STAT CARDS (Top 4 cards)
----------------------------------------------- */
-html.light .stat-card {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
-html.light .stat-card i {
-  color: #1a3d63 !important;
-}
-html.light .stat-details h3 {
-  color: #1a3d63;
-}
-html.light .stat-number {
-  color: #0a1931;
-}
-html.light .stat-sub {
-  color: #4b5563;
-}
-html.light .stat-change {
-  color: #166534 !important;
-}
-
-/* ----------------------------------------------
-   CHART CARDS (Trend + Distribusi Lead Score)
----------------------------------------------- */
-html.light .chart-card {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-}
-
-/* Judul chart */
-html.light .chart-card h3,
-html.light .chart-card h4,
-html.light .chart-card .chart-title {
-  color: #0a1931 !important;
-  opacity: 1 !important;
-}
-
-/* Subtitle chart */
-html.light .chart-card .chart-subtitle,
-html.light .chart-card .chart-description {
-  color: #1a3d63 !important;
-  opacity: 1 !important;
-}
-
-/* Legend donut chart */
-html.light .chart-card .legend-item span,
-html.light .chart-card .legend-label {
-  color: #0a1931 !important;
-  opacity: 1 !important;
-}
-
-html.light .legend-dot {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-/* Dropdown periode */
-html.light .select-period {
-  background: #f6fafd;
-  color: #0a1931;
-  border: 1px solid #b3cfe5;
-}
-
-/* ----------------------------------------------
-   LEAD PRIORITAS TINGGI (nama tidak terlihat → FIX)
----------------------------------------------- */
-html.light .priority-leads-card {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-}
-
-html.light .priority-leads-card .card-header h3,
-html.light .priority-leads-card .card-header .btn-text {
-  color: #0a1931 !important;
-}
-
-html.light .lead-info h4 {
-  color: #0a1931 !important;
-  font-weight: 600;
-}
-
-html.light .lead-info p {
-  color: #1a3d63 !important;
-  opacity: 1 !important;
-}
-
-/* Score badge */
-html.light .score-circle.high {
-  background: rgba(34, 197, 94, 0.15);
-  border-color: rgba(34, 197, 94, 0.8);
-  color: #166534 !important;
-}
-html.light .score-circle.medium {
-  background: rgba(234, 179, 8, 0.15);
-  border-color: rgba(234, 179, 8, 0.8);
-  color: #854d0e !important;
-}
-html.light .score-circle.low {
-  background: rgba(248, 113, 113, 0.18);
-  border-color: rgba(239, 68, 68, 0.9);
-  color: #b91c1c !important;
-}
-
-html.light .score-label {
-  color: #1a3d63 !important;
-}
-
-/* Hover row list */
-html.light .lead-item:hover {
-  background: #e2ecf5 !important;
-}
-
-/* ----------------------------------------------
-   AKTIVITAS TERKINI (Right card)
----------------------------------------------- */
-html.light .activity-card {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-}
-
-html.light .activity-details span {
-  color: #4b5563 !important;
-}
-
-html.light .activity-icon.success {
-  background: rgba(34, 197, 94, 0.15);
-  color: #166534;
-}
-html.light .activity-icon.info {
-  background: rgba(59, 130, 246, 0.15);
-  color: #1d4ed8;
-}
-html.light .activity-icon.warning {
-  background: rgba(249, 115, 22, 0.15);
-  color: #b45309;
-}
-
-/* ===================================================
-   FIX FINAL LEGEND DONUT CHART — LIGHT MODE
-   =================================================== */
-
-/* Semua teks legend di dalam chart-card */
-html.light .chart-card *[class*="legend"],
-html.light .chart-card *[class*="Legend"],
-html.light .chart-card .recharts-legend-item,
-html.light .chart-card .recharts-legend-item span {
-  color: #0a1931 !important;
-  opacity: 1 !important;
-  fill: #0a1931 !important;
-}
-
-/* Bullet warna (square kecil) */
-html.light .chart-card .recharts-legend-item svg,
-html.light .chart-card svg.recharts-surface {
-  stroke: rgba(0, 0, 0, 0.25) !important;
-}
-
-/* ===================================================
-   FIX LABEL DI Sumbu X (hari) — LIGHT MODE
-   =================================================== */
-
-html.light .chart-card .recharts-cartesian-axis-tick-value {
-  fill: #0a1931 !important;
-  opacity: 1 !important;
-  font-weight: 500;
-}
-
-/* -------- MAIN CONTENT / HEADER -------- */
-
-/* area konten kanan */
-html.light .main-content {
-  color: #0a1931;
-}
-
-/* search box */
-html.light .search-box {
-  background: #ffffff;
-  border-radius: 999px;
-  border: 1px solid #b3cfe5;
-}
-
-html.light .search-box i {
-  color: #4a7fa7;
-}
-
-html.light .search-box input {
-  color: #0a1931;
-}
-
-html.light .search-box input::placeholder {
-  color: #9ca3af;
-}
-
-/* ikon header (notifikasi, help, theme) */
-html.light .header-icon {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-  color: #0a1931;
-}
-
-/* dropdown notifikasi */
-html.light .notifications-dropdown {
-  background: #ffffff;
-  border: 1px solid #b3cfe5;
-}
-
-html.light .dropdown-header h3 {
-  color: #325896;
-}
-
-html.light .notification-item span {
-  color: #6b7280;
 }
 
 /* ====== RAPIKAN LAYOUT DASHBOARD (CENTER + RESPONSIVE) ====== */

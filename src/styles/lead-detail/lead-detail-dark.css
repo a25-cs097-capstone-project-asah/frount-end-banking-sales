@@ -1,0 +1,118 @@
+/* ==================== LEAD DETAIL – DARK MODE ===================== */
+
+.lead-detail-page {
+  background: radial-gradient(circle at top, #001a9d 0%, #0b1220 75%);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+}
+
+/* Header */
+.detail-header-left h1 {
+  color: #e5e7eb;
+}
+
+/* Summary card */
+.lead-summary-card {
+  background: rgba(15, 23, 42, 0.92);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.lead-summary-main {
+  border-bottom-color: rgba(148, 163, 184, 0.4);
+}
+
+.lead-avatar.large {
+  background: rgba(30, 64, 175, 0.85);
+  color: #e0f2fe;
+}
+
+.lead-summary-info p {
+  color: #cbd5e1;
+}
+
+/* Segmen */
+.segment-badge {
+  background: rgba(37, 99, 235, 0.25);
+  color: #bfdbfe;
+  border: 1px solid rgba(96, 165, 250, 0.5);
+}
+
+/* Score summary text */
+.summary-score-text {
+  color: #e5e7eb;
+}
+
+.summary-score-sub {
+  color: #cbd5e1;
+}
+
+/* Action tiles */
+.summary-action-card {
+  border-color: rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.96);
+  color: #e5e7eb;
+}
+
+.summary-action-card:hover {
+  background: rgba(30, 64, 175, 0.6);
+  border-color: rgba(191, 219, 254, 0.9);
+  transform: translateY(-2px);
+}
+
+.summary-action-icon {
+  background: rgba(30, 64, 175, 0.9);
+  color: #ffffff;
+}
+
+/* Grid cards */
+.chart-card,
+.activity-card {
+  background: rgba(15, 23, 42, 0.92);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+/* Score circle warna */
+.score-circle.high {
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #ffffff;
+}
+.score-circle.medium {
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: #ffffff;
+}
+.score-circle.low {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #ffffff;
+}
+
+/* Rekomendasi */
+.recommendation-list {
+  color: #e5e7eb;
+}
+
+.recommendation-list li i {
+  color: #60a5fa;
+}
+
+/* Aktivitas */
+.activity-icon.success {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.activity-icon.warning {
+  background: #eab308;
+  color: #ffffff;
+}
+
+.activity-icon.info {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.activity-details strong {
+  color: #e5e7eb;
+}
+
+.activity-details span {
+  color: #a5b4fc;
+}

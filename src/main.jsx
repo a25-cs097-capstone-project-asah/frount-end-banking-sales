@@ -7,9 +7,14 @@ import App from "./App";
 import "./styles/base.css";
 import "./styles/landing.css";
 import "./styles/auth.css";
-import "./styles/dashboard.css";
-import "./styles/leads.css";
-import "./styles/lead-detail.css";
+import "./styles/dashboard/dashboard.css";
+import "./styles/dashboard/theme-dark.css";
+import "./styles/dashboard/theme-light.css";
+import "./styles/leads/leads-dark.css";
+import "./styles/leads/leads-light.css";
+import "./styles/lead-detail/lead-detail-base.css";
+import "./styles/lead-detail/lead-detail-dark.css";
+import "./styles/lead-detail/lead-detail-light.css";
 import "./styles/responsive.css";
 // =====================================
 
