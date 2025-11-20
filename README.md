@@ -1,16 +1,81 @@
-# React + Vite
+# 🏦 Banking Sales Portal (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Banking Sales Portal adalah aplikasi frontend berbasis **React + Vite** yang dirancang untuk membantu tim sales perbankan mengelola lead, melakukan follow up, melihat analitik, dan mencatat aktivitas nasabah dengan cepat dan efisien.
 
-Currently, two official plugins are available:
+Aplikasi ini memiliki dukungan **Dark & Light Mode**, tampilan dashboard interaktif, daftar lead lengkap, detail nasabah, hingga fitur follow-up terpadu.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 **Tech Stack**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Teknologi | Keterangan |
+|----------|------------|
+| **React.js** | Library UI utama |
+| **Vite** | Bundler & Dev Server super cepat |
+| **React Router DOM** | Sistem navigasi SPA |
+| **CSS Custom Styling** | Desain UI modern & responsif |
+| **FontAwesome Icons** | Icon pack |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 **Struktur Proyek**
+📦 banking-sales-portal
+├── 📁 public
+├── 📁 src
+│ ├── 📁 assets
+│ ├── 📁 components
+│ ├── 📁 context
+│ ├── 📁 data
+│ ├── 📁 pages
+│ │ ├── Dashboard.jsx
+│ │ ├── Leads.jsx
+│ │ ├── LeadDetail.jsx
+│ │ ├── Landing.jsx
+│ │ ├── Login.jsx
+│ │ ├── Register.jsx
+│ │ └── Analytics.jsx
+│ ├── 📁 styles
+│ │ ├── base.css
+│ │ ├── dashboard.css
+│ │ ├── leads.css
+│ │ ├── lead-detail.css
+│ │ └── responsive.css
+│ ├── App.jsx
+│ ├── main.jsx
+│ └── theme.js
+├── package.json
+├── index.html
+└── README.md
+
+
+---
+
+## 🔥 **Fitur Utama**
+
+### 📊 **Dashboard Interaktif**
+- Statistik lead, konversi, prioritas tinggi, conversion rate
+- Grafik tren konversi
+- Donut chart distribusi lead score
+
+### 👤 **Manajemen Lead**
+- Daftar lead lengkap dengan sorting
+- Skor probabilitas (progress bar)
+- Kategori lead (Tinggi, Sedang, Rendah)
+- Status follow up
+
+### 📁 **Detail Nasabah**
+- Informasi lengkap nasabah
+- Riwayat aktivitas terbaru
+- Rekomendasi follow up
+- Aksi cepat:
+  - 📞 Telepon  
+  - ✉️ Email  
+  - 🗓️ Jadwalkan  
+  - 📝 Catatan  
+
+### 🌙 **Fitur Dark Mode & Light Mode**
+- Toggle tema sidebar
+- Warna tema disimpan otomatis
+
+### 🔐 **Authentication**
+- Login & Register halaman modern
