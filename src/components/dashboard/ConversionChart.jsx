@@ -5,6 +5,10 @@ const ConversionChart = ({ conversionTrend }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
+  // Ubah data backend → format Chart.js
+  const labels = conversionTrend.map((item) => item.date);
+  const dataPoints = conversionTrend.map((item) => item.convertionRate);
+
   useEffect(() => {
     const isLight = document.documentElement.classList.contains("light");
     const axisColor = isLight ? "#0A1931" : "#e5e7eb";
@@ -20,14 +24,14 @@ const ConversionChart = ({ conversionTrend }) => {
       chartInstance.current = new Chart(chartRef.current, {
         type: "line",
         data: {
-          labels: conversionTrend.labels,
+          labels,
           datasets: [
             {
-              label: "Konversi",
-              data: conversionTrend.datasets,
+              label: "Conversion Rate (%)",
+              data: dataPoints,
               borderColor: "rgba(0, 181, 204, 1)",
               backgroundColor: "rgba(0, 181, 204, 0.15)",
-              tension: 0.35,
+              tension: 0.3,
               fill: true,
             },
           ],
@@ -37,7 +41,6 @@ const ConversionChart = ({ conversionTrend }) => {
           plugins: { legend: { display: false } },
           scales: {
             x: {
-              grid: { display: false },
               ticks: { color: axisColor },
             },
             y: {
@@ -66,6 +69,7 @@ const ConversionChart = ({ conversionTrend }) => {
           <option>3 Bulan Terakhir</option>
         </select>
       </div>
+
       <canvas ref={chartRef} />
     </div>
   );

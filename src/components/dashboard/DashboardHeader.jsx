@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { toggleTheme } from "../../theme"; // <- path sudah benar
+import { toggleTheme } from "../../theme";
 
 const DashboardHeader = () => {
   const [showNotifications, setShowNotifications] = useState(false);
 
-  // cek apakah sedang light/dark untuk icon toggle
   const [isLight, setIsLight] = useState(
     document.documentElement.classList.contains("light")
   );

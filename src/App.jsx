@@ -8,23 +8,28 @@ import Leads from "./pages/Leads";
 import LeadDetail from "./pages/LeadDetail";
 import Layout from "./components/Layout";
 
-// halaman tambahan
 import PriorityLeads from "./pages/PriorityLeads";
 import FollowUp from "./pages/FollowUp";
 import Analytics from "./pages/Analytics";
 import History from "./pages/History";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 const App = () => {
   return (
     <Routes>
-      {/* Landing page publik */}
+      {/* Publik */}
       <Route path="/" element={<Landing />} />
-
-      {/* Auth */}
       <Route path="/login" element={<Login />} />
 
-      {/* Halaman yang pakai sidebar & header */}
-      <Route element={<Layout />}>
+      {/* Private → HARUS login */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/leads/:id" element={<LeadDetail />} />
@@ -36,7 +41,7 @@ const App = () => {
         <Route path="/history" element={<History />} />
       </Route>
 
-      {/* Fallback */}
+      {/* fallback */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );

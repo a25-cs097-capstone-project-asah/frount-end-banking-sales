@@ -1,3 +1,4 @@
+// src/components/leads/LeadsStats.jsx
 import React from "react";
 
 const LeadsStats = ({
@@ -6,23 +7,29 @@ const LeadsStats = ({
   avgScore,
   followUpToday,
 }) => {
+  // jaga-jaga kalau avgScore bukan angka (NaN / undefined)
+  const safeAvgScore = Number.isFinite(Number(avgScore)) ? Number(avgScore) : 0;
+
   return (
     <div className="stats-card-dark">
       <div className="stat-item-dark">
         <span className="stat-label-dark">Total Lead</span>
-        <span className="stat-value-dark">{totalLeads}</span>
+        <span className="stat-value-dark">{totalLeads ?? 0}</span>
       </div>
+
       <div className="stat-item-dark">
         <span className="stat-label-dark">Prioritas Tinggi</span>
-        <span className="stat-value-dark">{highPriorityLeads}</span>
+        <span className="stat-value-dark">{highPriorityLeads ?? 0}</span>
       </div>
+
       <div className="stat-item-dark">
         <span className="stat-label-dark">Rata-rata Skor</span>
-        <span className="stat-value-dark">{avgScore}%</span>
+        <span className="stat-value-dark">{safeAvgScore}%</span>
       </div>
+
       <div className="stat-item-dark">
         <span className="stat-label-dark">Follow Up Hari Ini</span>
-        <span className="stat-value-dark">{followUpToday}</span>
+        <span className="stat-value-dark">{followUpToday ?? 0}</span>
       </div>
     </div>
   );

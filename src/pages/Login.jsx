@@ -34,46 +34,48 @@ const Login = () => {
     setErrorMsg("");
 
     if (!form.identity || !form.password) {
-      setErrorMsg("Email/username dan password wajib diisi.");
+      setErrorMsg("Username dan password wajib diisi.");
       return;
     }
 
     try {
       setLoading(true);
 
-      // 🔁 SESUAIKAN URL & NAMA FIELD DENGAN BACKEND-MU
-      const res = await fetch("http://localhost:5000/auth/login", {
+      // === 1. Panggil backend sesuai dokumentasi API ===
+      const res = await fetch("http://localhost:5000/authentications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          identity: form.identity,
-          password: form.password,
+          username: form.identity, // backend pakai username
+          password: form.password, // backend pakai password
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        // sesuaikan key `message` kalau backend pakai nama lain
-        setErrorMsg(data.message || "Login gagal. Periksa kembali data Anda.");
+        setErrorMsg(data.message || "Login gagal.");
         return;
       }
 
-      // ✅ simpan informasi user (sesuaikan field `user.name` & `user.role`)
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-      }
+      // === 2. Simpan Access Token dan Refresh Token ===
+      localStorage.setItem("accessToken", data.data.accessToken);
+      localStorage.setItem("refreshToken", data.data.refreshToken);
 
-      if (data.user) {
-        localStorage.setItem("userName", data.user.name || "User");
-        localStorage.setItem("userRole", data.user.role || "Sales");
-      }
+      // === 2b. Simpan nama & role user untuk ditampilkan di sidebar ===
+      // kalau backend mengembalikan user, pakai fullname/role dari sana
+      const userFromApi = data.data.user || {};
+      const userName = userFromApi.fullname || form.identity;
+      const userRole = userFromApi.role || "Sales Manager";
 
-      // setelah login sukses, arahkan ke dashboard
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("userRole", userRole);
+
+      // === 3. Redirect ke dashboard ===
       navigate("/dashboard");
     } catch (err) {
       console.error("Login error:", err);
-      setErrorMsg("Terjadi kesalahan server. Coba beberapa saat lagi.");
+      setErrorMsg("Terjadi kesalahan server.");
     } finally {
       setLoading(false);
     }
@@ -81,7 +83,7 @@ const Login = () => {
 
   return (
     <>
-      {/* toggle theme */}
+      {/* Bagian UI tidak berubah */}
       <button
         className="auth-theme-toggle"
         onClick={handleToggleTheme}
@@ -130,21 +132,21 @@ const Login = () => {
             <div className="auth-form-container">
               <h2>Selamat Datang</h2>
               <p className="auth-subtitle">
-                Masuk menggunakan Username atau Email dan Password
+                Masuk menggunakan Username dan Password
               </p>
 
               <form className="auth-form" onSubmit={handleSubmit}>
-                {/* Identity (username/email) */}
+                {/* Username */}
                 <div className="form-group">
                   <label htmlFor="identity">
-                    <i className="fas fa-user" /> Username atau Email
+                    <i className="fas fa-user" /> Username
                   </label>
                   <input
                     type="text"
                     id="identity"
                     name="identity"
                     required
-                    placeholder="contoh: rizki123 atau rizki@bank.com"
+                    placeholder="contoh: Driyan"
                     value={form.identity}
                     onChange={handleChange}
                   />
@@ -177,58 +179,16 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* Error message */}
-                {errorMsg && (
-                  <p
-                    style={{
-                      color: "#fca5a5",
-                      fontSize: "0.85rem",
-                      marginTop: "0.2rem",
-                    }}
-                  >
-                    {errorMsg}
-                  </p>
-                )}
-
-                <div className="form-group checkbox-group">
-                  <label className="checkbox-label">
-                    <input type="checkbox" id="remember" />
-                    <span>Ingat saya</span>
-                    <button type="button" className="btn-link">
-                      Lupa password?
-                    </button>
-                  </label>
-                </div>
+                {/* Error */}
+                {errorMsg && <p className="error-text">{errorMsg}</p>}
 
                 <button
                   type="submit"
                   className="btn btn-primary btn-block"
                   disabled={loading}
                 >
-                  {loading ? (
-                    "Memproses..."
-                  ) : (
-                    <>
-                      <i className="fas fa-sign-in-alt" /> Masuk
-                    </>
-                  )}
+                  {loading ? "Memproses..." : "Masuk"}
                 </button>
-
-                <div className="auth-divider">
-                  <span>atau</span>
-                </div>
-
-                <div className="social-login">
-                  <button type="button" className="btn btn-social btn-google">
-                    <i className="fab fa-google" /> Google
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-social btn-microsoft"
-                  >
-                    <i className="fab fa-microsoft" /> Microsoft
-                  </button>
-                </div>
               </form>
             </div>
           </div>

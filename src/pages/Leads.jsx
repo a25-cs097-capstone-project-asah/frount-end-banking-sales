@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { leadsData as mockLeads } from "../data/leadsMock";
+import { getLeads } from "../api/leads";
 
 import LeadsHeader from "../components/leads/LeadsHeader";
 import LeadsFilterBar from "../components/leads/LeadsFilterBar";
@@ -8,11 +8,15 @@ import LeadsStats from "../components/leads/LeadsStats";
 import LeadsTable from "../components/leads/LeadsTable";
 import LeadsGrid from "../components/leads/LeadsGrid";
 
+import { normalizeStatus } from "../utils/normalizeLead";
+import { fetchPhoneForLeads } from "../utils/fetchPhone";
+
 const Leads = () => {
   const navigate = useNavigate();
 
-  // ===================== STATE DATA & FILTER =====================
-  const [leads, setLeads] = useState(mockLeads);
+  const [leads, setLeads] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [search, setSearch] = useState("");
   const [scoreFilter, setScoreFilter] = useState("all");
@@ -25,9 +29,17 @@ const Leads = () => {
 
   const [view, setView] = useState("table");
 
-  // ===================== UTIL =====================
+  const jobOptions = useMemo(() => {
+    const set = new Set();
+    leads.forEach((l) => l.job && set.add(l.job));
+    return [...set].sort();
+  }, [leads]);
 
-  const formatStatusLabel = (status) => status || "-";
+  const statusOptions = useMemo(() => {
+    const set = new Set();
+    leads.forEach((l) => l.status && set.add(l.status));
+    return [...set].sort();
+  }, [leads]);
 
   const getScoreCategory = (score) => {
     if (score >= 85) return "high";
@@ -44,177 +56,108 @@ const Leads = () => {
     }
   };
 
-  const handleRowClick = (id) => {
-    navigate(`/leads/${id}`);
+  const handleRowClick = (lead) => {
+    const leadId = lead.id || lead.lead_id;
+    if (leadId) navigate(`/leads/${leadId}`);
   };
 
-  const handleCallLead = (lead) => {
-    console.log("Call lead:", lead.name);
-  };
+  // FETCH LEADS + MERGE PHONE
+  const fetchLeads = useCallback(async () => {
+    try {
+      setLoading(true);
+      setErrorMsg("");
 
-  const handleEmailLead = (lead) => {
-    console.log("Email lead:", lead.name);
-  };
+      const { leads } = await getLeads({ page: 1, limit: 2000 });
 
-  const handleAddNote = (lead) => {
-    console.log("Add note for:", lead.name);
-  };
+      const normalized = (leads || []).map((l) => ({
+        ...l,
+        status: normalizeStatus(l.status),
+      }));
 
-  // ===================== FILTER + SORT =====================
+      const enriched = await fetchPhoneForLeads(normalized);
 
+      setLeads(enriched);
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Gagal mengambil data leads.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchLeads();
+  }, [fetchLeads]);
+
+  // FILTERING
   const filteredLeads = useMemo(() => {
     let result = [...leads];
 
-    // Filter skor
-    if (scoreFilter !== "all") {
-      result = result.filter(
-        (lead) => getScoreCategory(lead.score) === scoreFilter
-      );
-    }
-
-    // Filter usia
-    if (ageFilter !== "all") {
-      result = result.filter((lead) => {
-        if (ageFilter === "young") return lead.age < 30;
-        if (ageFilter === "middle") return lead.age >= 30 && lead.age <= 50;
-        if (ageFilter === "senior") return lead.age > 50;
-        return true;
-      });
-    }
-
-    // Filter pekerjaan
-    if (jobFilter !== "all") {
-      result = result.filter((lead) => {
-        const job = (lead.job || lead.title || "").toLowerCase();
-
-        if (jobFilter === "management")
-          return (
-            job.includes("manager") ||
-            job.includes("head") ||
-            job.includes("director")
-          );
-
-        if (jobFilter === "entrepreneur") return job.includes("entrepreneur");
-
-        if (jobFilter === "professional")
-          return (
-            job.includes("engineer") ||
-            job.includes("developer") ||
-            job.includes("it") ||
-            job.includes("consultant")
-          );
-
-        if (jobFilter === "others")
-          return !(
-            job.includes("manager") ||
-            job.includes("head") ||
-            job.includes("director") ||
-            job.includes("entrepreneur") ||
-            job.includes("engineer") ||
-            job.includes("developer") ||
-            job.includes("it") ||
-            job.includes("consultant")
-          );
-
-        return true;
-      });
-    }
-
-    // Filter status
-    if (statusFilter !== "all") {
-      result = result.filter(
-        (lead) =>
-          (lead.status || "").toLowerCase() === statusFilter.toLowerCase()
-      );
-    }
-
-    // Pencarian
     if (search.trim()) {
       const q = search.toLowerCase();
-      result = result.filter((lead) => {
-        const name = (lead.name || "").toLowerCase();
-        const email = (lead.email || "").toLowerCase();
-        const job = (lead.job || lead.title || "").toLowerCase();
-        const phone = (lead.phone || "").toLowerCase();
-        return (
-          name.includes(q) ||
-          email.includes(q) ||
-          job.includes(q) ||
-          phone.includes(q)
-        );
-      });
+      result = result.filter(
+        (l) =>
+          l.name?.toLowerCase().includes(q) ||
+          l.email?.toLowerCase().includes(q) ||
+          l.phone?.toLowerCase().includes(q)
+      );
     }
 
-    // Sorting
+    if (statusFilter !== "all") {
+      result = result.filter((l) => l.status === statusFilter);
+    }
+
+    if (jobFilter !== "all") {
+      result = result.filter((l) => l.job === jobFilter);
+    }
+
+    if (scoreFilter !== "all") {
+      result = result.filter(
+        (l) => getScoreCategory(Number(l.probabilityScore)) === scoreFilter
+      );
+    }
+
     if (sortField) {
       result.sort((a, b) => {
-        let valA = a[sortField];
-        let valB = b[sortField];
+        const A = a[sortField];
+        const B = b[sortField];
 
-        if (sortField === "job") {
-          valA = (a.job || a.title || "").toLowerCase();
-          valB = (b.job || b.title || "").toLowerCase();
-        }
+        if (typeof A === "string")
+          return sortDir === "asc" ? A.localeCompare(B) : B.localeCompare(A);
 
-        if (typeof valA === "string") {
-          const cmp = valA.localeCompare(valB);
-          return sortDir === "asc" ? cmp : -cmp;
-        }
-
-        if (typeof valA === "number") {
-          return sortDir === "asc" ? valA - valB : valB - valA;
-        }
+        if (typeof A === "number") return sortDir === "asc" ? A - B : B - A;
 
         return 0;
       });
     }
 
     return result;
-  }, [
-    leads,
-    scoreFilter,
-    ageFilter,
-    jobFilter,
-    statusFilter,
-    search,
-    sortField,
-    sortDir,
-  ]);
+  }, [leads, search, statusFilter, jobFilter, scoreFilter, sortField, sortDir]);
 
-  // ===================== STATS SUMMARY =====================
+  const totalLeads = filteredLeads.length;
+  const highPriorityLeads = filteredLeads.filter(
+    (l) => getScoreCategory(Number(l.probabilityScore)) === "high"
+  ).length;
 
-  const { totalLeads, highPriorityLeads, avgScore, followUpToday } =
-    useMemo(() => {
-      const total = filteredLeads.length;
-      const high = filteredLeads.filter((lead) => lead.score >= 85).length;
-      const avg =
-        total === 0
-          ? 0
-          : Math.round(
-              filteredLeads.reduce((sum, l) => sum + (l.score || 0), 0) / total
-            );
-      const followUp = filteredLeads.filter(
-        (lead) => (lead.status || "").toLowerCase() === "follow up"
-      ).length;
+  const avgScore =
+    filteredLeads.length > 0
+      ? Math.round(
+          filteredLeads.reduce(
+            (acc, l) => acc + Number(l.probabilityScore),
+            0
+          ) / filteredLeads.length
+        )
+      : 0;
 
-      return {
-        totalLeads: total,
-        highPriorityLeads: high,
-        avgScore: avg,
-        followUpToday: followUp,
-      };
-    }, [filteredLeads]);
-
-  // ===================== RENDER =====================
+  const followUpToday = filteredLeads.filter(
+    (l) => l.status === "Follow Up"
+  ).length;
 
   return (
     <>
-      {/* HEADER ATAS */}
       <LeadsHeader search={search} onSearchChange={setSearch} />
 
-      {/* KONTEN LEADS */}
       <div className="leads-content">
-        {/* CARD FILTER */}
         <LeadsFilterBar
           scoreFilter={scoreFilter}
           setScoreFilter={setScoreFilter}
@@ -222,18 +165,16 @@ const Leads = () => {
           setAgeFilter={setAgeFilter}
           jobFilter={jobFilter}
           setJobFilter={setJobFilter}
+          jobOptions={jobOptions}
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
+          statusOptions={statusOptions}
           view={view}
           setView={setView}
-          onRefresh={() => {
-            setLeads([...mockLeads]);
-            console.log("Refresh data");
-          }}
-          onExport={() => console.log("Export lead")}
+          onRefresh={fetchLeads}
+          onExport={() => {}}
         />
 
-        {/* CARD STATISTIK */}
         <LeadsStats
           totalLeads={totalLeads}
           highPriorityLeads={highPriorityLeads}
@@ -241,27 +182,24 @@ const Leads = () => {
           followUpToday={followUpToday}
         />
 
-        {/* TABLE / GRID */}
-        {view === "table" ? (
+        {loading ? (
+          <p>Memuat data leads...</p>
+        ) : errorMsg ? (
+          <p style={{ color: "red" }}>{errorMsg}</p>
+        ) : view === "table" ? (
           <LeadsTable
             leads={filteredLeads}
             onSort={handleSort}
             getScoreCategory={getScoreCategory}
-            formatStatusLabel={formatStatusLabel}
+            formatStatusLabel={(s) => s}
             onRowClick={handleRowClick}
-            onCallLead={handleCallLead}
-            onEmailLead={handleEmailLead}
-            onAddNote={handleAddNote}
           />
         ) : (
           <LeadsGrid
             leads={filteredLeads}
             getScoreCategory={getScoreCategory}
-            formatStatusLabel={formatStatusLabel}
+            formatStatusLabel={(s) => s}
             onCardClick={handleRowClick}
-            onCallLead={handleCallLead}
-            onEmailLead={handleEmailLead}
-            onAddNote={handleAddNote}
           />
         )}
       </div>

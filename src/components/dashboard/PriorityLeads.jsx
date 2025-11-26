@@ -8,6 +8,25 @@ const PriorityLeads = ({ priorityLeads }) => {
     console.log("Call lead:", name);
   };
 
+  const getScoreClass = (score) => {
+    if (score >= 85) return "high";
+    if (score >= 70) return "medium";
+    return "low";
+  };
+
+  const getLevelLabel = (category) => {
+    switch (category) {
+      case "high":
+        return "Tinggi";
+      case "medium":
+        return "Sedang";
+      case "low":
+        return "Rendah";
+      default:
+        return "Tidak Diketahui";
+    }
+  };
+
   return (
     <div className="priority-leads-card">
       <div className="card-header">
@@ -19,8 +38,9 @@ const PriorityLeads = ({ priorityLeads }) => {
 
       <div className="leads-list">
         {priorityLeads.map((lead) => {
-          const scoreClass =
-            lead.score >= 85 ? "high" : lead.score >= 70 ? "medium" : "low";
+          const score = lead.probabilityScore || 0;
+          const scoreClass = getScoreClass(score);
+          const levelLabel = getLevelLabel(lead.category);
 
           return (
             <div
@@ -36,17 +56,15 @@ const PriorityLeads = ({ priorityLeads }) => {
               {/* Info */}
               <div className="lead-info">
                 <h4>{lead.name}</h4>
-                <p>
-                  {lead.title} • {lead.age} tahun
-                </p>
+                <p>{lead.age ? `${lead.age} tahun` : "Usia tidak tersedia"}</p>
               </div>
 
               {/* Score column */}
               <div className="lead-score">
                 <div className={`score-circle ${scoreClass}`}>
-                  <span>{lead.score}%</span>
+                  <span>{score}%</span>
                 </div>
-                <span className="score-label">{lead.level}</span>
+                <span className="score-label">{levelLabel}</span>
               </div>
 
               {/* Call button */}
@@ -54,7 +72,7 @@ const PriorityLeads = ({ priorityLeads }) => {
                 className="btn-action"
                 type="button"
                 onClick={(e) => {
-                  e.stopPropagation(); // ⛔ jangan buka halaman detail
+                  e.stopPropagation();
                   callLead(lead.name);
                 }}
               >

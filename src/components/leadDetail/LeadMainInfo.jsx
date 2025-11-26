@@ -9,7 +9,7 @@ const LeadMainInfo = ({
   company,
   riskProfile,
   productInterest,
-  recommendations,
+  recommendations = [], // default aman
 }) => {
   return (
     <section className="lead-main-info">
@@ -20,7 +20,7 @@ const LeadMainInfo = ({
         </div>
         <p>Usia: {age} tahun</p>
         <p>Domisili: {city}</p>
-        <p>Segmen: {segment || "Belum ditentukan"} </p>
+        <p>Segmen: {segment || "Belum ditentukan"}</p>
       </div>
 
       {/* Profil Keuangan */}
@@ -49,13 +49,18 @@ const LeadMainInfo = ({
         <div className="card-header">
           <h3>Rekomendasi Tindakan</h3>
         </div>
-        <ul className="recommendation-list">
-          {recommendations.map((r, i) => (
-            <li key={i}>
-              <i className="fas fa-lightbulb" /> {r}
-            </li>
-          ))}
-        </ul>
+
+        {recommendations.length === 0 ? (
+          <p>Tidak ada rekomendasi.</p> // ✔ tidak error walaupun kosong
+        ) : (
+          <ul className="recommendation-list">
+            {recommendations.map((r, i) => (
+              <li key={i}>
+                <i className="fas fa-lightbulb" /> {r}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

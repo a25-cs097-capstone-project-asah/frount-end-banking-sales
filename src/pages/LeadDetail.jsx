@@ -1,116 +1,138 @@
-import React, { useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { leadsData } from "../data/leadsMock";
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { api } from "../api/client";
 
+// Komponen UI
 import LeadDetailHeader from "../components/leadDetail/LeadDetailHeader";
 import LeadSummary from "../components/leadDetail/LeadSummary";
 import LeadMainInfo from "../components/leadDetail/LeadMainInfo";
 import LeadActivityPanel from "../components/leadDetail/LeadActivityPanel";
 
-// Dummy aktivitas per lead (nanti bisa diganti dari backend)
-const leadActivitiesMock = [
-  {
-    id: 1,
-    leadId: 1,
-    type: "success",
-    title: "Follow up berhasil",
-    description: "Nasabah tertarik diskusi produk deposito berjangka.",
-    channel: "Telepon",
-    time: "10 menit lalu",
-    status: "Berhasil",
-    createdBy: "RM Andi",
-  },
-  {
-    id: 2,
-    leadId: 1,
-    type: "info",
-    title: "Email penawaran dikirim",
-    description: "Proposal deposito 12 bulan telah dikirim.",
-    channel: "Email",
-    time: "1 jam lalu",
-    status: "Terkirim",
-    createdBy: "RM Andi",
-  },
-];
-
 const LeadDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const lead = useMemo(
-    () => leadsData.find((item) => String(item.id) === String(id)),
-    [id]
-  );
+  const [lead, setLead] = useState(null);
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  if (!lead) {
-    return (
-      <div className="lead-detail-page">
-        <LeadDetailHeader onBack={() => navigate(-1)} />
-        <h2>Lead tidak ditemukan</h2>
-      </div>
-    );
-  }
+  const [newNote, setNewNote] = useState("");
+  const [saving, setSaving] = useState(false);
 
-  const {
-    name,
-    job,
-    age,
-    email,
-    phone,
-    city,
-    company,
-    score,
-    productInterest,
-    riskProfile,
-    incomeRange,
-    notes,
-    segment,
-  } = lead;
+  // =========================
+  // FETCH DETAIL LEAD
+  // =========================
+  const fetchLead = useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await api.get(`/leads/${id}`);
+      setLead(res.data.data.lead);
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Gagal mengambil detail lead.");
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
 
+  // =========================
+  // FETCH NOTES
+  // =========================
+  const fetchNotes = useCallback(async () => {
+    try {
+      const res = await api.get(`/notes/${id}`);
+      setNotes(res.data.data.notes || []);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [id]);
+
+  // =========================
+  // USE EFFECT
+  // =========================
+  useEffect(() => {
+    fetchLead();
+    fetchNotes();
+  }, [fetchLead, fetchNotes]);
+
+  // =========================
+  // ADD NOTE
+  // =========================
+  const handleAddNote = async () => {
+    if (!newNote.trim()) return;
+
+    try {
+      setSaving(true);
+
+      await api.post("/notes", {
+        leadId: id,
+        body: newNote,
+      });
+
+      setNewNote("");
+      fetchNotes(); // refresh notes
+    } catch (err) {
+      console.error(err);
+      alert("Gagal menambahkan catatan.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // =========================
+  // LOADING & ERROR
+  // =========================
+  if (loading) return <p>Memuat data...</p>;
+  if (errorMsg) return <p style={{ color: "red" }}>{errorMsg}</p>;
+  if (!lead) return <p>Lead tidak ditemukan.</p>;
+
+  // =========================
+  // NORMALISASI DATA
+  // =========================
+  const score = Number(lead.probabilityScore);
   const scoreClass = score >= 85 ? "high" : score >= 70 ? "medium" : "low";
-  const displayName = name;
-  const displayJob = job;
 
-  const leadActivities = leadActivitiesMock.filter((a) => a.leadId === lead.id);
-
-  const recommendations = [
-    "Prioritaskan follow up dalam 24 jam dengan penawaran personal.",
-    "Pertimbangkan paket deposito dengan tenor lebih panjang.",
-    `Sesuaikan penawaran dengan profil risiko: ${riskProfile}.`,
+  const recommendedActions = [
+    "Lakukan follow up dalam 24 jam.",
+    "Tawarkan promo deposit tenor panjang.",
+    `Profil risiko: ${lead.riskProfile || "Tidak tersedia"}.`,
   ];
 
   return (
     <div className="lead-detail-page">
-      {/* HEADER ATAS */}
-      <LeadDetailHeader onBack={() => navigate(-1)} />
+      <LeadDetailHeader onBack={() => navigate("/leads")} />
 
-      {/* SUMMARY CARD ATAS */}
       <LeadSummary
-        name={displayName}
-        job={displayJob}
-        email={email}
-        phone={phone}
+        name={lead.name}
+        job={lead.job}
+        email={lead.email}
+        phone={lead.phone}
         score={score}
         scoreClass={scoreClass}
       />
 
-      {/* GRID BAWAH */}
       <div className="lead-detail-grid">
-        {/* KIRI: Profil, Keuangan, Minat, Rekomendasi */}
         <LeadMainInfo
-          age={age}
-          city={city}
-          segment={segment}
-          incomeRange={incomeRange}
-          job={job}
-          company={company}
-          riskProfile={riskProfile}
-          productInterest={productInterest}
-          recommendations={recommendations}
+          age={lead.age}
+          city={"-"}
+          segment={lead.category}
+          incomeRange={"-"}
+          job={lead.job}
+          company={"-"}
+          riskProfile={lead.riskProfile || "-"}
+          productInterest={"-"}
+          recommendations={recommendedActions}
         />
 
-        {/* KANAN: Aktivitas & Catatan */}
-        <LeadActivityPanel activities={leadActivities} notes={notes} />
+        <LeadActivityPanel
+          activities={[]}
+          notes={notes}
+          newNote={newNote}
+          setNewNote={setNewNote}
+          saving={saving}
+          onAddNote={handleAddNote}
+        />
       </div>
     </div>
   );

@@ -5,6 +5,21 @@ const ScoreDistributionChart = ({ scoreDistribution }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
+  const labels = scoreDistribution.map((item) => {
+    switch (item.category) {
+      case "high":
+        return "Prioritas Tinggi";
+      case "medium":
+        return "Prioritas Sedang";
+      case "low":
+        return "Prioritas Rendah";
+      default:
+        return item.category || "Tidak diketahui";
+    }
+  });
+
+  const values = scoreDistribution.map((item) => item.count || 0);
+
   useEffect(() => {
     const isLight = document.documentElement.classList.contains("light");
     const legendColor = isLight ? "#0A1931" : "#e5e7eb";
@@ -17,10 +32,10 @@ const ScoreDistributionChart = ({ scoreDistribution }) => {
       chartInstance.current = new Chart(chartRef.current, {
         type: "doughnut",
         data: {
-          labels: scoreDistribution.labels,
+          labels,
           datasets: [
             {
-              data: scoreDistribution.values,
+              data: values,
               backgroundColor: [
                 "rgba(34,197,94,0.9)", // Tinggi
                 "rgba(234,179,8,0.9)", // Sedang
@@ -50,7 +65,7 @@ const ScoreDistributionChart = ({ scoreDistribution }) => {
         chartInstance.current.destroy();
       }
     };
-  }, [scoreDistribution]);
+  }, [labels, values]);
 
   return (
     <div className="chart-card">

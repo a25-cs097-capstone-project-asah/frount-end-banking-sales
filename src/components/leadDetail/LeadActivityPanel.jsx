@@ -6,7 +6,14 @@ const getActivityIconClass = (type) => {
   return "fas fa-user-plus";
 };
 
-const LeadActivityPanel = ({ activities, notes }) => {
+const LeadActivityPanel = ({
+  activities = [],
+  notes = [],
+  newNote = "",
+  setNewNote,
+  saving = false,
+  onAddNote,
+}) => {
   return (
     <section className="lead-activity-section">
       {/* Aktivitas Terakhir */}
@@ -43,7 +50,41 @@ const LeadActivityPanel = ({ activities, notes }) => {
         <div className="card-header">
           <h3>Catatan Internal</h3>
         </div>
-        <p>{notes || "Belum ada catatan."}</p>
+
+        {/* List catatan dari backend */}
+        <div className="notes-list">
+          {Array.isArray(notes) && notes.length > 0 ? (
+            notes.map((note, idx) => (
+              <div key={idx} className="note-item">
+                <p>{note.body}</p>
+                <small>
+                  {note.createdBy?.fullname || "User"} • {note.createdAt || "-"}
+                </small>
+              </div>
+            ))
+          ) : (
+            <p>Belum ada catatan.</p>
+          )}
+        </div>
+
+        {/* Form tambah catatan */}
+        {setNewNote && onAddNote && (
+          <div className="add-note-section">
+            <textarea
+              placeholder="Tulis catatan baru..."
+              value={newNote}
+              onChange={(e) => setNewNote(e.target.value)}
+            />
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={onAddNote}
+              disabled={saving || !newNote.trim()}
+            >
+              {saving ? "Menyimpan..." : "Tambah Catatan"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

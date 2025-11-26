@@ -12,26 +12,28 @@ const LeadsGrid = ({
   return (
     <div className="leads-grid">
       {leads.map((lead) => {
-        const scoreCat = getScoreCategory(lead.score);
+        const score = lead.probabilityScore || 0;
+        const scoreCat = getScoreCategory(score);
+
+        const initials =
+          (lead.name || "")
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
+            .toUpperCase() || "?";
 
         return (
           <div
-            key={lead.id}
+            key={lead._id}
             className="lead-card-dark"
-            onClick={() => onCardClick(lead.id)}
+            onClick={() => onCardClick(lead)}
           >
             <div className="lead-card-header">
-              <div className="lead-card-avatar">
-                {(lead.name || "")
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")
-                  .toUpperCase()}
-              </div>
+              <div className="lead-card-avatar">{initials}</div>
               <div className="lead-card-title">
                 <h3>{lead.name}</h3>
                 <p>
-                  {lead.job || lead.title} • {lead.age} tahun
+                  {lead.job || "-"} {lead.age ? `• ${lead.age} tahun` : ""}
                 </p>
               </div>
             </div>
@@ -39,48 +41,52 @@ const LeadsGrid = ({
             <div className="lead-card-body">
               <div className="lead-card-score">
                 <div className={`score-circle ${scoreCat}`}>
-                  <span>{lead.score}%</span>
+                  <span>{score}%</span>
                 </div>
                 <div className="lead-card-score-text">
                   <span className="status-pill">
                     {formatStatusLabel(lead.status)}
                   </span>
                   <span className="last-contact">
-                    Terakhir: {lead.lastContact || "-"}
+                    Terakhir:{" "}
+                    {lead.lastContactedAt
+                      ? new Date(lead.lastContactedAt).toLocaleDateString(
+                          "id-ID"
+                        )
+                      : "-"}
                   </span>
                 </div>
               </div>
 
               <div className="lead-card-actions">
                 <button
-                  type="button"
                   className="btn-icon-small"
                   title="Hubungi"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onCallLead(lead);
+                    onCallLead?.(lead);
                   }}
                 >
                   <i className="fas fa-phone" />
                 </button>
+
                 <button
-                  type="button"
                   className="btn-icon-small"
                   title="Email"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onEmailLead(lead);
+                    onEmailLead?.(lead);
                   }}
                 >
                   <i className="fas fa-envelope" />
                 </button>
+
                 <button
-                  type="button"
                   className="btn-icon-small"
                   title="Catatan"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onAddNote(lead);
+                    onAddNote?.(lead);
                   }}
                 >
                   <i className="fas fa-sticky-note" />

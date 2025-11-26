@@ -7,8 +7,10 @@ const LeadsFilterBar = ({
   setAgeFilter,
   jobFilter,
   setJobFilter,
+  jobOptions = [],
   statusFilter,
   setStatusFilter,
+  statusOptions = [],
   view,
   setView,
   onRefresh,
@@ -29,6 +31,7 @@ const LeadsFilterBar = ({
           <i className="fas fa-sync-alt" /> <span>Refresh</span>
         </button>
 
+        {/* SKOR */}
         <div className="filter-group-inline">
           <label>Skor:</label>
           <select
@@ -42,6 +45,7 @@ const LeadsFilterBar = ({
           </select>
         </div>
 
+        {/* USIA */}
         <div className="filter-group-inline">
           <label>Usia:</label>
           <select
@@ -55,20 +59,23 @@ const LeadsFilterBar = ({
           </select>
         </div>
 
+        {/* PEKERJAAN (DINAMIS) */}
         <div className="filter-group-inline">
           <label>Pekerjaan:</label>
           <select
             value={jobFilter}
             onChange={(e) => setJobFilter(e.target.value)}
           >
-            <option value="all">Semua Pekerajaan</option>
-            <option value="management">Management</option>
-            <option value="entrepreneur">Entrepreneur</option>
-            <option value="professional">Professional</option>
-            <option value="others">Lainnya</option>
+            <option value="all">Semua Pekerjaan</option>
+            {jobOptions.map((job) => (
+              <option key={job} value={job}>
+                {job}
+              </option>
+            ))}
           </select>
         </div>
 
+        {/* STATUS (DINAMIS) */}
         <div className="filter-group-inline">
           <label>Status:</label>
           <select
@@ -76,13 +83,15 @@ const LeadsFilterBar = ({
             onChange={(e) => setStatusFilter(e.target.value)}
           >
             <option value="all">Semua Status</option>
-            <option value="Baru">Baru</option>
-            <option value="Dihubungi">Dihubungi</option>
-            <option value="Follow Up">Follow Up</option>
-            <option value="Konversi">Konversi</option>
+            {statusOptions.map((st) => (
+              <option key={st} value={st}>
+                {st}
+              </option>
+            ))}
           </select>
         </div>
 
+        {/* VIEW MODE */}
         <div className="view-toggle-dark">
           <button
             type="button"
