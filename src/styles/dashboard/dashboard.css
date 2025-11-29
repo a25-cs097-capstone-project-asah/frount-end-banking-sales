@@ -533,3 +533,8 @@
     gap: 0.9rem;
   }
 }
+
+.stat-icon.teal {
+  background: rgba(20, 184, 166, 0.15);
+  color: #0f766e;
+}

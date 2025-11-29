@@ -1,4 +1,3 @@
-// src/components/leads/LeadsStats.jsx
 import React from "react";
 
 const LeadsStats = ({

@@ -41,13 +41,13 @@ const Login = () => {
     try {
       setLoading(true);
 
-      // === 1. Panggil backend sesuai dokumentasi API ===
-      const res = await fetch("http://localhost:5000/authentications", {
+      // === 1. Panggil backend ===
+      const res = await fetch("http://13.214.178.102:5000/authentications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: form.identity, // backend pakai username
-          password: form.password, // backend pakai password
+          username: form.identity,
+          password: form.password,
         }),
       });
 
@@ -58,20 +58,22 @@ const Login = () => {
         return;
       }
 
-      // === 2. Simpan Access Token dan Refresh Token ===
+      // === 2. Simpan Access & Refresh Token ===
       localStorage.setItem("accessToken", data.data.accessToken);
       localStorage.setItem("refreshToken", data.data.refreshToken);
 
-      // === 2b. Simpan nama & role user untuk ditampilkan di sidebar ===
-      // kalau backend mengembalikan user, pakai fullname/role dari sana
+      // === 3. Simpan nama & role user ===
       const userFromApi = data.data.user || {};
+
       const userName = userFromApi.fullname || form.identity;
-      const userRole = userFromApi.role || "Sales Manager";
+
+      // 🔥 PERBAIKAN DI SINI (hanya baris ini)
+      const userRole = userFromApi.role ?? "Sales";
 
       localStorage.setItem("userName", userName);
       localStorage.setItem("userRole", userRole);
 
-      // === 3. Redirect ke dashboard ===
+      // === 4. Redirect ===
       navigate("/dashboard");
     } catch (err) {
       console.error("Login error:", err);
@@ -83,7 +85,6 @@ const Login = () => {
 
   return (
     <>
-      {/* Bagian UI tidak berubah */}
       <button
         className="auth-theme-toggle"
         onClick={handleToggleTheme}
@@ -179,7 +180,6 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* Error */}
                 {errorMsg && <p className="error-text">{errorMsg}</p>}
 
                 <button

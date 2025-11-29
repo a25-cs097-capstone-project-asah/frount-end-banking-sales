@@ -1,15 +1,13 @@
-// src/components/dashboard/StatsGrid.jsx
 import React from "react";
 
 const StatsGrid = ({ stats }) => {
   if (!stats) return null;
 
-  // Ambil nilai dari backend, beri default biar aman
   const {
     totalLeads = 0,
     convertedLeads = 0,
     highPriorityLeads = 0,
-    convertionRate = 0, // perhatikan: nama dari backend
+    conversionRate = 0, // backend: 0.01 = 1%
     averageScore = 0,
   } = stats;
 
@@ -26,13 +24,12 @@ const StatsGrid = ({ stats }) => {
           <h3>Total Lead</h3>
           <p className="stat-number">{formatNumber(totalLeads)}</p>
           <span className="stat-change positive">
-            {/* sementara teks statis */}
             <i className="fas fa-arrow-up" /> Data keseluruhan leads
           </span>
         </div>
       </div>
 
-      {/* Konversi (jumlah leads converted) */}
+      {/* Konversi */}
       <div className="stat-card">
         <div className="stat-icon green">
           <i className="fas fa-check-circle" />
@@ -61,19 +58,22 @@ const StatsGrid = ({ stats }) => {
         </div>
       </div>
 
-      {/* Conversion Rate + rata-rata skor */}
+      {/* Conversion Rate */}
       <div className="stat-card">
         <div className="stat-icon purple">
           <i className="fas fa-percentage" />
         </div>
         <div className="stat-details">
           <h3>Conversion Rate</h3>
+
+          {/* 🔥 FIX di sini (backend 0.01 → tampil 1.00%) */}
           <p className="stat-number">
-            {Number(convertionRate || 0).toFixed(2)}%
+            {(Number(conversionRate) * 100).toFixed(2)}%
           </p>
+
           <span className="stat-change positive">
             <i className="fas fa-chart-line" /> Rata-rata skor:{" "}
-            {Number(averageScore || 0).toFixed(2)}
+            <strong>{Number(averageScore || 0).toFixed(2)}</strong>
           </span>
         </div>
       </div>

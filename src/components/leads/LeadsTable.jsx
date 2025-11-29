@@ -4,11 +4,19 @@ const LeadsTable = ({
   leads = [],
   onSort,
   getScoreCategory,
-  formatStatusLabel,
   onRowClick,
   onCallLead,
   onEmailLead,
 }) => {
+  const getInitials = (name = "") =>
+    name
+      .trim()
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+
   const handleEmailClick = (e, lead) => {
     e.stopPropagation();
     onEmailLead?.(lead);
@@ -17,16 +25,6 @@ const LeadsTable = ({
   const handleCallClick = (e, lead) => {
     e.stopPropagation();
     onCallLead?.(lead);
-  };
-
-  const getInitials = (name = "") => {
-    return name
-      .trim()
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
   };
 
   return (
@@ -53,90 +51,91 @@ const LeadsTable = ({
         </thead>
 
         <tbody>
-          {leads.map((lead) => {
-            const id = lead.id || lead.leadId || lead._id; // fallback aman
-            const score = Number(lead.probabilityScore) || 0;
-            const scoreCat = getScoreCategory(score);
-            const initials = getInitials(lead.name);
+          {leads.length > 0 ? (
+            leads.map((lead) => {
+              const id = lead.id || lead.leadId || lead._id;
+              const score = Number(lead.probabilityScore) || 0;
+              const scoreCat = getScoreCategory(score);
+              const initials = getInitials(lead.name);
 
-            return (
-              <tr key={id} onClick={() => onRowClick(lead)}>
-                {/* Nama */}
-                <td>
-                  <div className="name-cell">
-                    <div className="avatar">{initials}</div>
-
-                    <div className="name-info">
-                      <strong>{lead.name}</strong>
-                      {lead.email && (
-                        <div className="email-text">{lead.email}</div>
-                      )}
+              return (
+                <tr key={id} onClick={() => onRowClick(lead)}>
+                  {/* NAMA */}
+                  <td>
+                    <div className="name-cell">
+                      <div className="avatar">{initials}</div>
+                      <div className="name-info">
+                        <strong>{lead.name}</strong>
+                        {lead.email && (
+                          <div className="email-text">{lead.email}</div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                {/* Nomor Telepon */}
-                <td>{lead.phone || "-"}</td>
+                  {/* TELEPON */}
+                  <td>{lead.phone || "-"}</td>
 
-                {/* Pekerjaan */}
-                <td>{lead.job || "-"}</td>
+                  {/* PEKERJAAN */}
+                  <td>{lead.job || "-"}</td>
 
-                {/* Skor Probabilitas */}
-                <td>
-                  <div className="score-bar-container">
-                    <div className="score-bar">
-                      <div
-                        className={`score-fill ${scoreCat}`}
-                        style={{ width: `${score}%` }}
-                      />
+                  {/* SKOR */}
+                  <td>
+                    <div className="score-bar-container">
+                      <div className="score-bar">
+                        <div
+                          className={`score-fill ${scoreCat}`}
+                          style={{ width: `${score}%` }}
+                        />
+                      </div>
+                      <span className="score-text">{score}%</span>
                     </div>
-                    <span className="score-text">{score}%</span>
-                  </div>
-                </td>
+                  </td>
 
-                {/* Kategori */}
-                <td>
-                  {scoreCat === "high" && (
-                    <span className="badge-high">Tinggi</span>
-                  )}
-                  {scoreCat === "medium" && (
-                    <span className="badge-medium">Sedang</span>
-                  )}
-                  {scoreCat === "low" && (
-                    <span className="badge-low">Rendah</span>
-                  )}
-                </td>
+                  {/* KATEGORI */}
+                  <td>
+                    {scoreCat === "high" && (
+                      <span className="badge-high">Tinggi</span>
+                    )}
+                    {scoreCat === "medium" && (
+                      <span className="badge-medium">Sedang</span>
+                    )}
+                    {scoreCat === "low" && (
+                      <span className="badge-low">Rendah</span>
+                    )}
+                  </td>
 
-                {/* Status */}
-                <td>
-                  <span className="status-badge">
-                    {formatStatusLabel(lead.status)}
-                  </span>
-                </td>
+                  {/* 🔥 STATUS — readonly, tanpa dropdown */}
+                  <td>
+                    <span className={`status-badge status-${lead.status}`}>
+                      {lead.status
+                        .replace("-", " ")
+                        .replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </span>
+                  </td>
 
-                {/* Aksi */}
-                <td>
-                  <div className="action-buttons">
-                    <button
-                      className="btn-icon-small"
-                      onClick={(e) => handleEmailClick(e, lead)}
-                    >
-                      <i className="fas fa-envelope" />
-                    </button>
+                  {/* ACTION BUTTONS */}
+                  <td>
+                    <div className="action-buttons">
+                      <button
+                        className="btn-icon-small"
+                        onClick={(e) => handleEmailClick(e, lead)}
+                      >
+                        <i className="fas fa-envelope" />
+                      </button>
 
-                    <button
-                      className="btn-icon-small"
-                      onClick={(e) => handleCallClick(e, lead)}
-                    >
-                      <i className="fas fa-phone" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-
-          {leads.length === 0 && (
+                      <button
+                        className="btn-icon-small"
+                        onClick={(e) => handleCallClick(e, lead)}
+                      >
+                        <i className="fas fa-phone" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
             <tr>
               <td colSpan={7} className="no-data">
                 Tidak ada data lead yang cocok dengan filter.

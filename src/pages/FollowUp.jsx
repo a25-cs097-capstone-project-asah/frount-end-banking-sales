@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toggleTheme } from "../theme";
 
 import { getLeads } from "../api/leads";
+import { getDashboardStats } from "../api/dashboard";
 import { normalizeStatus } from "../utils/normalizeLead";
 import { fetchPhoneForLeads } from "../utils/fetchPhone";
 
@@ -30,6 +31,14 @@ const FollowUp = () => {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
+  // 🔥 Stats dari backend
+  const [stats, setStats] = useState({
+    totalLeads: 0,
+    highPriorityLeads: 0,
+    averageScore: 0,
+    followUpLeads: 0,
+  });
+
   // FILTER STATE
   const [search, setSearch] = useState("");
   const [scoreFilter, setScoreFilter] = useState("all");
@@ -37,7 +46,7 @@ const FollowUp = () => {
   const [jobFilter, setJobFilter] = useState("all");
 
   // ======================================================
-  // FETCH FOLLOW-UP LEADS + PATCH PHONE
+  // 🔥 FETCH FOLLOW-UP LEADS
   // ======================================================
   const fetchFollowUps = async () => {
     try {
@@ -56,7 +65,6 @@ const FollowUp = () => {
       }));
 
       const leadsWithPhone = await fetchPhoneForLeads(normalized);
-
       setLeads(leadsWithPhone);
     } catch (err) {
       console.error(err);
@@ -66,8 +74,26 @@ const FollowUp = () => {
     }
   };
 
+  // ======================================================
+  // 🔥 FETCH GLOBAL STATS (/dashboard/stats)
+  // ======================================================
+  const loadStats = async () => {
+    try {
+      const s = await getDashboardStats();
+      setStats({
+        totalLeads: s.totalLeads ?? 0,
+        highPriorityLeads: s.highPriorityLeads ?? 0,
+        averageScore: s.averageScore ?? 0,
+        followUpLeads: s.followUpLeads ?? 0,
+      });
+    } catch (error) {
+      console.error("Failed to load stats:", error);
+    }
+  };
+
   useEffect(() => {
     fetchFollowUps();
+    loadStats();
   }, []);
 
   // ======================================================
@@ -76,12 +102,14 @@ const FollowUp = () => {
   const filteredLeads = useMemo(() => {
     let result = [...leads];
 
-    // SCORE
+    // SCORE (aturan baru)
     result = result.filter((lead) => {
       const s = Number(lead.probabilityScore) || 0;
-      if (scoreFilter === "high") return s >= 85;
-      if (scoreFilter === "medium") return s >= 70 && s < 85;
-      if (scoreFilter === "low") return s < 70;
+
+      if (scoreFilter === "high") return s >= 80;
+      if (scoreFilter === "medium") return s >= 60 && s < 80;
+      if (scoreFilter === "low") return s < 60;
+
       return true;
     });
 
@@ -121,26 +149,6 @@ const FollowUp = () => {
     return [...set].sort();
   }, [leads]);
 
-  // ======================================================
-  // STATS
-  // ======================================================
-  const totalLeads = filteredLeads.length;
-
-  const highPriorityLeads = filteredLeads.filter(
-    (l) => Number(l.probabilityScore) >= 85
-  ).length;
-
-  const avgScore = filteredLeads.length
-    ? Math.round(
-        filteredLeads.reduce(
-          (acc, l) => acc + Number(l.probabilityScore || 0),
-          0
-        ) / filteredLeads.length
-      )
-    : 0;
-
-  const followUpToday = totalLeads;
-
   return (
     <>
       <LeadsHeader
@@ -160,16 +168,17 @@ const FollowUp = () => {
           jobFilter={jobFilter}
           setJobFilter={setJobFilter}
           jobOptions={jobOptions}
-          hideStatusFilter // ⛔ no status filter
-          hideViewSwitcher // ⛔ force table view
+          hideStatusFilter
+          hideViewSwitcher
           onRefresh={fetchFollowUps}
         />
 
+        {/* 🔥 Semua angka dari backend */}
         <LeadsStats
-          totalLeads={totalLeads}
-          highPriorityLeads={highPriorityLeads}
-          avgScore={avgScore}
-          followUpToday={followUpToday}
+          totalLeads={stats.totalLeads}
+          highPriorityLeads={stats.highPriorityLeads}
+          avgScore={stats.averageScore}
+          followUpToday={stats.followUpLeads}
         />
 
         {loading ? (

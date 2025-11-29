@@ -1,15 +1,24 @@
 import React from "react";
 
 const LeadMainInfo = ({
+  name,
+  email,
+  locate,
+  phone,
   age,
-  city,
-  segment,
-  incomeRange,
   job,
-  company,
-  riskProfile,
-  productInterest,
-  recommendations = [], // default aman
+  marital,
+  education,
+  housing,
+  loan,
+  balance,
+  contact,
+  month,
+  dayOfWeek,
+  duration,
+  probabilityScore,
+  category,
+  status,
 }) => {
   return (
     <section className="lead-main-info">
@@ -18,9 +27,14 @@ const LeadMainInfo = ({
         <div className="card-header">
           <h3>Profil Nasabah</h3>
         </div>
+        <p>Nama: {name}</p>
+        <p>Email: {email}</p>
+        <p>No. Telepon: {phone}</p>
+        <p>Lokasi: {locate}</p>
         <p>Usia: {age} tahun</p>
-        <p>Domisili: {city}</p>
-        <p>Segmen: {segment || "Belum ditentukan"}</p>
+        <p>Status Perkawinan: {marital}</p>
+        <p>Pendidikan: {education}</p>
+        <p>Status Lead: {status}</p>
       </div>
 
       {/* Profil Keuangan */}
@@ -28,39 +42,23 @@ const LeadMainInfo = ({
         <div className="card-header">
           <h3>Profil Keuangan</h3>
         </div>
-        <p>Rentang penghasilan: {incomeRange}</p>
         <p>Pekerjaan: {job}</p>
-        <p>Perusahaan: {company}</p>
-        <p>Profil risiko: {riskProfile}</p>
+        <p>Saldo Nasabah: {balance}</p>
+        <p>Memiliki Rumah: {housing}</p>
+        <p>Memiliki Pinjaman: {loan}</p>
+        <p>Kategori Lead: {category}</p>
+        <p>Probability Score: {probabilityScore}%</p>
       </div>
 
-      {/* Minat & Produk */}
+      {/* Informasi Kontak */}
       <div className="chart-card">
         <div className="card-header">
-          <h3>Minat & Produk</h3>
+          <h3>Informasi Kontak</h3>
         </div>
-        <p>
-          Produk diminati: <strong>{productInterest}</strong>
-        </p>
-      </div>
-
-      {/* Rekomendasi */}
-      <div className="chart-card">
-        <div className="card-header">
-          <h3>Rekomendasi Tindakan</h3>
-        </div>
-
-        {recommendations.length === 0 ? (
-          <p>Tidak ada rekomendasi.</p> // ✔ tidak error walaupun kosong
-        ) : (
-          <ul className="recommendation-list">
-            {recommendations.map((r, i) => (
-              <li key={i}>
-                <i className="fas fa-lightbulb" /> {r}
-              </li>
-            ))}
-          </ul>
-        )}
+        <p>Metode Kontak Terakhir: {contact}</p>
+        <p>Bulan Dihubungi: {month}</p>
+        <p>Hari Dihubungi: {dayOfWeek}</p>
+        <p>Durasi Kontak: {duration} detik</p>
       </div>
     </section>
   );

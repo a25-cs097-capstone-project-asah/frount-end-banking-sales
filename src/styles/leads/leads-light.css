@@ -1,7 +1,8 @@
-/* =========================
-   LEADS – LIGHT MODE
-   ======================== */
+/* ===================================================================
+   LEADS — LIGHT MODE (FINAL, CLEAN, COMPLETE)
+   =================================================================== */
 
+/* WRAPPER */
 html.light .leads-content {
   background: #ffffff;
   border-radius: 20px;
@@ -9,7 +10,7 @@ html.light .leads-content {
   box-shadow: 0 16px 32px rgba(10, 25, 49, 0.12);
 }
 
-/* Filter & stats card */
+/* FILTER & STATS CARD */
 html.light .filter-card-dark,
 html.light .stats-card-dark {
   background: #f6fafd;
@@ -17,14 +18,13 @@ html.light .stats-card-dark {
   border: 1px solid #b3cfe5;
 }
 
-/* Label kecil di filter & stats */
+/* TEXT LABELS */
 html.light .filter-group-inline label,
 html.light .stat-label-dark {
   color: #1a3d63;
 }
 
-/* Tombol & dropdown di filter bar
-   (Export = primary, Refresh = secondary) */
+/* BUTTON: PRIMARY (EXPORT) */
 html.light .btn-dark-primary {
   height: 32px;
   display: inline-flex;
@@ -42,7 +42,7 @@ html.light .btn-dark-primary {
   font-weight: 500;
 
   box-shadow: 0 8px 18px rgba(10, 25, 49, 0.24);
-  transition: 0.2s ease-in-out;
+  transition: 0.2s;
 }
 
 html.light .btn-dark-primary:hover {
@@ -51,27 +51,21 @@ html.light .btn-dark-primary:hover {
   transform: translateY(-1px);
 }
 
-html.light .btn-dark-primary i {
-  color: #ffffff !important;
-}
-
+/* BUTTON: SECONDARY (REFRESH) */
 html.light .btn-dark-secondary {
   height: 32px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 0 14px;
-
   border-radius: 10px;
+
   border: 1px solid #b3cfe5;
 
   background: #ffffff;
   color: #0a1931;
-
   font-size: 0.82rem;
   font-weight: 500;
-
-  transition: 0.2s ease;
 }
 
 html.light .btn-dark-secondary:hover {
@@ -79,18 +73,25 @@ html.light .btn-dark-secondary:hover {
   border-color: #4a7fa7;
 }
 
+/* FILTER SELECT */
 html.light .filter-group-inline select {
   background: #ffffff;
   color: #0a1931;
   border: 1px solid #b3cfe5;
 }
 
+html.light .filter-group-inline select:hover {
+  border-color: #4a7fa7;
+  background: #f8fbff;
+}
+
 html.light .filter-group-inline select:focus {
   border-color: #4a7fa7;
   box-shadow: 0 0 0 1px rgba(74, 127, 167, 0.35);
+  outline: none;
 }
 
-/* Toggle list / grid default */
+/* VIEW TOGGLE */
 html.light .view-toggle-dark {
   background: #ffffff;
   border: 1px solid #b3cfe5;
@@ -100,29 +101,26 @@ html.light .view-toggle-dark .view-btn-dark {
   color: #1a3d63;
 }
 
-/* Hover disamakan dengan tombol aksi */
 html.light .view-toggle-dark .view-btn-dark:hover {
-  background: #0a1931 !important;
-  color: #ffffff !important;
-  border-radius: 8px; /* biar lembut, opsional */
+  background: #0a1931;
+  color: #ffffff;
 }
 
-/* Ikon ikut jadi putih */
-html.light .view-toggle-dark .view-btn-dark:hover i {
-  color: #ffffff !important;
-}
-
-/* Aktif (terpilih) juga disamakan */
 html.light .view-toggle-dark .view-btn-dark.active {
-  background: #0a1931 !important;
-  color: #ffffff !important;
+  background: #0a1931;
+  color: #ffffff;
 }
 
-html.light .view-toggle-dark .view-btn-dark.active i {
-  color: #ffffff !important;
+/* TABLE CONTAINER */
+html.light .table-container {
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid #d3e3f5;
+  box-shadow: 0 10px 20px rgba(10, 25, 49, 0.1);
 }
 
-/* TABEL LEADS */
+/* TABLE */
 html.light .leads-table {
   color: #0a1931;
 }
@@ -133,14 +131,14 @@ html.light .leads-table thead {
 
 html.light .leads-table th {
   color: #0a1931;
-  border-bottom-color: rgba(179, 207, 229, 0.9);
+  border-bottom: 1px solid rgba(179, 207, 229, 0.9);
 }
 
 html.light .leads-table td {
-  border-bottom-color: rgba(212, 221, 235, 0.9);
+  border-bottom: 1px solid rgba(212, 221, 235, 0.9);
 }
 
-/* zebra row */
+/* ZEBRA */
 html.light .leads-table tbody tr:nth-child(even) {
   background: #f6fafd;
 }
@@ -149,61 +147,97 @@ html.light .leads-table tbody tr:nth-child(odd) {
   background: #ffffff;
 }
 
-/* hover row */
-html.light .leads-table tbody tr:hover {
-  background: #dbeafe;
+/* HOVER */
+html.light .leads-table tbody tr {
+  cursor: pointer;
 }
 
-/* Badge & status */
+html.light .leads-table tbody tr:hover {
+  background: #e6f0ff !important;
+}
+
+/* SCORE BAR */
+html.light .score-bar {
+  background: #ffffff !important;
+  border-radius: 999px !important;
+  border: 1px solid #d3e3f5 !important;
+}
+
+html.light .score-text {
+  color: #0a1931 !important;
+}
+
+/* BADGES */
 html.light .badge-high {
   background: rgba(34, 197, 94, 0.08);
-  border-color: rgba(34, 197, 94, 0.5);
+  border: 1px solid rgba(34, 197, 94, 0.5);
   color: #166534;
 }
 
 html.light .badge-medium {
   background: rgba(234, 179, 8, 0.08);
-  border-color: rgba(234, 179, 8, 0.5);
+  border: 1px solid rgba(234, 179, 8, 0.5);
   color: #854d0e;
 }
 
-html.light .status-new {
-  background: rgba(59, 130, 246, 0.08);
-  border-color: rgba(59, 130, 246, 0.4);
-  color: #1d4ed8;
+html.light .badge-low {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #b91c1c;
 }
 
-html.light .status-contacted {
-  background: rgba(34, 197, 94, 0.08);
-  border-color: rgba(34, 197, 94, 0.4);
-  color: #166534;
-}
-
-html.light .status-follow-up {
-  background: rgba(234, 179, 8, 0.08);
-  border-color: rgba(234, 179, 8, 0.4);
-  color: #854d0e;
-}
-
-html.light .status-converted {
-  background: rgba(22, 163, 74, 0.1);
-  border-color: rgba(22, 163, 74, 0.5);
-  color: #166534;
-}
-
-/* Tombol aksi */
-html.light .btn-icon-small {
+/* STATUS DROPDOWN */
+html.light .status-dropdown {
   background: #ffffff;
   border: 1px solid #b3cfe5;
+  padding: 4px 8px;
+  border-radius: 8px;
   color: #0a1931;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+html.light .status-dropdown:hover {
+  border-color: #4a7fa7;
+}
+
+html.light .status-dropdown:focus {
+  outline: none;
+  border-color: #4a7fa7;
+  box-shadow: 0 0 0 1px rgba(74, 127, 167, 0.4);
+}
+
+/* ACTION BUTTONS */
+html.light .action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+html.light .btn-icon-small {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff !important;
+  border: 1px solid #b3cfe5 !important;
+  color: #0a1931 !important;
+
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(10, 25, 49, 0.12);
+  transition: 0.15s ease;
 }
 
 html.light .btn-icon-small:hover {
-  background: #0a1931;
-  color: #ffffff;
+  background: #0a1931 !important;
+  color: #ffffff !important;
+  border-color: #0a1931 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(10, 25, 49, 0.18) !important;
 }
 
-/* GRID CARD LEADS */
+/* GRID CARD */
 html.light .lead-card-dark {
   background: #ffffff;
   border-radius: 16px;
@@ -224,101 +258,31 @@ html.light .lead-card-title p {
   color: #6b7280;
 }
 
-/* PAGINATION */
-html.light .pagination-btn {
+/* PAGINATION (NEW SYSTEM) */
+html.light .page-btn {
   background: #ffffff;
   border: 1px solid #b3cfe5;
   color: #0a1931;
+  padding: 6px 12px;
+  border-radius: 8px;
+  min-width: 34px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-html.light .pagination-btn:hover {
+html.light .page-btn:hover {
   background: #e0ecff;
+  border-color: #4a7fa7;
 }
 
-html.light .pagination-btn.active {
+html.light .page-btn.active {
   background: #0a1931;
-  border-color: #0a1931;
   color: #ffffff;
+  border-color: #0a1931;
 }
 
-html.light .btn-dark-primary span,
-html.light .btn-dark-primary * {
-  color: #ffffff !important;
-}
-
-/* =====================================================
-   LEADS – LIGHT MODE (POIN 3 POLISH)
-   ===================================================== */
-
-/* --- Avatar lebih lembut (shadow tipis) --- */
-html.light .avatar {
-  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.15) !important;
-  border: 1px solid #d3e3f5 !important;
-}
-
-/* --- Score Bar: bagian kosong putih bersih --- */
-html.light .score-bar {
-  background: #ffffff !important;
-  border-radius: 999px !important;
-  border: 1px solid #d3e3f5 !important;
-}
-
-/* --- Teks skor tetap gelap & jelas --- */
-html.light .score-text {
-  color: #0a1931 !important;
-}
-
-/* --- Badge kategori tidak bertumpuk --- */
-html.light .badge-high,
-html.light .badge-medium {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 75px;
-  padding: 4px 10px;
-
-  border-radius: 999px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  margin-left: 6px;
-}
-
-/* --- Action buttons (email & telepon) --- */
-html.light .action-buttons {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-html.light .btn-icon-small {
-  width: 28px;
-  height: 28px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #ffffff !important;
-  border: 1px solid #b3cfe5 !important;
-  color: #0a1931 !important;
-
-  border-radius: 999px;
-  font-size: 0.78rem;
-
-  box-shadow: 0 2px 4px rgba(10, 25, 49, 0.12) !important;
-  transition: 0.15s ease;
-}
-
-html.light .btn-icon-small:hover {
-  background: #0a1931 !important;
-  color: #ffffff !important;
-  border-color: #0a1931 !important;
-  box-shadow: 0 4px 8px rgba(10, 25, 49, 0.18) !important;
-  transform: translateY(-1px);
-}
-
-/* Icon mengikuti warna tombol */
-html.light .btn-icon-small i {
-  color: inherit !important;
+html.light .pagination-dots {
+  padding: 6px 10px;
+  color: #6b7280;
 }

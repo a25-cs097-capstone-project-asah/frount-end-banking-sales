@@ -1,0 +1,98 @@
+.history-container {
+  padding: 20px 40px;
+}
+
+.date-header {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #e2e8f0;
+}
+
+.timeline {
+  border-left: 2px solid rgba(255, 255, 255, 0.22);
+  margin-left: 18px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.timeline-item {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -34px;
+  top: 5px;
+  background: #1e293b;
+  border: 2px solid #64748b;
+  color: white;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px #0006;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+}
+
+.timeline-footer {
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.8;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.timeline-top .badge {
+  margin-left: auto;
+}
+
+html.light .date-header {
+  color: #1e293b;
+}
+
+html.light .timeline {
+  border-left: 2px solid rgba(0, 0, 0, 0.14);
+}
+
+html.light .timeline-dot {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  color: #475569;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #1e293b;
+}
+
+html.light .timeline-footer {
+  color: #334155;
+  opacity: 0.8;
+}

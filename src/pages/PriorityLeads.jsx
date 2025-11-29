@@ -2,13 +2,18 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { toggleTheme } from "../theme";
-import { getPriorityLeads } from "../api/dashboard";
-import { fetchPhoneForLeads } from "../utils/fetchPhone";
+import { api } from "../api/client";
+import { exportToCSV } from "../utils/exportToCSV";
 
 import LeadsHeader from "../components/leads/LeadsHeader";
 import LeadsFilterBar from "../components/leads/LeadsFilterBar";
 import LeadsStats from "../components/leads/LeadsStats";
 import LeadsTable from "../components/leads/LeadsTable";
+import LeadsPagination from "../components/leads/LeadsPagination";
+
+import { fetchPhoneForLeads } from "../utils/fetchPhone";
+
+import { getDashboardStats } from "../api/dashboard";
 
 const PriorityLeads = () => {
   const navigate = useNavigate();
@@ -21,11 +26,26 @@ const PriorityLeads = () => {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // FILTER UI STATE
+  const [stats, setStats] = useState({
+    totalLeads: 0,
+    highPriorityLeads: 0,
+    averageScore: 0,
+    followUpLeads: 0,
+  });
+
+  const [pagination, setPagination] = useState({
+    page: 1,
+    totalPages: 1,
+    totalLeads: 0,
+  });
+
+  // FILTER
   const [search, setSearch] = useState("");
   const [scoreFilter, setScoreFilter] = useState("all");
   const [ageFilter, setAgeFilter] = useState("all");
   const [jobFilter, setJobFilter] = useState("all");
+
+  const limit = 10;
 
   const handleToggleTheme = () => {
     toggleTheme();
@@ -33,19 +53,22 @@ const PriorityLeads = () => {
   };
 
   // ======================================================
-  // FETCH PRIORITY LEADS (STATUS TIDAK DIUBAH)
+  // 🔥 FETCH PRIORITY LEADS — PAGINATION
   // ======================================================
-  const fetchPriority = async () => {
+  const fetchPriority = async (page = 1) => {
     try {
       setLoading(true);
       setErrorMsg("");
 
-      const data = await getPriorityLeads(30);
+      const res = await api.get("/leads/priority-leads", {
+        params: { page, limit },
+      });
 
-      // ❗ STATUS TIDAK DI NORMALISASI, LANGSUNG PAKAI RAW
-      const withPhone = await fetchPhoneForLeads(data);
+      const { leads, pagination } = res.data.data;
+      const withPhone = await fetchPhoneForLeads(leads);
 
       setLeads(withPhone);
+      setPagination(pagination);
     } catch (err) {
       console.error(err);
       setErrorMsg("Gagal mengambil data prioritas tinggi.");
@@ -55,7 +78,28 @@ const PriorityLeads = () => {
   };
 
   useEffect(() => {
-    fetchPriority();
+    fetchPriority(1);
+  }, []);
+
+  // ======================================================
+  // 🔥 FETCH GLOBAL STATS DARI /dashboard/stats
+  // ======================================================
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const s = await getDashboardStats();
+        setStats({
+          totalLeads: s.totalLeads ?? 0,
+          highPriorityLeads: s.highPriorityLeads ?? 0,
+          averageScore: s.averageScore ?? 0,
+          followUpLeads: s.followUpLeads ?? 0,
+        });
+      } catch (err) {
+        console.error("Failed to load stats:", err);
+      }
+    };
+
+    loadStats();
   }, []);
 
   // ======================================================
@@ -63,13 +107,26 @@ const PriorityLeads = () => {
   // ======================================================
   const filteredLeads = useMemo(() => {
     let result = [...leads];
+    const q = search.toLowerCase();
 
-    // Score
+    if (search.trim()) {
+      result = result.filter(
+        (l) =>
+          l.name?.toLowerCase().includes(q) ||
+          l.email?.toLowerCase().includes(q) ||
+          l.phone?.toLowerCase().includes(q) ||
+          l.job?.toLowerCase().includes(q)
+      );
+    }
+
+    // SCORE (aturan baru)
     result = result.filter((lead) => {
-      const score = Number(lead.probabilityScore) || 0;
-      if (scoreFilter === "high") return score >= 85;
-      if (scoreFilter === "medium") return score >= 70 && score < 85;
-      if (scoreFilter === "low") return score < 70;
+      const s = Number(lead.probabilityScore) || 0;
+
+      if (scoreFilter === "high") return s >= 80;
+      if (scoreFilter === "medium") return s >= 60 && s < 80;
+      if (scoreFilter === "low") return s < 60;
+
       return true;
     });
 
@@ -87,18 +144,6 @@ const PriorityLeads = () => {
       result = result.filter((lead) => lead.job === jobFilter);
     }
 
-    // Search
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      result = result.filter(
-        (l) =>
-          l.name.toLowerCase().includes(q) ||
-          l.email?.toLowerCase().includes(q) ||
-          l.phone?.toLowerCase().includes(q) ||
-          l.job?.toLowerCase().includes(q)
-      );
-    }
-
     return result;
   }, [leads, search, scoreFilter, ageFilter, jobFilter]);
 
@@ -108,25 +153,6 @@ const PriorityLeads = () => {
     leads.forEach((l) => l.job && set.add(l.job));
     return [...set].sort();
   }, [leads]);
-
-  // ======================================================
-  // STATS
-  // ======================================================
-  const totalLeads = filteredLeads.length;
-  const highPriorityLeads = totalLeads;
-
-  const avgScore = totalLeads
-    ? Math.round(
-        filteredLeads.reduce(
-          (acc, l) => acc + Number(l.probabilityScore || 0),
-          0
-        ) / totalLeads
-      )
-    : 0;
-
-  const followUpToday = filteredLeads.filter(
-    (l) => l.status === "follow-up"
-  ).length; // RAW status, bukan “Follow Up”
 
   return (
     <>
@@ -149,14 +175,23 @@ const PriorityLeads = () => {
           jobOptions={jobOptions}
           hideStatusFilter
           hideViewSwitcher
-          onRefresh={fetchPriority}
+          onRefresh={() => fetchPriority(pagination.page)}
+          onExport={() =>
+            exportToCSV(
+              filteredLeads,
+              `priority-leads-page-${pagination.page}.csv`
+            )
+          }
         />
 
+        {/* ======================================================
+            🔥 Stats DIPAKAI dari Backend (/dashboard/stats)
+        ====================================================== */}
         <LeadsStats
-          totalLeads={totalLeads}
-          highPriorityLeads={highPriorityLeads}
-          avgScore={avgScore}
-          followUpToday={followUpToday}
+          totalLeads={stats.totalLeads} // 🔥 dari backend
+          highPriorityLeads={stats.highPriorityLeads} // 🔥 dari backend
+          avgScore={stats.averageScore} // 🔥 dari backend
+          followUpToday={stats.followUpLeads} // 🔥 dari backend
         />
 
         {loading ? (
@@ -164,14 +199,22 @@ const PriorityLeads = () => {
         ) : errorMsg ? (
           <p style={{ color: "red" }}>{errorMsg}</p>
         ) : (
-          <LeadsTable
-            leads={filteredLeads}
-            getScoreCategory={(s) =>
-              s >= 85 ? "high" : s >= 70 ? "medium" : "low"
-            }
-            formatStatusLabel={(s) => s} // status apa adanya
-            onRowClick={(lead) => navigate(`/leads/${lead.id}`)}
-          />
+          <>
+            <LeadsTable
+              leads={filteredLeads}
+              getScoreCategory={(s) =>
+                s >= 85 ? "high" : s >= 70 ? "medium" : "low"
+              }
+              formatStatusLabel={(s) => s}
+              onRowClick={(lead) => navigate(`/leads/${lead.id}`)}
+            />
+
+            <LeadsPagination
+              currentPage={pagination.page}
+              totalPages={pagination.totalPages}
+              onPageChange={(p) => fetchPriority(p)}
+            />
+          </>
         )}
       </div>
     </>

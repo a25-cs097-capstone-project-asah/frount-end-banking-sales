@@ -3,8 +3,6 @@ import React from "react";
 const LeadsFilterBar = ({
   scoreFilter,
   setScoreFilter,
-  ageFilter,
-  setAgeFilter,
   jobFilter,
   setJobFilter,
   jobOptions = [],
@@ -39,23 +37,9 @@ const LeadsFilterBar = ({
             onChange={(e) => setScoreFilter(e.target.value)}
           >
             <option value="all">Semua Skor</option>
-            <option value="high">Tinggi (≥ 85%)</option>
-            <option value="medium">Sedang (70–84%)</option>
-            <option value="low">Rendah (&lt; 70%)</option>
-          </select>
-        </div>
-
-        {/* USIA */}
-        <div className="filter-group-inline">
-          <label>Usia:</label>
-          <select
-            value={ageFilter}
-            onChange={(e) => setAgeFilter(e.target.value)}
-          >
-            <option value="all">Semua Usia</option>
-            <option value="young">&lt; 30 tahun</option>
-            <option value="middle">30–50 tahun</option>
-            <option value="senior">&gt; 50 tahun</option>
+            <option value="high">Tinggi (≥ 80%)</option>
+            <option value="medium">Sedang (60–79%)</option>
+            <option value="low">Rendah (&lt; 60%)</option>
           </select>
         </div>
 

@@ -24,17 +24,6 @@ const LeadDetailHeader = ({ onBack }) => {
       </div>
 
       <div className="detail-header-actions">
-        {/* Tombol Hubungi */}
-        <button className="btn btn-primary btn-header-primary">
-          <i className="fas fa-phone" /> Hubungi
-        </button>
-
-        {/* Tombol Email */}
-        <button className="btn btn-outline btn-header-secondary">
-          <i className="fas fa-envelope" /> Email
-        </button>
-
-        {/* Theme Toggle (baru ditambahkan) */}
         <button
           className="header-icon"
           type="button"

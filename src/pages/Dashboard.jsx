@@ -15,10 +15,12 @@ import {
 
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
-  const [convertionTrend, setConvertionTrend] = useState([]);
+  const [conversionTrend, setConversionTrend] = useState([]);
   const [distributionStats, setDistributionStats] = useState([]);
   const [priorityLeads, setPriorityLeadsState] = useState([]);
-  const [activities, setActivities] = useState([]); // sementara kosong
+  const [activities, setActivities] = useState([]);
+
+  const [chartDays, setChartDays] = useState(7); // default 7 hari
 
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,27 +37,42 @@ const Dashboard = () => {
           return;
         }
 
-        // Karena api client sudah otomatis kirim Authorization dari localStorage,
-        // kita cukup panggil service saja:
-
+        // Ambil semua data paralel berdasarkan periode grafik
         const [statsData, chartsData, priorityData] = await Promise.all([
           getDashboardStats(),
-          getDashboardCharts(7),
+          getDashboardCharts(chartDays),
           getPriorityLeads(5),
         ]);
 
-        setStats(statsData);
-        setConvertionTrend(chartsData.convertionTrend || []);
+        // ---- 1️⃣ Stats utama (backend) ----
+        setStats({
+          totalLeads: statsData.totalLeads ?? 0,
+          convertedLeads: statsData.convertedLeads ?? 0,
+          highPriorityLeads: statsData.highPriorityLeads ?? 0,
+          conversionRate: statsData.conversionRate ?? 0, // akan dikali 100 di StatsGrid
+          averageScore: statsData.averageScore ?? 0,
+        });
+
+        // ---- 2️⃣ Fix typo backend convertionTrend ----
+        setConversionTrend(
+          chartsData.conversionTrend ||
+            chartsData.convertionTrend || // fallback
+            []
+        );
+
+        // ---- 3️⃣ Score Distribution ----
         setDistributionStats(chartsData.distributionStats || []);
+
+        // ---- 4️⃣ Priority Leads ----
         setPriorityLeadsState(priorityData || []);
 
-        // Activities belum ada di backend → kosong dulu
+        // ---- 5️⃣ Aktivitas → belum ada API ----
         setActivities([]);
       } catch (err) {
         console.error("Dashboard load error:", err);
         setErrorMsg(
           err?.response?.data?.message ||
-            "Terjadi kegagalan pada server kami saat memuat dashboard."
+            "Terjadi masalah saat memuat dashboard."
         );
       } finally {
         setLoading(false);
@@ -63,8 +80,9 @@ const Dashboard = () => {
     };
 
     fetchDashboardData();
-  }, []);
+  }, [chartDays]); // refresh ketika periode berubah
 
+  // ==================== LOADING ====================
   if (loading) {
     return (
       <>
@@ -76,38 +94,40 @@ const Dashboard = () => {
     );
   }
 
+  // ==================== ERROR ====================
   if (errorMsg) {
     return (
       <>
         <DashboardHeader />
         <div className="dashboard-content">
-          <p style={{ color: "#f87171" }}>{errorMsg}</p>
+          <p style={{ color: "#ef4444" }}>{errorMsg}</p>
         </div>
       </>
     );
   }
 
+  // ==================== SUCCESS ====================
   return (
     <>
       <DashboardHeader />
 
       <div className="dashboard-content">
-        {/* Stats dari backend */}
+        {/* Stats Box */}
         {stats && <StatsGrid stats={stats} />}
 
         <div className="charts-row">
-          {/* Conversion chart pakai convertionTrend dari backend */}
-          <ConversionChart conversionTrend={convertionTrend} />
+          {/* Grafik Konversi */}
+          <ConversionChart
+            conversionTrend={conversionTrend}
+            period={chartDays}
+            onChangePeriod={setChartDays}
+          />
 
-          {/* Score distribution chart pakai distributionStats dari backend */}
           <ScoreDistributionChart scoreDistribution={distributionStats} />
         </div>
 
         <div className="bottom-section">
-          {/* Priority leads dari /dashboard/priority-leads */}
           <PriorityLeads priorityLeads={priorityLeads} />
-
-          {/* Activities sementara kosong */}
           <ActivityList activities={activities} />
         </div>
       </div>

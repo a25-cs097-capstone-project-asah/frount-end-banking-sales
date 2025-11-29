@@ -19,6 +19,7 @@ import "./styles/leads/leads-light.css";
 import "./styles/lead-detail/lead-detail-base.css";
 import "./styles/lead-detail/lead-detail-dark.css";
 import "./styles/lead-detail/lead-detail-light.css";
+import "./styles/history.css";
 import "./styles/responsive.css";
 // =====================================
 

@@ -1,12 +1,12 @@
 /* =====================================================
-   LEAD DETAIL — LIGHT MODE (Banking Blue Refined)
+   LEAD DETAIL — LIGHT MODE (Improved Readability)
    ===================================================== */
 
 /* ----- Halaman container ----- */
 html.light .lead-detail-page {
   background: #ffffff;
   border-radius: 24px;
-  border: 1px solid #b3cfe5;
+  border: 1px solid #9bb8d4;
   box-shadow: 0 10px 26px rgba(10, 25, 49, 0.08);
 }
 
@@ -15,82 +15,88 @@ html.light .detail-header-left h1 {
   color: #0a1931;
 }
 
-/* Tombol "Hubungi" (primary) */
-html.light .btn-header-primary {
-  background: linear-gradient(135deg, #5281cd, #4e66b0) !important;
-  color: #ffffff !important;
-  border: 1px solid #0a3d91 !important;
-  box-shadow: 0 8px 20px rgba(10, 25, 49, 0.3);
-}
+/* ===== FIX: TOMBOL KEMBALI DI LIGHT MODE ===== */
 
-html.light .btn-header-primary i {
-  color: #ffffff !important;
-}
-
-/* Tombol "Email" (secondary) */
-html.light .btn-header-secondary {
+html.light .btn-back {
   background: #ffffff !important;
   color: #0a1931 !important;
-  border: 1px solid #b3cfe5 !important;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+  border: 1px solid #8ba8c6 !important;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(10, 25, 49, 0.1);
 }
 
-html.light .btn-header-secondary:hover {
-  background: #e6effc !important;
-  border-color: #4a7fa7 !important;
+html.light .btn-back i {
+  color: #0a1931 !important;
+}
+
+/* ===== FIX: TEKS SKOR DI LIGHT MODE ===== */
+
+html.light .summary-score-text {
+  color: #0a1931 !important;
+}
+
+html.light .summary-score-level {
+  color: #0a1931 !important;
+  font-weight: 600;
+}
+
+html.light .summary-score-sub {
+  color: #4b5563 !important;
+  opacity: 1 !important;
 }
 
 /* ----- Summary card atas ----- */
 html.light .lead-summary-card {
-  background: #f6fafd;
-  border: 1px solid #d3e2f4;
+  background: #f4f7fb;
+  border: 1px solid #c4d6eb;
 }
 
-/* Garis pemisah di tengah summary card */
+/* Garis pemisah */
 html.light .lead-summary-main {
-  border-bottom-color: #d3e2f4;
+  border-bottom-color: #c4d6eb;
 }
 
-/* Avatar inisial (SN, dst) */
+/* Avatar */
 html.light .lead-avatar.large {
-  background: #99b2db;
-  color: #ffffff;
-}
-
-html.light .lead-avatar.large span {
-  color: #ffffff;
+  background: #6f91c5;
+  color: #f0e8e8;
 }
 
 /* Teks info nasabah */
+html.light .lead-summary-info h2 {
+  color: #0a1931;
+}
+
 html.light .lead-summary-info p {
-  color: #4b5563;
+  color: #374151;
 }
 
-/* Score summary di kanan */
+/* Teks score */
 html.light .summary-score-text {
-  color: #9baec9;
+  color: #526581;
+  font-weight: 500;
 }
 
-/* Lingkaran skor 92% */
+/* Lingkaran skor */
 html.light .score-circle.summary-score.high {
   background: #ffffff;
   color: #166534;
-  border: 5px solid rgba(34, 197, 94, 0.7);
+  border: 5px solid rgba(34, 197, 94, 0.85); /* lebih tegas */
 }
 
 html.light .score-circle.summary-score.medium {
   background: #ffffff;
   color: #854d0e;
-  border: 5px solid rgba(234, 179, 8, 0.75);
+  border: 5px solid rgba(234, 179, 8, 0.85);
 }
 
 html.light .score-circle.summary-score.low {
   background: #ffffff;
   color: #b91c1c;
-  border: 5px solid rgba(239, 68, 68, 0.75);
+  border: 5px solid rgba(239, 68, 68, 0.85);
 }
 
-/* ----- 4 tombol besar: Telepon, Email, Jadwalkan, Catatan ----- */
+/* ----- Tombol aksi besar ----- */
 html.light .summary-action-card {
   background: #ffffff;
   border: 1px solid #0a3d64;
@@ -103,27 +109,27 @@ html.light .summary-action-card:hover {
   border-color: #4a7fa7;
 }
 
-/* Bulatan ikon di dalam tombol besar */
 html.light .summary-action-icon {
-  background: #e2e7f0;
-  color: #ffffff;
+  background: #dce3ef;
+  color: #0a1931;
 }
 
-/* ----- Card bawah: Profil, Keuangan, Aktivitas, Catatan ----- */
+/* ----- Card bawah (Profil, Aktivitas, Catatan) ----- */
 html.light .lead-main-info .chart-card,
 html.light .lead-activity-section .chart-card,
 html.light .lead-activity-section .activity-card {
   background: #ffffff;
-  border: 1px solid #d3e2f4;
+  border: 1px solid #c4d6eb;
   box-shadow: 0 6px 18px rgba(10, 25, 49, 0.06);
 }
 
-/* Judul tiap card */
+/* Judul card */
 html.light .card-header h3 {
   color: #0a1931;
+  font-weight: 600;
 }
 
-/* Teks rekomendasi */
+/* ----- Rekomendasi ----- */
 html.light .recommendation-list {
   color: #374151;
 }
@@ -132,37 +138,81 @@ html.light .recommendation-list li i {
   color: #0a3d91;
 }
 
-/* ----- Aktivitas Terakhir ----- */
+/* ----- Aktivitas terakhir ----- */
 html.light .activity-details strong {
   color: #0a1931;
 }
 
 html.light .activity-details span {
-  color: #6b7280;
+  color: #4b5563;
 }
 
-/* Ikon status aktivitas */
+/* Ikon aktivitas */
 html.light .activity-icon.success {
-  background: rgba(34, 197, 94, 0.1);
-  border: 3px solid rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.12);
+  border: 3px solid rgba(34, 197, 94, 0.55);
   color: #166534;
 }
 
 html.light .activity-icon.warning {
-  background: rgba(234, 179, 8, 0.1);
-  border: 3px solid rgba(234, 179, 8, 0.5);
+  background: rgba(234, 179, 8, 0.12);
+  border: 3px solid rgba(234, 179, 8, 0.55);
   color: #854d0e;
 }
 
 html.light .activity-icon.info {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.55);
   color: #1e3a8a;
 }
 
-/* ----- Responsif (boleh tetap, cuma tambah sedikit shadow ringan) ----- */
-@media (max-width: 900px) {
-  html.light .lead-detail-page {
-    box-shadow: 0 6px 16px rgba(10, 25, 49, 0.06);
-  }
+/* ==========================================================
+   FIX LIGHT MODE — TEKS DALAM CARD TERLALU PUDAR
+   ========================================================== */
+
+html.light .chart-card p,
+html.light .chart-card div,
+html.light .lead-main-info p,
+html.light .lead-main-info div {
+  color: #1f2a37 !important;
+}
+
+html.light .chart-card strong,
+html.light .lead-main-info strong {
+  color: #0a1931 !important;
+}
+
+html.light .lead-activity-section p,
+html.light .chart-card .note-empty {
+  color: #4b5563 !important;
+}
+
+html.light textarea {
+  color: #1f2a37 !important;
+  border-color: #b3cfe5 !important;
+}
+
+html.light .chart-card,
+html.light .activity-card {
+  border: 1px solid #b7c9dd !important;
+}
+
+html.light .activity-panel {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+html.light .note-item {
+  background: #f8faff;
+  border: 1px solid #dce4f2;
+  box-shadow: 0 2px 8px rgba(0, 40, 80, 0.05);
+  color: #2e3a4d;
+}
+
+html.light .note-header strong {
+  color: #1f2a3d;
+}
+
+html.light .note-date {
+  color: #6d7a90;
 }

@@ -23,26 +23,27 @@ const Layout = () => {
     navigate("/login");
   };
 
-  const userName = localStorage.getItem("userName") || "Ahmad Rizki";
-  const userRole = localStorage.getItem("userRole") || "Sales Manager";
+  const userName = localStorage.getItem("userName");
+  const userRole = localStorage.getItem("userRole");
 
   // ====== AMBIL DATA DARI BACKEND: /dashboard/stats ======
   useEffect(() => {
     const fetchSidebarCounts = async () => {
       try {
-        // api client sudah otomatis kirim Authorization header
         const res = await api.get("/dashboard/stats");
 
-        // backend: { status, data: { stats: { ... } } }
-        const stats = res.data?.data?.stats || res.data?.data || {};
+        // hanya ambil field yang diperlukan
+        const stats = res.data?.data?.stats || {};
 
         setSidebarCounts({
           leadsTotal: stats.totalLeads ?? 0,
           highPriority: stats.highPriorityLeads ?? 0,
+          // jika ingin dipakai nanti:
+          averageScore: stats.averageScore ?? 0,
+          followUpLeads: stats.followUpLeads ?? 0,
         });
       } catch (err) {
         console.error("Gagal mengambil statistik sidebar:", err);
-        // kalau gagal, biarkan angka tetap 0 saja
       }
     };
 
@@ -53,7 +54,6 @@ const Layout = () => {
     <div className="dashboard-container">
       {/* SIDEBAR */}
       <aside className="sidebar">
-        {/* BRANDING ATAS: icon + title + subtitle */}
         <div className="sidebar-title-row">
           <div className="sidebar-brand">
             <div className="brand-badge">
@@ -66,7 +66,6 @@ const Layout = () => {
           </div>
         </div>
 
-        {/* MENU */}
         <nav className="sidebar-nav">
           <Link
             to="/dashboard"
