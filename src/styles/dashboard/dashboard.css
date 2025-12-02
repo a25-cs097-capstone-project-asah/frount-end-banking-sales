@@ -519,7 +519,7 @@
 
 @media (max-width: 768px) {
   .dashboard-container {
-    grid-template-columns: 1fr; /* sidebar bisa jadi off-canvas kalau mau */
+    grid-template-columns: 1fr;
   }
 
   .stats-grid,

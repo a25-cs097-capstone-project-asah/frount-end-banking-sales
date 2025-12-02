@@ -5,7 +5,7 @@ import StatsGrid from "../components/dashboard/StatsGrid";
 import ConversionChart from "../components/dashboard/ConversionChart";
 import ScoreDistributionChart from "../components/dashboard/ScoreDistributionChart";
 import PriorityLeads from "../components/dashboard/PriorityLeads";
-import ActivityList from "../components/dashboard/ActivityList";
+import ActivityList from "../components/dashboard/InteractionHistory";
 
 import {
   getDashboardStats,
@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [priorityLeads, setPriorityLeadsState] = useState([]);
   const [activities, setActivities] = useState([]);
 
-  const [chartDays, setChartDays] = useState(7); // default 7 hari
+  const [chartDays, setChartDays] = useState(7);
 
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -49,15 +49,13 @@ const Dashboard = () => {
           totalLeads: statsData.totalLeads ?? 0,
           convertedLeads: statsData.convertedLeads ?? 0,
           highPriorityLeads: statsData.highPriorityLeads ?? 0,
-          conversionRate: statsData.conversionRate ?? 0, // akan dikali 100 di StatsGrid
+          conversionRate: statsData.conversionRate ?? 0,
           averageScore: statsData.averageScore ?? 0,
         });
 
         // ---- 2️⃣ Fix typo backend convertionTrend ----
         setConversionTrend(
-          chartsData.conversionTrend ||
-            chartsData.convertionTrend || // fallback
-            []
+          chartsData.conversionTrend || chartsData.convertionTrend || []
         );
 
         // ---- 3️⃣ Score Distribution ----
@@ -80,7 +78,7 @@ const Dashboard = () => {
     };
 
     fetchDashboardData();
-  }, [chartDays]); // refresh ketika periode berubah
+  }, [chartDays]);
 
   // ==================== LOADING ====================
   if (loading) {

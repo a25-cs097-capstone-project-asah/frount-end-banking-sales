@@ -104,14 +104,6 @@ const Layout = () => {
           </Link>
 
           <Link
-            to="/analytics"
-            className={`nav-item ${isActive("/analytics") ? "active" : ""}`}
-          >
-            <i className="fas fa-chart-bar" />
-            <span>Analytics</span>
-          </Link>
-
-          <Link
             to="/history"
             className={`nav-item ${isActive("/history") ? "active" : ""}`}
           >

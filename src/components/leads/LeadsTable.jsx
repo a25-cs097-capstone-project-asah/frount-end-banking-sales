@@ -3,11 +3,11 @@ import React from "react";
 const LeadsTable = ({
   leads = [],
   onSort,
-  getScoreCategory,
   onRowClick,
   onCallLead,
   onEmailLead,
 }) => {
+  // Ambil inisial dari nama
   const getInitials = (name = "") =>
     name
       .trim()
@@ -16,6 +16,13 @@ const LeadsTable = ({
       .join("")
       .toUpperCase()
       .slice(0, 2);
+
+  // Tentukan kategori langsung dari score
+  const getScoreCategory = (score = 0) => {
+    if (score >= 80) return "high";
+    if (score >= 60) return "medium";
+    return "low";
+  };
 
   const handleEmailClick = (e, lead) => {
     e.stopPropagation();
@@ -105,7 +112,7 @@ const LeadsTable = ({
                     )}
                   </td>
 
-                  {/* 🔥 STATUS — readonly, tanpa dropdown */}
+                  {/* STATUS */}
                   <td>
                     <span className={`status-badge status-${lead.status}`}>
                       {lead.status
@@ -128,7 +135,7 @@ const LeadsTable = ({
                         className="btn-icon-small"
                         onClick={(e) => handleCallClick(e, lead)}
                       >
-                        <i className="fas fa-phone" />
+                        <i className="fas fa-sticky-note" />
                       </button>
                     </div>
                   </td>

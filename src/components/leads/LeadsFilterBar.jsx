@@ -9,8 +9,6 @@ const LeadsFilterBar = ({
   statusFilter,
   setStatusFilter,
   statusOptions = [],
-  view,
-  setView,
   onRefresh,
   onExport,
 }) => {
@@ -73,24 +71,6 @@ const LeadsFilterBar = ({
               </option>
             ))}
           </select>
-        </div>
-
-        {/* VIEW MODE */}
-        <div className="view-toggle-dark">
-          <button
-            type="button"
-            className={`view-btn-dark ${view === "table" ? "active" : ""}`}
-            onClick={() => setView("table")}
-          >
-            <i className="fas fa-table" />
-          </button>
-          <button
-            type="button"
-            className={`view-btn-dark ${view === "grid" ? "active" : ""}`}
-            onClick={() => setView("grid")}
-          >
-            <i className="fas fa-th" />
-          </button>
         </div>
       </div>
     </div>

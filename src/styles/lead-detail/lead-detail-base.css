@@ -1,14 +1,8 @@
-/* =====================================================
-   LEAD DETAIL — BASE LAYOUT (CLEAN & FIXED)
-   ===================================================== */
-
 .lead-detail-page {
   border-radius: 24px;
   padding: 1.6rem 1.6rem 2rem;
   margin-top: 0.8rem;
 }
-
-/* ========================= HEADER ========================= */
 
 .detail-header-row {
   display: flex;
@@ -46,8 +40,6 @@
   align-items: center;
   gap: 12px;
 }
-
-/* ========================= SUMMARY CARD ========================= */
 
 .lead-summary-card {
   margin-bottom: 1.6rem;
@@ -120,8 +112,6 @@
   font-size: 0.82rem;
 }
 
-/* ========================= ACTION BUTTONS ========================= */
-
 .lead-summary-actions {
   margin-top: 1.1rem;
   display: grid;
@@ -151,23 +141,30 @@
   justify-content: center;
 }
 
-/* ========================== GRID BAWAH ========================== */
-
 .lead-detail-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.95fr;
-  gap: 1.6rem;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
 }
 
-.lead-main-info,
-.lead-activity-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem; /* jarak antar card */
+.full-row {
+  grid-column: 1 / -1;
+  width: 100%;
 }
 
-/* ========================== CARD UMUM ========================== */
+.lead-detail-grid .chart-card,
+.lead-detail-grid .contact-card,
+.lead-detail-grid .profile-card,
+.lead-detail-grid .notes-card,
+.interaction-timeline {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
 
 .chart-card,
 .activity-card {
@@ -183,8 +180,6 @@
   font-weight: 600;
 }
 
-/* ========================== REKOMENDASI ========================== */
-
 .recommendation-list {
   list-style: none;
   display: flex;
@@ -195,24 +190,21 @@
 
 .activity-panel {
   margin-left: 20px;
-  width: 420px; /* sama seperti card di kiri */
+  width: 420px;
 }
 
-/* Judul */
 .activity-title {
   margin-bottom: 16px;
   font-size: 22px;
   font-weight: 600;
 }
 
-/* Card Wrapper */
 .notes-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* CARD CATATAN */
 .note-item {
   padding: 20px;
   border-radius: 16px;
@@ -221,7 +213,6 @@
   width: 100%;
 }
 
-/* Header */
 .note-header {
   display: flex;
   justify-content: space-between;
@@ -232,14 +223,12 @@
   font-size: 16px;
 }
 
-/* Isi catatan */
 .note-body {
   font-size: 15px;
   margin-bottom: 16px;
   line-height: 1.5;
 }
 
-/* Tombol */
 .note-actions {
   display: flex;
   gap: 10px;
@@ -247,7 +236,233 @@
   margin-top: 10px;
 }
 
-/* ========================== RESPONSIVE ========================== */
+.email-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.email-modal-card {
+  width: 520px;
+  background: var(--card-bg, #ffffff);
+  color: var(--text-color, #0a0a0a);
+
+  border-radius: 16px;
+  padding: 22px 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.email-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.email-modal-header h3 {
+  color: #0d0d0d;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.email-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #444;
+  transition: 0.2s;
+}
+
+.email-modal-close:hover {
+  color: #ff4d4d;
+}
+
+.email-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.email-input {
+  width: 100%;
+  padding: 10px 13px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #d4d4d4;
+  margin-bottom: 14px;
+  font-size: 14px;
+  background: var(--input-bg, #fff);
+  color: var(--text-color, #111);
+}
+
+.email-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  min-height: 120px;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  resize: vertical;
+  font-size: 14px;
+  background: var(--input-bg, #fff);
+  color: var(--text-color, #111);
+  margin-bottom: 18px;
+}
+
+.email-send-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.email-send-btn:hover {
+  background: #1e4fd1;
+  transform: translateY(-1px);
+}
+
+.status-select {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.status-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.status-select-trigger:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.status-select-trigger i {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.status-select-trigger .status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 180px;
+  background: #0f1a35;
+  padding: 10px 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.28);
+  z-index: 100;
+  animation: fadeScale 0.18s ease-out;
+}
+
+/* Animation */
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.status-select-option {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.17s ease;
+}
+
+.status-select-option:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.status-select-option .status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-new .status-dot {
+  background: #4da3ff;
+}
+
+.status-select.status-new .status-select-trigger {
+  background: rgba(77, 163, 255, 0.22);
+  border-color: rgba(77, 163, 255, 0.55);
+}
+
+.status-contacted .status-dot {
+  background: #4dd0e1;
+}
+
+.status-select.status-contacted .status-select-trigger {
+  background: rgba(77, 208, 225, 0.22);
+  border-color: rgba(77, 208, 225, 0.55);
+}
+
+.status-follow-up .status-dot {
+  background: #ffd54f;
+}
+
+.status-select.status-follow-up .status-select-trigger {
+  background: rgba(255, 213, 79, 0.22);
+  border-color: rgba(255, 213, 79, 0.55);
+}
+
+.status-converted .status-dot {
+  background: #66bb6a;
+}
+
+.status-select.status-converted .status-select-trigger {
+  background: rgba(102, 187, 106, 0.22);
+  border-color: rgba(102, 187, 106, 0.55);
+}
+
+.status-rejected .status-dot {
+  background: #ef5350;
+}
+
+.status-select.status-rejected .status-select-trigger {
+  background: rgba(239, 83, 80, 0.22);
+  border-color: rgba(239, 83, 80, 0.55);
+}
 
 @media (max-width: 900px) {
   .lead-detail-grid {

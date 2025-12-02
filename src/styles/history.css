@@ -70,29 +70,47 @@
   margin-left: auto;
 }
 
-html.light .date-header {
-  color: #1e293b;
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1a1a1a !important;
 }
 
 html.light .timeline {
-  border-left: 2px solid rgba(0, 0, 0, 0.14);
+  border-left: 2px solid rgba(0, 0, 0, 0.15) !important;
 }
 
 html.light .timeline-dot {
-  background: #ffffff;
-  border: 2px solid #cbd5e1;
-  color: #475569;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-html.light .glass-card {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: #1e293b;
+  background: #ffffff !important;
+  border: 2px solid rgba(0, 0, 0, 0.2) !important;
+  color: #1a1a1a !important;
+  box-shadow: none !important;
 }
 
 html.light .timeline-footer {
-  color: #334155;
-  opacity: 0.8;
+  opacity: 1 !important;
+  color: #6c6c6c !important;
+}
+
+html.light .date-header {
+  color: #1a1a1a !important;
+}
+
+html.light .timeline-top strong {
+  color: #1a1a1a !important;
+}
+
+html.light .details {
+  color: #555 !important;
+}
+
+html.light .timeline .fa-calendar-day,
+html.light .timeline .fa-clock {
+  color: #444 !important;
+}
+
+html.light .top-header h1,
+html.light h1.history-page-title,
+html.light .history-container h1 {
+  color: #1a1a1a !important;
 }

@@ -6,8 +6,8 @@ export const api = axios.create({
   baseURL,
 });
 
+// Interceptor Request (menambahkan token)
 api.interceptors.request.use((config) => {
-  // Ambil token dari berbagai key umum
   const token =
     localStorage.getItem("accessToken") ||
     localStorage.getItem("token") ||
@@ -21,3 +21,21 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// Interceptor Response (logout otomatis jika token expired)
+api.interceptors.response.use(
+  (response) => {
+    if (response.data?.message === "Token telah kadaluarsa") {
+      localStorage.clear();
+      window.location.href = "/login";
+    }
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.clear();
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);

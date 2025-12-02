@@ -9,11 +9,15 @@ const LeadsGrid = ({
   onEmailLead,
   onAddNote,
 }) => {
+  // Konversi score backend (0–1) → persentase
+  const normalizeScore = (s) => Number(s) * 100;
+
   return (
     <div className="leads-grid">
       {leads.map((lead) => {
-        const score = lead.probabilityScore || 0;
-        const scoreCat = getScoreCategory(score);
+        const raw = lead.probabilityScore || 0;
+        const percent = normalizeScore(raw).toFixed(2); // contoh: 13.17
+        const scoreCat = getScoreCategory(percent);
 
         const initials =
           (lead.name || "")
@@ -41,12 +45,14 @@ const LeadsGrid = ({
             <div className="lead-card-body">
               <div className="lead-card-score">
                 <div className={`score-circle ${scoreCat}`}>
-                  <span>{score}%</span>
+                  <span>{percent}%</span>
                 </div>
+
                 <div className="lead-card-score-text">
                   <span className="status-pill">
                     {formatStatusLabel(lead.status)}
                   </span>
+
                   <span className="last-contact">
                     Terakhir:{" "}
                     {lead.lastContactedAt

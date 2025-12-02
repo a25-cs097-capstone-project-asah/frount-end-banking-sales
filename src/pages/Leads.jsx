@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
 
 import { getLeads } from "../api/leads";
-import { api } from "../api/client";
 import { getDashboardStats } from "../api/dashboard";
 
 import LeadsHeader from "../components/leads/LeadsHeader";
@@ -29,7 +28,6 @@ const Leads = () => {
     totalLeads: 0,
   });
 
-  // Stats dari /dashboard/stats
   const [stats, setStats] = useState({
     totalLeads: 0,
     highPriorityLeads: 0,
@@ -54,7 +52,7 @@ const Leads = () => {
   const limit = 10;
 
   /* ---------------------------------------------------------
-     OPTIONS (Dropdown)
+     OPTIONS
   --------------------------------------------------------- */
   const jobOptions = useMemo(() => {
     const set = new Set();
@@ -69,13 +67,15 @@ const Leads = () => {
   }, [leads]);
 
   /* ---------------------------------------------------------
-     SCORE CATEGORY (80 = high, 60 = medium)
+     SCORE CATEGORY FIXED (useCallback)
   --------------------------------------------------------- */
-  const getScoreCategory = (score) => {
-    if (score >= 80) return "high";
-    if (score >= 60) return "medium";
+  const getScoreCategory = useCallback((score) => {
+    const pct = Number(score) * 100;
+
+    if (pct >= 80) return "high";
+    if (pct >= 60) return "medium";
     return "low";
-  };
+  }, []);
 
   /* ---------------------------------------------------------
      SORTING
@@ -98,28 +98,10 @@ const Leads = () => {
   };
 
   /* ---------------------------------------------------------
-     UPDATE LEAD STATUS
+     EXPORT ALL LEADS
   --------------------------------------------------------- */
-  const handleStatusChange = async (lead, newStatus) => {
-    const id = lead.id || lead.lead_id;
-
-    try {
-      await api.put(`/leads/${id}/status`, { status: newStatus });
-
-      setLeads((prev) =>
-        prev.map((l) => (l.id === id ? { ...l, status: newStatus } : l))
-      );
-    } catch (err) {
-      console.error("Update status error:", err);
-      alert("Gagal mengubah status lead.");
-    }
-  };
-
-  /* ---------------------------------------------------------
-     EXPORT EXCEL
-  --------------------------------------------------------- */
-  const handleExportExcel = () => {
-    const exportData = filteredLeads.map((l) => ({
+  const handleExportAll = () => {
+    const exportData = leads.map((l) => ({
       Nama: l.name,
       Email: l.email,
       Telepon: l.phone,
@@ -131,12 +113,12 @@ const Leads = () => {
     const ws = XLSX.utils.json_to_sheet(exportData);
     const wb = XLSX.utils.book_new();
 
-    XLSX.utils.book_append_sheet(wb, ws, "Leads");
-    XLSX.writeFile(wb, `leads_page_${pagination.page}.xlsx`);
+    XLSX.utils.book_append_sheet(wb, ws, "All Leads");
+    XLSX.writeFile(wb, `all_leads.xlsx`);
   };
 
   /* ---------------------------------------------------------
-     FETCH LEADS (Pagination + Phone Patch)
+     FETCH LEADS
   --------------------------------------------------------- */
   const fetchLeads = useCallback(
     async (page = 1) => {
@@ -170,7 +152,7 @@ const Leads = () => {
   }, [fetchLeads]);
 
   /* ---------------------------------------------------------
-     FETCH GLOBAL STATS (dari /dashboard/stats)
+     FETCH GLOBAL STATS
   --------------------------------------------------------- */
   useEffect(() => {
     const loadStats = async () => {
@@ -191,12 +173,11 @@ const Leads = () => {
   }, []);
 
   /* ---------------------------------------------------------
-     FILTERING
+     FILTERING (NO LOGIC CHANGED)
   --------------------------------------------------------- */
   const filteredLeads = useMemo(() => {
     let result = [...leads];
 
-    // Search
     if (search.trim()) {
       const q = search.toLowerCase();
       result = result.filter(
@@ -207,24 +188,20 @@ const Leads = () => {
       );
     }
 
-    // Status
     if (statusFilter !== "all") {
       result = result.filter((l) => l.status === statusFilter);
     }
 
-    // Job
     if (jobFilter !== "all") {
       result = result.filter((l) => l.job === jobFilter);
     }
 
-    // Score
     if (scoreFilter !== "all") {
       result = result.filter(
         (l) => getScoreCategory(Number(l.probabilityScore)) === scoreFilter
       );
     }
 
-    // Sorting
     if (sortField) {
       result.sort((a, b) => {
         const A = a[sortField];
@@ -240,7 +217,16 @@ const Leads = () => {
     }
 
     return result;
-  }, [leads, search, scoreFilter, jobFilter, statusFilter, sortField, sortDir]);
+  }, [
+    leads,
+    search,
+    scoreFilter,
+    jobFilter,
+    statusFilter,
+    sortField,
+    sortDir,
+    getScoreCategory, // added to fix warning
+  ]);
 
   const formatStatusLabel = (s) =>
     !s ? "-" : s.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -267,10 +253,9 @@ const Leads = () => {
           view={view}
           setView={setView}
           onRefresh={() => fetchLeads(pagination.page)}
-          onExport={handleExportExcel}
+          onExport={handleExportAll}
         />
 
-        {/* Stats global dari /dashboard/stats */}
         <LeadsStats
           totalLeads={stats.totalLeads}
           highPriorityLeads={stats.highPriorityLeads}
@@ -288,7 +273,6 @@ const Leads = () => {
             onSort={handleSort}
             getScoreCategory={getScoreCategory}
             onRowClick={handleRowClick}
-            onStatusChange={handleStatusChange}
           />
         ) : (
           <LeadsGrid

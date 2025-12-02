@@ -33,6 +33,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/leads/:id" element={<LeadDetail />} />
+        <Route path="/riwayat" element={<History />} />
 
         {/* menu kiri */}
         <Route path="/priority" element={<PriorityLeads />} />

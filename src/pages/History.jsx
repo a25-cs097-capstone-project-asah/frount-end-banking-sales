@@ -67,7 +67,8 @@ const History = () => {
     ADD_NOTE: "linear-gradient(90deg,#4ade80,#22c55e)",
     EDIT_NOTE: "linear-gradient(90deg,#60a5fa,#3b82f6)",
     DELETE_NOTE: "linear-gradient(90deg,#f87171,#ef4444)",
-    UPDATE_STATUS: "linear-gradient(90deg,#facc15,#eab308)",
+    UPDATE_STATUS: "linear-gradient(90deg,#ea4335,#1a73e8)",
+    EMAIL_SENT: "linear-gradient(90deg,#a855f7,#9333ea)",
   };
 
   /* ================== GROUP BY DATE (ISO) ================== */

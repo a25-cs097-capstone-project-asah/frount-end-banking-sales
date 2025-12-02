@@ -233,3 +233,39 @@ html:not(.light) .activity-icon.warning {
   background: rgba(249, 115, 22, 0.25);
   color: #fed7aa;
 }
+
+html:not(.light) .interaction-card.dark-card {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+  color: #fff;
+}
+
+html:not(.light) .interaction-card.dark-card .badge {
+  color: #fff !important;
+}
+
+html:not(.light) .history-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+html:not(.light) .see-all-btn {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+html:not(.light) .see-all-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}

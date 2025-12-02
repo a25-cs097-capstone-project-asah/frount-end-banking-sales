@@ -8,23 +8,34 @@ const PriorityLeads = ({ priorityLeads }) => {
     console.log("Call lead:", name);
   };
 
+  /* ============================
+     NORMALISASI SCORE / KATEGORI
+  =============================== */
+
+  // score class untuk warna border / circle
   const getScoreClass = (score) => {
     if (score >= 80) return "high";
     if (score >= 60) return "medium";
     return "low";
   };
 
-  const getLevelLabel = (category) => {
-    switch (category) {
-      case "high":
-        return "Tinggi";
-      case "medium":
-        return "Sedang";
-      case "low":
-        return "Rendah";
-      default:
-        return "Tidak Diketahui";
+  // label kategori berdasarkan teks dari backend
+  const getCategoryLabel = (category, score) => {
+    if (!category) {
+      // fallback dari score
+      if (score >= 80) return "Tinggi";
+      if (score >= 60) return "Sedang";
+      return "Rendah";
     }
+
+    // normalisasi "High", "high", "TINGGI", "Tinggi", dll
+    const c = category.toString().toLowerCase();
+
+    if (c === "tinggi" || c === "high") return "Tinggi";
+    if (c === "sedang" || c === "medium") return "Sedang";
+    if (c === "rendah" || c === "low") return "Rendah";
+
+    return "Tidak Diketahui";
   };
 
   return (
@@ -40,7 +51,7 @@ const PriorityLeads = ({ priorityLeads }) => {
         {priorityLeads.map((lead) => {
           const score = lead.probabilityScore || 0;
           const scoreClass = getScoreClass(score);
-          const levelLabel = getLevelLabel(lead.category);
+          const categoryLabel = getCategoryLabel(lead.category, score);
 
           return (
             <div
@@ -64,7 +75,7 @@ const PriorityLeads = ({ priorityLeads }) => {
                 <div className={`score-circle ${scoreClass}`}>
                   <span>{score}%</span>
                 </div>
-                <span className="score-label">{levelLabel}</span>
+                <span className="score-label">{categoryLabel}</span>
               </div>
 
               {/* Call button */}

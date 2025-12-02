@@ -1,22 +1,30 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../api/client";
+import Swal from "sweetalert2";
 
 import LeadDetailHeader from "../components/leadDetail/LeadDetailHeader";
 import LeadSummary from "../components/leadDetail/LeadSummary";
-import LeadMainInfo from "../components/leadDetail/LeadMainInfo";
+
+import ProfileNasabah from "../components/leadDetail/ProfileNasabah";
+import ProfileKeuangan from "../components/leadDetail/ProfileKeuangan";
+import ContactInfo from "../components/leadDetail/ContactInfo";
+
 import LeadActivityPanel from "../components/leadDetail/LeadActivityPanel";
+import InteractionTimeline from "../components/leadDetail/InteractionTimeline";
+
 import ModalTambahCatatan from "../components/leadDetail/ModalCatatan";
+import EmailModal from "../components/leadDetail/EmailModal";
 
 const LeadDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
+  /* ============================= STATE ============================= */
   const [lead, setLead] = useState(null);
-  const [notes, setNotes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
 
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -25,9 +33,18 @@ const LeadDetail = () => {
   const [editNoteText, setEditNoteText] = useState("");
   const [editNoteId, setEditNoteId] = useState(null);
 
-  const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  /* ============================== FETCH LEAD ============================== */
+  // Email
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailSubject, setEmailSubject] = useState("");
+  const [emailBody, setEmailBody] = useState("");
+
+  // Riwayat Interaksi
+  const [history, setHistory] = useState([]);
+
+  /* ============================= FETCH LEAD ============================= */
   const fetchLead = useCallback(async () => {
     try {
       setLoading(true);
@@ -40,47 +57,62 @@ const LeadDetail = () => {
     }
   }, [id]);
 
-  /* ============================== FETCH NOTES ============================== */
+  /* ============================= FETCH NOTES ============================= */
   const fetchNotes = useCallback(async () => {
     try {
       const res = await api.get(`/leads/${id}/notes`);
-      const list = res.data.data?.notes || [];
-      setNotes(Array.isArray(list) ? list : []);
-    } catch (err) {
-      console.error("Fetch notes error:", err);
+      setNotes(res.data.data?.notes || []);
+    } catch {
       setNotes([]);
+    }
+  }, [id]);
+
+  /* ============================= FETCH HISTORY ============================= */
+  const fetchHistory = useCallback(async () => {
+    try {
+      const res = await api.get(`/histories/leads/${id}`);
+      setHistory(res.data.data?.histories || []);
+    } catch {
+      setHistory([]);
     }
   }, [id]);
 
   useEffect(() => {
     fetchLead();
     fetchNotes();
-  }, [fetchLead, fetchNotes]);
+    fetchHistory();
+  }, [fetchLead, fetchNotes, fetchHistory]);
 
-  /* ============================== UPDATE STATUS ============================== */
+  /* ============================= UPDATE STATUS ============================= */
   const handleStatusChange = async (e) => {
     try {
       const newStatus = e.target.value;
 
       await api.put(
-        `/leads/${id}/status`,
+        `/leads/${id}`,
         { status: newStatus },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       setLead((prev) => ({ ...prev, status: newStatus }));
-    } catch (err) {
-      console.error("STATUS ERROR: ", err.response?.data || err);
-      alert("Gagal memperbarui status.");
+      fetchHistory();
+
+      Swal.fire({
+        title: "Status Berhasil Diubah!",
+        text: `Status lead telah diperbarui menjadi: ${newStatus}`,
+        icon: "success",
+        confirmButtonColor: "#2563eb",
+      });
+    } catch {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Gagal memperbarui status.",
+      });
     }
   };
 
-  /* ============================== ADD NOTE ============================== */
+  /* ============================= ADD NOTE ============================= */
   const handleAddNote = async () => {
     if (!newNote.trim()) return;
 
@@ -89,26 +121,27 @@ const LeadDetail = () => {
 
       await api.post(
         `/leads/${id}/notes`,
-        { body: newNote }, // <-- userId DIHAPUS
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        { body: newNote },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      setNewNote("");
       setShowAddModal(false);
+      setNewNote("");
+
       fetchNotes();
-    } catch (err) {
-      alert(err.response?.data?.message || "Gagal menambahkan catatan.");
+      fetchHistory();
+    } catch {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Gagal menambahkan catatan.",
+      });
     } finally {
       setSaving(false);
     }
   };
 
-  /* ============================== EDIT NOTE ============================== */
+  /* ============================= EDIT NOTE ============================= */
   const handleEditNote = (note) => {
     setEditNoteId(note.id);
     setEditNoteText(note.body);
@@ -121,22 +154,26 @@ const LeadDetail = () => {
     try {
       await api.put(
         `/notes/${editNoteId}`,
-        { body: editNoteText }, // <-- userId DIHAPUS
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { body: editNoteText },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       setShowEditModal(false);
       setEditNoteText("");
       setEditNoteId(null);
+
       fetchNotes();
-    } catch (err) {
-      alert(err.response?.data?.message || "Gagal mengedit catatan.");
+      fetchHistory();
+    } catch {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Gagal mengedit catatan.",
+      });
     }
   };
 
-  /* ============================== DELETE NOTE ============================== */
+  /* ============================= DELETE NOTE ============================= */
   const handleDeleteNote = async (noteId) => {
     if (!window.confirm("Hapus catatan ini?")) return;
 
@@ -146,13 +183,53 @@ const LeadDetail = () => {
       });
 
       fetchNotes();
-    } catch (err) {
-      alert(err.response?.data?.message || "Gagal menghapus catatan.");
+      fetchHistory();
+    } catch {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Gagal menghapus catatan.",
+      });
     }
   };
 
-  /* ============================== RENDER ============================== */
+  /* ============================= SEND EMAIL ============================= */
+  const handleSendEmail = async () => {
+    if (!emailSubject.trim() || !emailBody.trim()) return;
 
+    try {
+      await api.post(
+        `/leads/${id}/email`,
+        { subject: emailSubject, message: emailBody },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setShowEmailModal(false);
+      setEmailSubject("");
+      setEmailBody("");
+
+      Swal.fire({
+        title: "Email Berhasil Dikirim!",
+        text: "Pesan Anda telah berhasil terkirim.",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/2983/2983788.png",
+        imageWidth: 120,
+        imageHeight: 120,
+        confirmButtonColor: "#2563eb",
+        confirmButtonText: "OK",
+      });
+
+      fetchHistory();
+    } catch {
+      Swal.fire({
+        title: "Gagal Mengirim Email",
+        text: "Silakan coba lagi atau periksa koneksi.",
+        icon: "error",
+        confirmButtonColor: "#ef4444",
+      });
+    }
+  };
+
+  /* ============================= RENDER ============================= */
   if (loading) return <p>Memuat data...</p>;
   if (errorMsg) return <p style={{ color: "red" }}>{errorMsg}</p>;
 
@@ -176,18 +253,27 @@ const LeadDetail = () => {
         status={lead.status}
         onStatusChange={handleStatusChange}
         onOpenNotesSection={() => setShowAddModal(true)}
+        onEmail={() => setShowEmailModal(true)}
       />
 
+      {/* ====================== GRID ====================== */}
       <div className="lead-detail-grid">
-        <LeadMainInfo {...lead} />
+        <ProfileNasabah {...lead} />
+        <ProfileKeuangan {...lead} />
 
+        <ContactInfo {...lead} />
         <LeadActivityPanel
           notes={notes}
           onEditNote={handleEditNote}
           onDeleteNote={handleDeleteNote}
         />
+
+        <div className="full-row">
+          <InteractionTimeline history={history} />
+        </div>
       </div>
 
+      {/* ====================== MODALS ====================== */}
       {showAddModal && (
         <ModalTambahCatatan
           noteText={newNote}
@@ -225,6 +311,17 @@ const LeadDetail = () => {
             </button>
           </div>
         </div>
+      )}
+
+      {showEmailModal && (
+        <EmailModal
+          subject={emailSubject}
+          setSubject={setEmailSubject}
+          message={emailBody}
+          setMessage={setEmailBody}
+          onSend={handleSendEmail}
+          onClose={() => setShowEmailModal(false)}
+        />
       )}
     </div>
   );

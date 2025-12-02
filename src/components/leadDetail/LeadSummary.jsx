@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const LeadSummary = ({
   name,
@@ -6,10 +6,11 @@ const LeadSummary = ({
   scoreClass,
   status,
   onStatusChange,
-
-  // HANYA INI YANG DIPAKAI
+  onEmail,
   onOpenNotesSection,
 }) => {
+  const [openMenu, setOpenMenu] = useState(false);
+
   const initials = (name || "")
     .split(" ")
     .map((n) => n[0])
@@ -35,10 +36,14 @@ const LeadSummary = ({
     { value: "rejected", label: "Rejected" },
   ];
 
+  const handleSelect = (val) => {
+    onStatusChange({ target: { value: val } });
+    setOpenMenu(false);
+  };
+
   return (
     <section className="lead-summary-card">
       <div className="lead-summary-main">
-        {/* Bagian kiri */}
         <div className="lead-summary-left">
           <div className="lead-avatar large">
             <span>{initials}</span>
@@ -47,24 +52,39 @@ const LeadSummary = ({
           <div className="lead-summary-info">
             <h2>{name}</h2>
 
+            {/* MODERN STATUS DROPDOWN */}
             <div className="detail-status-wrapper">
               <label>Status:</label>
-              <select
-                className="detail-status-dropdown"
-                value={status}
-                onChange={onStatusChange}
+
+              <div
+                className={`status-select status-${status}`}
+                onClick={() => setOpenMenu(!openMenu)}
               >
-                {statusList.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
+                <button className="status-select-trigger">
+                  <span className="status-dot" />
+                  {statusList.find((s) => s.value === status)?.label}
+                  <i className="fas fa-chevron-down"></i>
+                </button>
+
+                {openMenu && (
+                  <div className="status-select-menu">
+                    {statusList.map((s) => (
+                      <div
+                        key={s.value}
+                        className={`status-select-option status-${s.value}`}
+                        onClick={() => handleSelect(s.value)}
+                      >
+                        <span className="status-dot" />
+                        {s.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Score */}
         <div className="lead-summary-score">
           <div className={`score-circle summary-score ${scoreClass}`}>
             <span>{score}%</span>
@@ -77,23 +97,15 @@ const LeadSummary = ({
         </div>
       </div>
 
-      {/* Tombol Aksi */}
+      {/* ACTION BUTTONS */}
       <div className="lead-summary-actions">
-        <button className="summary-action-card">
-          <div className="summary-action-icon">
-            <i className="fas fa-phone" />
-          </div>
-          Telepon
-        </button>
-
-        <button className="summary-action-card">
+        <button className="summary-action-card" onClick={onEmail}>
           <div className="summary-action-icon">
             <i className="fas fa-envelope" />
           </div>
           Email
         </button>
 
-        {/* SCROLL KE CATATAN */}
         <button className="summary-action-card" onClick={onOpenNotesSection}>
           <div className="summary-action-icon">
             <i className="fas fa-sticky-note" />
