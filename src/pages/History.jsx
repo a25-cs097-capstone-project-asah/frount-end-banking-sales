@@ -40,13 +40,11 @@ const History = () => {
       timeStyle: "short",
     });
 
-  // Format header tanggal (ISO)
   const formatDateHeader = (isoDate) =>
     new Date(isoDate).toLocaleDateString("id-ID", {
       dateStyle: "full",
     });
 
-  // Ikon tiap aksi
   const getIcon = (action) => {
     switch (action) {
       case "ADD_NOTE":
@@ -62,7 +60,6 @@ const History = () => {
     }
   };
 
-  // Warna badge
   const badgeColor = {
     ADD_NOTE: "linear-gradient(90deg,#4ade80,#22c55e)",
     EDIT_NOTE: "linear-gradient(90deg,#60a5fa,#3b82f6)",
@@ -73,7 +70,7 @@ const History = () => {
 
   /* ================== GROUP BY DATE (ISO) ================== */
   const grouped = histories.reduce((acc, item) => {
-    const isoDate = item.createdAt.split("T")[0]; // “2025-11-28”
+    const isoDate = item.createdAt.split("T")[0];
     if (!acc[isoDate]) acc[isoDate] = [];
     acc[isoDate].push(item);
     return acc;

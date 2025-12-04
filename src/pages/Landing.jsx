@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { toggleTheme } from "../theme";
 
 const Landing = () => {
-  // Baca tema awal langsung saat inisialisasi state
   const [isLight, setIsLight] = useState(() =>
     document.documentElement.classList.contains("light")
   );
@@ -21,14 +20,15 @@ const Landing = () => {
         onClick={handleToggle}
         aria-label="Toggle Theme"
       >
-        <i className={isLight ? "fas fa-sun" : "fas fa-moon"} />
+        <i className={isLight ? "fa-solid fa-sun" : "fa-solid fa-moon"} />
       </button>
 
       <div className="landing-page-simple">
         {/* HERO */}
         <section className="landing-hero">
+          {/* LOGO PREMIUM */}
           <div className="landing-icon">
-            <i className="fas fa-chart-line" />
+            <i className="fa-solid fa-chart-line"></i>
           </div>
 
           <h1 className="landing-title">Banking Sales Portal</h1>
@@ -44,9 +44,8 @@ const Landing = () => {
           </p>
 
           <div className="landing-buttons">
-            {/* Register sudah dihapus, hanya tombol Login */}
             <Link to="/login" className="btn btn-primary hero-btn">
-              <i className="fas fa-sign-in-alt" />
+              <i className="fa-solid fa-right-to-bracket" />
               <span>Masuk</span>
             </Link>
           </div>
@@ -56,7 +55,7 @@ const Landing = () => {
         <section className="landing-features-row">
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-brain" />
+              <i className="fa-solid fa-brain" />
             </div>
             <h3>AI-Based Scoring</h3>
             <p>
@@ -67,7 +66,7 @@ const Landing = () => {
 
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-list-check" />
+              <i className="fa-solid fa-list-check" />
             </div>
             <h3>Prioritas Otomatis</h3>
             <p>
@@ -78,7 +77,7 @@ const Landing = () => {
 
           <div className="feature-card">
             <div className="feature-icon">
-              <i className="fas fa-users" />
+              <i className="fa-solid fa-users" />
             </div>
             <h3>Dashboard Interaktif</h3>
             <p>

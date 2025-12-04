@@ -76,7 +76,7 @@ const ConversionChart = ({ conversionTrend, period, onChangePeriod }) => {
         chartInstance.current.destroy();
       }
     };
-  }, [conversionTrend, period]); // FIXED dependencies
+  }, [conversionTrend, period]);
 
   return (
     <div className="chart-card">

@@ -37,9 +37,9 @@ const ScoreDistributionChart = ({ scoreDistribution }) => {
             {
               data: values,
               backgroundColor: [
-                "rgba(34,197,94,0.9)", // Tinggi
-                "rgba(234,179,8,0.9)", // Sedang
-                "rgba(239,68,68,0.9)", // Rendah
+                "rgba(34,197,94,0.9)",
+                "rgba(234,179,8,0.9)",
+                "rgba(239,68,68,0.9)",
               ],
               borderColor: "#0f172a",
               borderWidth: 2,

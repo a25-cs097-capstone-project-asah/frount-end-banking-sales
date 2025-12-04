@@ -45,9 +45,6 @@ const FollowUp = () => {
   const [ageFilter, setAgeFilter] = useState("all");
   const [jobFilter, setJobFilter] = useState("all");
 
-  // ======================================================
-  // 🔥 FETCH FOLLOW-UP LEADS
-  // ======================================================
   const fetchFollowUps = async () => {
     try {
       setLoading(true);
@@ -74,9 +71,6 @@ const FollowUp = () => {
     }
   };
 
-  // ======================================================
-  // 🔥 FETCH GLOBAL STATS (/dashboard/stats)
-  // ======================================================
   const loadStats = async () => {
     try {
       const s = await getDashboardStats();
@@ -96,13 +90,10 @@ const FollowUp = () => {
     loadStats();
   }, []);
 
-  // ======================================================
-  // FILTERING
-  // ======================================================
   const filteredLeads = useMemo(() => {
     let result = [...leads];
 
-    // SCORE (aturan baru)
+    // SCORE
     result = result.filter((lead) => {
       const s = Number(lead.probabilityScore) || 0;
 

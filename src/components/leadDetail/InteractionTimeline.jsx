@@ -51,7 +51,7 @@ const InteractionTimeline = ({ history }) => {
 
   /* ================== GROUP BY DATE ================== */
   const grouped = history.reduce((acc, item) => {
-    const iso = item.createdAt.split("T")[0]; // yyyy-mm-dd
+    const iso = item.createdAt.split("T")[0];
     if (!acc[iso]) acc[iso] = [];
     acc[iso].push(item);
     return acc;

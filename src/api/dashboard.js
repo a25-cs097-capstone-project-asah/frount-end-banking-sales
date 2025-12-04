@@ -1,12 +1,9 @@
 import { api } from "./client";
 
-// =============================
 // 📌 GET /dashboard/stats
-// =============================
 export async function getDashboardStats() {
   const res = await api.get("/dashboard/stats");
 
-  // backend: { status, data: { stats } }
   return (
     res.data?.data?.stats || {
       totalLeads: 0,
@@ -19,9 +16,7 @@ export async function getDashboardStats() {
   );
 }
 
-// =============================================
 // 📌 GET /dashboard/charts?days=7
-// =============================================
 export async function getDashboardCharts(days = 7) {
   const res = await api.get("/dashboard/charts", {
     params: { days },
@@ -35,10 +30,7 @@ export async function getDashboardCharts(days = 7) {
   };
 }
 
-// =======================================================
 // 📌 GET /leads/priority-leads?limit=5
-// (Perbaikan path dari yang sebelumnya salah)
-// =======================================================
 export async function getPriorityLeads(limit = 5) {
   const res = await api.get("/leads/priority-leads", {
     params: { limit },

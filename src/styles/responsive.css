@@ -54,12 +54,7 @@
   }
 }
 
-/* =========================================================
-   RESPONSIVE SIDEBAR (MOBILE ≤ 640px)
-   ========================================================= */
-
 @media (max-width: 640px) {
-  /* Sidebar mengecil */
   .sidebar {
     width: 70px !important;
     padding: 1rem 0.5rem !important;
@@ -68,34 +63,28 @@
     align-items: center;
   }
 
-  /* Sembunyikan teks menu */
   .sidebar .nav-item span {
     display: none !important;
   }
 
-  /* Sembunyikan badge jumlah */
   .sidebar .badge {
     display: none !important;
   }
 
-  /* Posisi menu center */
   .sidebar .nav-item {
     justify-content: center !important;
     padding: 0.8rem !important;
     width: 100%;
   }
 
-  /* Sembunyikan tulisan "Banking Portal" */
   .sidebar-title-row h3 {
     display: none !important;
   }
 
-  /* Pusatkan tombol theme */
   .theme-toggle-btn {
     margin: 0 auto 1rem auto !important;
   }
 
-  /* Footer responsif */
   .sidebar-footer {
     flex-direction: column !important;
     align-items: center !important;
@@ -103,24 +92,20 @@
     gap: 0.6rem !important;
   }
 
-  /* Hilangkan nama & jabatan */
   .user-info {
     display: none !important;
   }
 
-  /* Avatar tetap */
   .user-avatar {
     width: 40px !important;
     height: 40px !important;
   }
 
-  /* Tombol logout tetap white theme */
   .btn-logout {
     width: 35px !important;
     height: 35px !important;
   }
 
-  /* Main content full width */
   .main-content {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;

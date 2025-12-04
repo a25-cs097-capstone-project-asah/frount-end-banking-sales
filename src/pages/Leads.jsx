@@ -18,9 +18,6 @@ import { fetchPhoneForLeads } from "../utils/fetchPhone";
 const Leads = () => {
   const navigate = useNavigate();
 
-  /* ---------------------------------------------------------
-     STATE
-  --------------------------------------------------------- */
   const [leads, setLeads] = useState([]);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -38,7 +35,6 @@ const Leads = () => {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Filters
   const [search, setSearch] = useState("");
   const [scoreFilter, setScoreFilter] = useState("all");
   const [ageFilter, setAgeFilter] = useState("all");
@@ -51,9 +47,6 @@ const Leads = () => {
   const [view, setView] = useState("table");
   const limit = 10;
 
-  /* ---------------------------------------------------------
-     OPTIONS
-  --------------------------------------------------------- */
   const jobOptions = useMemo(() => {
     const set = new Set();
     leads.forEach((l) => l.job && set.add(l.job));
@@ -66,9 +59,6 @@ const Leads = () => {
     return [...set].sort();
   }, [leads]);
 
-  /* ---------------------------------------------------------
-     SCORE CATEGORY FIXED (useCallback)
-  --------------------------------------------------------- */
   const getScoreCategory = useCallback((score) => {
     const pct = Number(score) * 100;
 
@@ -77,9 +67,6 @@ const Leads = () => {
     return "low";
   }, []);
 
-  /* ---------------------------------------------------------
-     SORTING
-  --------------------------------------------------------- */
   const handleSort = (field) => {
     if (sortField === field) {
       setSortDir((prev) => (prev === "asc" ? "desc" : "asc"));
@@ -89,17 +76,11 @@ const Leads = () => {
     }
   };
 
-  /* ---------------------------------------------------------
-     ROW CLICK
-  --------------------------------------------------------- */
   const handleRowClick = (lead) => {
     const id = lead.id || lead.lead_id;
     if (id) navigate(`/leads/${id}`);
   };
 
-  /* ---------------------------------------------------------
-     EXPORT ALL LEADS
-  --------------------------------------------------------- */
   const handleExportAll = () => {
     const exportData = leads.map((l) => ({
       Nama: l.name,
@@ -117,9 +98,6 @@ const Leads = () => {
     XLSX.writeFile(wb, `all_leads.xlsx`);
   };
 
-  /* ---------------------------------------------------------
-     FETCH LEADS
-  --------------------------------------------------------- */
   const fetchLeads = useCallback(
     async (page = 1) => {
       try {
@@ -151,9 +129,6 @@ const Leads = () => {
     fetchLeads(1);
   }, [fetchLeads]);
 
-  /* ---------------------------------------------------------
-     FETCH GLOBAL STATS
-  --------------------------------------------------------- */
   useEffect(() => {
     const loadStats = async () => {
       try {
@@ -172,9 +147,6 @@ const Leads = () => {
     loadStats();
   }, []);
 
-  /* ---------------------------------------------------------
-     FILTERING (NO LOGIC CHANGED)
-  --------------------------------------------------------- */
   const filteredLeads = useMemo(() => {
     let result = [...leads];
 
@@ -225,15 +197,12 @@ const Leads = () => {
     statusFilter,
     sortField,
     sortDir,
-    getScoreCategory, // added to fix warning
+    getScoreCategory,
   ]);
 
   const formatStatusLabel = (s) =>
     !s ? "-" : s.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-  /* ---------------------------------------------------------
-     RENDER
-  --------------------------------------------------------- */
   return (
     <>
       <LeadsHeader search={search} onSearchChange={setSearch} />

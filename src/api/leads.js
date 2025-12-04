@@ -1,9 +1,6 @@
 import { api } from "./client";
 import { normalizeCategory, normalizeStatus } from "../utils/normalizeLead";
 
-/* ===================================================================
-   1. GET LEADS WITH PAGINATION (DEFAULT)
-   =================================================================== */
 export async function getLeads({
   page = 1,
   limit = 10,
@@ -33,7 +30,6 @@ export async function getLeads({
 
   let { leads, pagination } = res.data.data;
 
-  // Normalize setiap lead
   leads = leads.map((lead) => ({
     ...lead,
     category: normalizeCategory(lead.category),
@@ -43,15 +39,11 @@ export async function getLeads({
   return { leads, pagination };
 }
 
-/* ===================================================================
-   2. GET ALL LEADS (UNTUK EXPORT / FILTER BERDASARKAN KESELURUHAN)
-      → Ambil semua leads dari backend (tanpa pagination)
-   =================================================================== */
 export async function getAllLeads() {
   const res = await api.get("/leads", {
     params: {
       page: 1,
-      limit: 999999, // ambil semua
+      limit: 999999,
       sortBy: "probability_score",
       order: "DESC",
     },
@@ -66,9 +58,6 @@ export async function getAllLeads() {
   }));
 }
 
-/* ===================================================================
-   3. GET LEAD DETAIL BY ID
-   =================================================================== */
 export async function getLeadDetail(id) {
   const res = await api.get(`/leads/${id}`);
 

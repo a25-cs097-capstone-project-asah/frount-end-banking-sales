@@ -8,27 +8,19 @@ const PriorityLeads = ({ priorityLeads }) => {
     console.log("Call lead:", name);
   };
 
-  /* ============================
-     NORMALISASI SCORE / KATEGORI
-  =============================== */
-
-  // score class untuk warna border / circle
   const getScoreClass = (score) => {
     if (score >= 80) return "high";
     if (score >= 60) return "medium";
     return "low";
   };
 
-  // label kategori berdasarkan teks dari backend
   const getCategoryLabel = (category, score) => {
     if (!category) {
-      // fallback dari score
       if (score >= 80) return "Tinggi";
       if (score >= 60) return "Sedang";
       return "Rendah";
     }
 
-    // normalisasi "High", "high", "TINGGI", "Tinggi", dll
     const c = category.toString().toLowerCase();
 
     if (c === "tinggi" || c === "high") return "Tinggi";

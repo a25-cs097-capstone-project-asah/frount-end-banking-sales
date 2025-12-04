@@ -1,7 +1,3 @@
-/* =========================================
-   AUTH BASE (STRUKTUR UMUM)
-========================================= */
-
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -10,7 +6,6 @@
   padding: 2.5rem 1.2rem;
 }
 
-/* Layout 2 kolom */
 .auth-container {
   width: 100%;
   max-width: 1080px;
@@ -21,7 +16,6 @@
   border: 1px solid transparent;
 }
 
-/* Panel kiri */
 .auth-left {
   padding: 2.2rem 2.2rem;
   display: flex;
@@ -30,7 +24,6 @@
   gap: 2rem;
 }
 
-/* Branding kiri */
 .auth-branding i {
   display: inline-flex;
   align-items: center;
@@ -51,7 +44,6 @@
   font-size: 0.9rem;
 }
 
-/* Feature items */
 .auth-features {
   display: flex;
   flex-direction: column;
@@ -66,7 +58,6 @@
   border-radius: 16px;
 }
 
-/* Panel kanan */
 .auth-right {
   padding: 2.2rem;
   display: flex;
@@ -88,7 +79,6 @@
   margin-bottom: 1.4rem;
 }
 
-/* Form */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -110,7 +100,6 @@
   transition: 0.15s ease-in-out;
 }
 
-/* Password */
 .password-input {
   position: relative;
 }
@@ -130,7 +119,6 @@
   cursor: pointer;
 }
 
-/* Checkbox */
 .checkbox-group {
   display: flex;
   align-items: center;
@@ -143,7 +131,6 @@
   gap: 0.45rem;
 }
 
-/* Buttons */
 .btn-block {
   width: 100%;
 }
@@ -159,7 +146,6 @@
   gap: 1rem;
 }
 
-/* Divider */
 .auth-divider {
   text-align: center;
   margin: 1.3rem 0;
@@ -182,13 +168,11 @@
   right: 0;
 }
 
-/* Switch */
 .auth-switch {
   font-size: 0.85rem;
   text-align: center;
 }
 
-/* Theme toggle button */
 .auth-theme-toggle {
   position: fixed;
   top: 20px;

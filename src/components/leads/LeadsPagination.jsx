@@ -1,10 +1,6 @@
 import React from "react";
 
-// ==========================================
-// Pagination Number Generator (Dengan Ellipsis)
-// ==========================================
 function generatePagination(current, totalPages, maxVisible = 7) {
-  // Jika total halaman sedikit → tampilkan semuanya
   if (totalPages <= maxVisible) {
     return [...Array(totalPages)].map((_, i) => i + 1);
   }
@@ -13,28 +9,24 @@ function generatePagination(current, totalPages, maxVisible = 7) {
   const last = totalPages;
   const pages = [];
 
-  // Range kiri & kanan (centered)
   const left = Math.max(current - 1, 2);
   const right = Math.min(current + 1, totalPages - 1);
 
-  pages.push(first); // halaman pertama
+  pages.push(first);
 
-  if (left > 2) pages.push("..."); // ellipsis kiri
+  if (left > 2) pages.push("...");
 
   for (let i = left; i <= right; i++) {
     pages.push(i);
   }
 
-  if (right < totalPages - 1) pages.push("..."); // ellipsis kanan
+  if (right < totalPages - 1) pages.push("...");
 
-  pages.push(last); // halaman terakhir
+  pages.push(last);
 
   return pages;
 }
 
-// ==========================================
-// Pagination Component
-// ==========================================
 const LeadsPagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = generatePagination(currentPage, totalPages);
 

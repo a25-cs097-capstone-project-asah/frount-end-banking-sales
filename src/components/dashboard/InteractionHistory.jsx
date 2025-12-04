@@ -9,10 +9,8 @@ const InteractionHistory = ({ leadId }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  /* Detect Theme */
   const isLight = document.documentElement.classList.contains("light");
 
-  /* FETCH */
   useEffect(() => {
     const fetchHistory = async () => {
       try {
@@ -34,7 +32,6 @@ const InteractionHistory = ({ leadId }) => {
     fetchHistory();
   }, [leadId]);
 
-  /* Formatters */
   const formatDate = (iso) =>
     new Date(iso).toLocaleString("id-ID", {
       dateStyle: "medium",

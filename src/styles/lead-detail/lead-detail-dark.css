@@ -1,16 +1,12 @@
-/* ==================== LEAD DETAIL – DARK MODE ===================== */
-
 .lead-detail-page {
   background: radial-gradient(circle at top, #001a9d 0%, #0b1220 75%);
   border: 1px solid rgba(148, 163, 184, 0.45);
 }
 
-/* Header */
 .detail-header-left h1 {
   color: #e5e7eb;
 }
 
-/* Summary card */
 .lead-summary-card {
   background: rgba(15, 23, 42, 0.92);
   border-color: rgba(148, 163, 184, 0.35);
@@ -29,14 +25,12 @@
   color: #cbd5e1;
 }
 
-/* Segmen */
 .segment-badge {
   background: rgba(37, 99, 235, 0.25);
   color: #bfdbfe;
   border: 1px solid rgba(96, 165, 250, 0.5);
 }
 
-/* Score summary text */
 .summary-score-text {
   color: #e5e7eb;
 }
@@ -45,7 +39,6 @@
   color: #cbd5e1;
 }
 
-/* Action tiles */
 .summary-action-card {
   border-color: rgba(148, 163, 184, 0.7);
   background: rgba(15, 23, 42, 0.96);
@@ -63,14 +56,12 @@
   color: #ffffff;
 }
 
-/* Grid cards */
 .chart-card,
 .activity-card {
   background: rgba(15, 23, 42, 0.92);
   border-color: rgba(148, 163, 184, 0.35);
 }
 
-/* Score circle warna */
 .score-circle.high {
   background: linear-gradient(135deg, #22c55e, #15803d);
   color: #ffffff;
@@ -84,7 +75,6 @@
   color: #ffffff;
 }
 
-/* Rekomendasi */
 .recommendation-list {
   color: #e5e7eb;
 }
@@ -93,7 +83,6 @@
   color: #60a5fa;
 }
 
-/* CATATAN SALES – FIXED */
 .note-item {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);

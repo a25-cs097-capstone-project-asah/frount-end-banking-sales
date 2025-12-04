@@ -52,9 +52,6 @@ const PriorityLeads = () => {
     setIsLight((prev) => !prev);
   };
 
-  // ======================================================
-  // 🔥 FETCH PRIORITY LEADS — PAGINATION
-  // ======================================================
   const fetchPriority = async (page = 1) => {
     try {
       setLoading(true);
@@ -81,9 +78,6 @@ const PriorityLeads = () => {
     fetchPriority(1);
   }, []);
 
-  // ======================================================
-  // 🔥 FETCH GLOBAL STATS DARI /dashboard/stats
-  // ======================================================
   useEffect(() => {
     const loadStats = async () => {
       try {
@@ -102,9 +96,6 @@ const PriorityLeads = () => {
     loadStats();
   }, []);
 
-  // ======================================================
-  // FILTERING
-  // ======================================================
   const filteredLeads = useMemo(() => {
     let result = [...leads];
     const q = search.toLowerCase();
@@ -119,7 +110,7 @@ const PriorityLeads = () => {
       );
     }
 
-    // SCORE (aturan baru)
+    // SCORE
     result = result.filter((lead) => {
       const s = Number(lead.probabilityScore) || 0;
 
@@ -184,14 +175,11 @@ const PriorityLeads = () => {
           }
         />
 
-        {/* ======================================================
-            🔥 Stats DIPAKAI dari Backend (/dashboard/stats)
-        ====================================================== */}
         <LeadsStats
-          totalLeads={stats.totalLeads} // 🔥 dari backend
-          highPriorityLeads={stats.highPriorityLeads} // 🔥 dari backend
-          avgScore={stats.averageScore} // 🔥 dari backend
-          followUpToday={stats.followUpLeads} // 🔥 dari backend
+          totalLeads={stats.totalLeads}
+          highPriorityLeads={stats.highPriorityLeads}
+          avgScore={stats.averageScore}
+          followUpToday={stats.followUpLeads}
         />
 
         {loading ? (

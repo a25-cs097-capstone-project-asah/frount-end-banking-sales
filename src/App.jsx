@@ -10,7 +10,6 @@ import Layout from "./components/Layout";
 
 import PriorityLeads from "./pages/PriorityLeads";
 import FollowUp from "./pages/FollowUp";
-import Analytics from "./pages/Analytics";
 import History from "./pages/History";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -38,7 +37,6 @@ const App = () => {
         {/* menu kiri */}
         <Route path="/priority" element={<PriorityLeads />} />
         <Route path="/follow-up" element={<FollowUp />} />
-        <Route path="/analytics" element={<Analytics />} />
         <Route path="/history" element={<History />} />
       </Route>
 

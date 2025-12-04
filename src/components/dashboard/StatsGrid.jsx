@@ -7,7 +7,7 @@ const StatsGrid = ({ stats }) => {
     totalLeads = 0,
     convertedLeads = 0,
     highPriorityLeads = 0,
-    conversionRate = 0, // backend: 0.01 = 1%
+    conversionRate = 0,
     averageScore = 0,
   } = stats;
 
@@ -66,7 +66,6 @@ const StatsGrid = ({ stats }) => {
         <div className="stat-details">
           <h3>Conversion Rate</h3>
 
-          {/* 🔥 FIX di sini (backend 0.01 → tampil 1.00%) */}
           <p className="stat-number">
             {(Number(conversionRate) * 100).toFixed(2)}%
           </p>

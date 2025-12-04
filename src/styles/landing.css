@@ -1,270 +1,385 @@
 .landing-page-simple {
   min-height: 100vh;
+  padding: 4rem 1.5rem 6rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 3rem 1.5rem 4rem;
-  background: radial-gradient(
-    circle at top,
-    #001a9d 0%,
-    #294762 45%,
-    #36454f 100%
-  );
+  background: linear-gradient(180deg, #0a0f1f, #0b132b 50%, #101828 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hero */
+.landing-page-simple::before,
+.landing-page-simple::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: 0;
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+.landing-page-simple::before {
+  width: 450px;
+  height: 450px;
+  top: -150px;
+  left: -120px;
+  background: rgba(88, 112, 255, 0.3);
+}
+
+.landing-page-simple::after {
+  width: 550px;
+  height: 550px;
+  right: -160px;
+  bottom: -180px;
+  background: rgba(138, 77, 252, 0.28);
+  animation-duration: 15s;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -40px) scale(1.15);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 .landing-hero {
-  width: 100%;
   max-width: 900px;
   text-align: center;
-  color: #f9fafb;
-  margin-bottom: 2.4rem;
+  color: #ffffff;
+  position: relative;
+  z-index: 5;
 }
 
 .landing-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 999px;
-  margin: 0 auto 1.4rem;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto 1.6rem;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  backdrop-filter: blur(14px);
+
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: rgba(18, 24, 33, 0.25);
-  border: 2px solid rgba(248, 250, 252, 0.65);
-  font-size: 1.8rem;
+  align-items: center;
+
+  font-size: 2.2rem;
+  color: #dbe4ff;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 0 25px rgba(255, 255, 255, 0.18),
+    0 0 40px rgba(138, 92, 246, 0.5),
+    0 0 80px rgba(88, 112, 255, 0.4);
+
+  transition: 0.35s ease;
+}
+
+.landing-icon:hover {
+  transform: scale(1.08);
+  box-shadow:
+    inset 0 0 30px rgba(255, 255, 255, 0.22),
+    0 0 65px rgba(138, 92, 246, 0.7),
+    0 0 130px rgba(88, 112, 255, 0.55);
+}
+
+.landing-icon::after {
+  content: "";
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  top: -40%;
+  left: -40%;
+  background: radial-gradient(
+    circle,
+    rgba(148, 163, 255, 0.55),
+    transparent 70%
+  );
+  filter: blur(50px);
+  animation: iconPulse 6s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.25);
+  }
 }
 
 .landing-title {
-  font-size: 2.6rem;
+  font-size: 3.2rem;
   font-weight: 700;
-  margin-bottom: 0.4rem;
+  background: linear-gradient(to right, #f8fafc, #dbeafe);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .landing-subtitle-main {
   font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.9rem;
+  color: #b4c5ff;
+  margin-top: 0.4rem;
 }
 
 .landing-description {
-  max-width: 720px;
-  margin: 0 auto;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #e3edf3;
+  max-width: 760px;
+  margin: 1.4rem auto 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #cfdaf2;
 }
 
 .landing-buttons {
-  margin-top: 1.8rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  margin-top: 2.2rem;
 }
 
 .hero-btn {
-  min-width: 180px;
-  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
+  padding: 0.85rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+  color: white !important;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: 0.25s ease;
+  box-shadow: 0 0 22px rgba(138, 77, 252, 0.4);
 }
 
-/* Fitur */
+.hero-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 34px rgba(138, 77, 252, 0.7);
+}
+
+.hero-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: 0.5s;
+}
+
+.hero-btn:hover::after {
+  left: 200%;
+}
+
 .landing-features-row {
   width: 100%;
   max-width: 1100px;
+  margin-top: 2.8rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1.8rem;
   justify-content: center;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .feature-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
   flex: 1 1 260px;
   max-width: 340px;
+  padding: 1.6rem 1.4rem;
   border-radius: 20px;
-  background: rgba(18, 24, 33, 0.96);
-  border: 1px solid rgba(96, 125, 139, 0.6);
-  padding: 1.4rem 1.2rem;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   text-align: center;
-  box-shadow: var(--shadow-card);
+  transition: 0.25s ease;
+}
+
+.feature-card:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.feature-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 14px 40px rgba(139, 92, 246, 0.28);
 }
 
 .feature-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 0 auto 0.8rem;
-  background: rgba(41, 71, 98, 0.95);
-  border: 1px solid rgba(248, 250, 252, 0.25);
-  font-size: 1.2rem;
-  color: #e0f2f1;
+  align-items: center;
+  color: #d3dbff;
+  font-size: 1.3rem;
+  transition: 0.25s ease;
+}
+
+.feature-icon:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 22px rgba(139, 92, 246, 0.45);
 }
 
 .feature-card h3 {
-  font-size: 1rem;
+  font-size: 1.15rem;
+  color: #ffffff;
   margin-bottom: 0.4rem;
 }
 
 .feature-card p {
-  font-size: 0.85rem;
-  color: #cfd8dc;
+  font-size: 0.9rem;
+  color: #d3ddef;
+  line-height: 1.6;
 }
 
-/* ========================================================
-   LANDING – LIGHT MODE (Banking Blue Palette)
-   ======================================================== */
-
-html.light .landing-page-simple {
-  background: radial-gradient(
-    circle at top,
-    #f6fafd 0%,
-    #b3cfe5 45%,
-    #f6fafd 100%
-  );
-}
-
-html.light .landing-title {
-  color: #0a1931; /* navy */
-}
-
-html.light .landing-subtitle-main {
-  color: #1a3d63; /* deep blue */
-}
-
-html.light .landing-description {
-  color: #1a3d63;
-}
-
-/* Feature Cards */
-html.light .feature-card {
-  background: #ffffff;
-  border-color: #b3cfe5;
-  box-shadow: 0 8px 28px rgba(10, 25, 49, 0.08);
-}
-
-html.light .feature-card p {
-  color: #1a3d63;
-}
-
-/* ========================================================
-   BUTTONS — LIGHT MODE FIX
-   ======================================================== */
-
-/* Button utama (Daftar Sekarang) — tetap navy */
-html.light .hero-btn {
-  font-weight: 600;
-}
-
-/* Button solid (Daftar Sekarang) */
-html.light .hero-btn.btn-primary {
-  background: #0a1931;
-  color: #f6fafd;
-  border: none;
-}
-
-html.light .hero-btn.btn-primary:hover {
-  background: #1a3d63; /* deep blue hover */
-}
-
-/* Button outline (Masuk) — FIX TIDAK KELIHATAN */
-html.light .hero-btn.btn-outline {
-  background: transparent;
-  border: 2px solid #1a3d63; /* jelas */
-  color: #1a3d63; /* kontras */
-  font-weight: 600;
-}
-
-html.light .hero-btn.btn-outline:hover {
-  background: rgba(26, 61, 99, 0.08);
-  border-color: #0a1931;
-  color: #0a1931;
-}
-
-/* State ter-disable (kalau dipakai di landing) */
-html.light .hero-btn.btn-outline:disabled,
-html.light .hero-btn.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Tombol toggle tema di Landing */
 .landing-theme-toggle {
   position: fixed;
-  top: 20px;
-  right: 26px;
-  z-index: 999;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  border: 2px solid rgba(0, 0, 0, 0.15);
-  width: 44px;
-  height: 44px;
+  top: 24px;
+  right: 32px;
+  z-index: 99;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: white;
   cursor: pointer;
-  color: #0a1931;
-  font-size: 1.1rem;
-  transition: 0.2s ease-in-out;
+  transition: 0.25s ease;
 }
 
 .landing-theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
 }
 
-/* versi dark */
-html:not(.light) .landing-theme-toggle {
-  background: rgba(18, 24, 33, 0.6);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+html.light .landing-theme-toggle {
+  background: rgba(10, 25, 49, 0.15);
+  border-color: rgba(10, 25, 49, 0.25);
+  color: #0a1931;
 }
 
-html:not(.light) .landing-theme-toggle:hover {
-  background: rgba(18, 24, 33, 0.8);
+html.light .landing-theme-toggle:hover {
+  background: rgba(10, 25, 49, 0.22);
 }
 
-/* ========================================================
-   HARD OVERRIDE: teks "Daftar Sekarang" harus kelihatan
-   ======================================================== */
-
-/* Tombol di Landing: <Link class="btn btn-primary hero-btn"> */
-html.light .landing-page-simple .btn.btn-primary.hero-btn,
-html.light .landing-page-simple .btn.btn-primary.hero-btn span,
-html.light .landing-page-simple .btn.btn-primary.hero-btn i {
-  color: #f6fafd !important; /* teks & icon putih */
+html.light .landing-page-simple {
+  background: linear-gradient(180deg, #f6f8fc 0%, #e7eef8 50%, #f9fbff 100%);
 }
 
-/* Sedikit glow biar makin kebaca */
-html.light .landing-page-simple .btn.btn-primary.hero-btn span {
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+html.light .landing-title {
+  background: linear-gradient(to right, #0a0f1f, #1c2b48);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-/* ========================================================
-   FIX: Ikon fitur di Landing (lebih jelas & kontras)
-   ======================================================== */
-
-/* Warna ikon diperkuat */
-html.light .feature-icon i {
-  color: #0a1931 !important; /* navy paling gelap = paling kontras */
-  opacity: 0.95;
+html.light .landing-subtitle-main {
+  color: #425b8f;
 }
 
-/* Lingkaran ikon ditambah ketebalan warna */
-html.light .feature-icon {
-  background: rgba(10, 25, 49, 0.08) !important; /* soft navy */
-  border: 2px solid rgba(10, 25, 49, 0.18) !important;
+html.light .landing-description {
+  color: #2c3e55;
 }
 
-/* Teks judul fitur juga dipertegas */
+html.light .feature-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+html.light .feature-card p {
+  color: #324864;
+}
+
 html.light .feature-card h3 {
-  color: #0a1931 !important;
-  font-weight: 700;
+  color: #0a0f1f;
 }
 
-html.light .feature-icon i {
-  text-shadow: 0 0 4px rgba(10, 25, 49, 0.35);
+html.light .feature-icon {
+  background: rgba(10, 25, 49, 0.06);
+  border: 1px solid rgba(10, 25, 49, 0.18);
+  color: #0a1931;
+}
+
+html.light .hero-btn {
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+}
+
+html.light .landing-icon {
+  background: rgba(10, 25, 49, 0.08);
+  border: 2px solid rgba(10, 25, 49, 0.18);
+  backdrop-filter: blur(6px);
+
+  color: #0a1931;
+  box-shadow:
+    inset 0 0 12px rgba(255, 255, 255, 0.4),
+    0 0 14px rgba(55, 65, 81, 0.25);
+}
+
+html.light .landing-icon::after {
+  background: radial-gradient(
+    circle,
+    rgba(94, 116, 185, 0.35),
+    transparent 70%
+  );
+  filter: blur(25px);
+  opacity: 0.55;
+}
+
+html.light .landing-icon:hover {
+  transform: scale(1.06);
+  box-shadow:
+    inset 0 0 18px rgba(255, 255, 255, 0.5),
+    0 0 25px rgba(55, 65, 81, 0.35);
 }

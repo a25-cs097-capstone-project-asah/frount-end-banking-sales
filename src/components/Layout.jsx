@@ -6,7 +6,6 @@ const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // angka di badge sidebar, diisi dari backend
   const [sidebarCounts, setSidebarCounts] = useState({
     leadsTotal: 0,
     highPriority: 0,
@@ -26,19 +25,16 @@ const Layout = () => {
   const userName = localStorage.getItem("userName");
   const userRole = localStorage.getItem("userRole");
 
-  // ====== AMBIL DATA DARI BACKEND: /dashboard/stats ======
   useEffect(() => {
     const fetchSidebarCounts = async () => {
       try {
         const res = await api.get("/dashboard/stats");
 
-        // hanya ambil field yang diperlukan
         const stats = res.data?.data?.stats || {};
 
         setSidebarCounts({
           leadsTotal: stats.totalLeads ?? 0,
           highPriority: stats.highPriorityLeads ?? 0,
-          // jika ingin dipakai nanti:
           averageScore: stats.averageScore ?? 0,
           followUpLeads: stats.followUpLeads ?? 0,
         });

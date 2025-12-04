@@ -1,16 +1,14 @@
-/* === OVERLAY FULLSCREEN === */
 .modal-overlay {
   position: fixed;
-  inset: 0; /* ganti top/left/width/height */
+  inset: 0;
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* pastikan paling atas */
+  z-index: 9999;
 }
 
-/* === CARD UTAMA MODAL === */
 .modal-card-notes {
   background: var(--card-bg, #ffffff);
   width: 95%;
@@ -18,7 +16,6 @@
   padding: 20px;
   border-radius: 16px;
 
-  /* FIX UTAMA */
   max-height: 85vh;
   overflow-y: auto;
 
@@ -27,7 +24,6 @@
   position: relative;
 }
 
-/* HEADER */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -43,7 +39,6 @@
   color: var(--text-color, #333);
 }
 
-/* Label & Textarea */
 .modal-label {
   font-weight: 600;
   margin-bottom: 6px;
@@ -60,7 +55,6 @@
   font-size: 14px;
 }
 
-/* Button utama */
 .btn-primary.full {
   width: 100%;
   padding: 12px;
@@ -85,7 +79,6 @@
   font-weight: 600;
 }
 
-/* === LIST CATATAN === */
 .notes-wrapper {
   display: flex;
   flex-direction: column;

@@ -1,9 +1,3 @@
-/* =========================================
-   AUTH LIGHT THEME – FULL VERSION (FINAL)
-   Aktif saat <html> memiliki class .light
-========================================= */
-
-/* Background halaman */
 html.light .auth-page {
   background: radial-gradient(
     circle at top,
@@ -13,7 +7,6 @@ html.light .auth-page {
   );
 }
 
-/* Panel container */
 html.light .auth-container {
   background: #ffffff;
   border-color: rgba(185, 205, 225, 0.55);
@@ -21,10 +14,6 @@ html.light .auth-container {
     0 18px 40px rgba(15, 25, 45, 0.1),
     0 0 0 1px rgba(255, 255, 255, 0.85);
 }
-
-/* =========================================
-   PANEL KIRI – BRANDING / LOGO
-========================================= */
 
 html.light .auth-left {
   background: linear-gradient(
@@ -37,7 +26,6 @@ html.light .auth-left {
   color: #ffffff;
 }
 
-/* LOGO – GLASS BLUE */
 html.light .auth-branding i {
   width: 3.4rem;
   height: 3.4rem;
@@ -63,7 +51,6 @@ html.light .auth-branding i {
     0 0 0 3px rgba(255, 255, 255, 0.4);
 }
 
-/* Branding title */
 html.light .auth-branding h1 {
   color: #ffffff;
   font-weight: 700;
@@ -71,16 +58,11 @@ html.light .auth-branding h1 {
   text-shadow: 0 3px 7px rgba(0, 0, 0, 0.35);
 }
 
-/* Branding subtitle */
 html.light .auth-branding p {
   color: #f3f8ff;
   font-weight: 500;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
-
-/* =========================================
-   FITUR KIRI (GLASS LIST)
-========================================= */
 
 html.light .feature-item {
   background: rgba(255, 255, 255, 0.2);
@@ -110,34 +92,22 @@ html.light .feature-item i {
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* =========================================
-   PANEL KANAN – FORM LOGIN
-========================================= */
-
 html.light .auth-right {
   background: #ffffff;
 }
 
-/* ======= TEKS YANG SEBELUMNYA HILANG ======= */
-
-/* Judul: “Selamat Datang” */
 html.light .auth-right .auth-form-container h2 {
   color: #0e233d !important;
   font-weight: 700 !important;
   text-shadow: none !important;
 }
 
-/* Subjudul: “Masuk menggunakan Username atau Email” */
 html.light .auth-right .auth-form-container .auth-subtitle {
   color: #1f2937 !important;
   font-size: 0.95rem;
   font-weight: 500;
   margin-bottom: 1.4rem;
 }
-
-/* =========================================
-   INPUT & LABEL
-========================================= */
 
 html.light .form-group label {
   color: #1a2f46;
@@ -161,14 +131,9 @@ html.light .form-group input:focus {
   box-shadow: 0 0 0 3px rgba(74, 127, 167, 0.25);
 }
 
-/* Password eye icon */
 html.light .toggle-password {
   color: #6f7b89;
 }
-
-/* =========================================
-   CHECKBOX & LINKS
-========================================= */
 
 html.light .checkbox-label {
   color: #374151;
@@ -179,10 +144,6 @@ html.light .checkbox-label .btn-link {
   text-decoration: underline;
 }
 
-/* =========================================
-   DIVIDER
-========================================= */
-
 html.light .auth-divider {
   color: #8da0b5;
 }
@@ -191,10 +152,6 @@ html.light .auth-divider::before,
 html.light .auth-divider::after {
   background: rgba(150, 160, 180, 0.35);
 }
-
-/* =========================================
-   BUTTONS
-========================================= */
 
 html.light .btn-primary {
   background: linear-gradient(135deg, #4a7fa7, #2f6790);
@@ -212,7 +169,6 @@ html.light .btn-primary:hover {
   transform: translateY(-1px);
 }
 
-/* Social buttons */
 html.light .btn-social {
   background: #ffffff;
   border: 1px solid rgba(150, 175, 200, 0.9);
@@ -224,10 +180,6 @@ html.light .btn-social:hover {
   transform: translateY(-1px);
 }
 
-/* =========================================
-   SWITCH TEXT
-========================================= */
-
 html.light .auth-switch {
   color: #556070;
 }
@@ -235,10 +187,6 @@ html.light .auth-switch {
 html.light .auth-switch .link {
   color: #1a3d63;
 }
-
-/* =========================================
-   THEME TOGGLER (GEAR)
-========================================= */
 
 html.light .auth-theme-toggle {
   background: rgba(255, 255, 255, 0.8);

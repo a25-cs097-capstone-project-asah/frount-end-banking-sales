@@ -9,14 +9,13 @@ const LeadsGrid = ({
   onEmailLead,
   onAddNote,
 }) => {
-  // Konversi score backend (0–1) → persentase
   const normalizeScore = (s) => Number(s) * 100;
 
   return (
     <div className="leads-grid">
       {leads.map((lead) => {
         const raw = lead.probabilityScore || 0;
-        const percent = normalizeScore(raw).toFixed(2); // contoh: 13.17
+        const percent = normalizeScore(raw).toFixed(2);
         const scoreCat = getScoreCategory(percent);
 
         const initials =

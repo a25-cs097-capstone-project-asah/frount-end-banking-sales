@@ -1,24 +1,14 @@
-/* =========================================
-   SIDEBAR – LIGHT MODE (PREMIUM MINIMALIST)
-========================================= */
-
-/* Container sidebar */
 html.light .sidebar {
   position: relative;
   display: flex;
   flex-direction: column;
   padding: 1.6rem 1.3rem;
 
-  /* gradient halus */
   background: linear-gradient(180deg, #e9f4ff 0%, #c9def0 40%, #b7d0e6 100%);
 
   border-right: 1px solid rgba(120, 150, 175, 0.35);
   box-shadow: 6px 0 24px rgba(0, 0, 0, 0.05);
 }
-
-/* =========================================
-   BRAND AREA (Logo + title)
-========================================= */
 
 html.light .brand-badge {
   width: 42px;
@@ -51,7 +41,6 @@ html.light .brand-subtitle {
   text-transform: uppercase;
 }
 
-/* accent line */
 html.light .brand-title::after {
   content: "";
   width: 40px;
@@ -62,10 +51,6 @@ html.light .brand-title::after {
 
   background: linear-gradient(90deg, #4a7fa7, #8bc8ff);
 }
-
-/* =========================================
-   NAV ITEMS (Minimal, No white pills)
-========================================= */
 
 html.light .sidebar .nav-item {
   background: transparent !important;
@@ -89,15 +74,10 @@ html.light .sidebar .nav-item span {
   color: #0b1e36 !important;
 }
 
-/* Hover (soft) */
 html.light .sidebar .nav-item:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
-
-/* =========================================
-   ACTIVE ITEM (premium pill)
-========================================= */
 
 html.light .sidebar .nav-item.active {
   background: linear-gradient(135deg, #4a7fa7, #6fb3e8) !important;
@@ -115,10 +95,6 @@ html.light .sidebar .nav-item.active span {
 html.light .sidebar .nav-item.active:hover {
   background: linear-gradient(135deg, #5fa1c7, #8bcbff) !important;
 }
-
-/* =========================================
-   FOOTER USER
-========================================= */
 
 html.light .sidebar-footer {
   margin-top: auto;
@@ -141,7 +117,6 @@ html.light .user-info p {
   color: #33516b !important;
 }
 
-/* Logout */
 html.light .btn-logout {
   background: #ffffff !important;
   color: #0a1931 !important;

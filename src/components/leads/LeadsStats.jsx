@@ -6,7 +6,6 @@ const LeadsStats = ({
   avgScore,
   followUpToday,
 }) => {
-  // jaga-jaga kalau avgScore bukan angka (NaN / undefined)
   const safeAvgScore = Number.isFinite(Number(avgScore)) ? Number(avgScore) : 0;
 
   return (

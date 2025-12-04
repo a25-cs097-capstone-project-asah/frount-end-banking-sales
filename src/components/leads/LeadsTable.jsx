@@ -7,7 +7,6 @@ const LeadsTable = ({
   onCallLead,
   onEmailLead,
 }) => {
-  // Ambil inisial dari nama
   const getInitials = (name = "") =>
     name
       .trim()
@@ -17,7 +16,6 @@ const LeadsTable = ({
       .toUpperCase()
       .slice(0, 2);
 
-  // Tentukan kategori langsung dari score
   const getScoreCategory = (score = 0) => {
     if (score >= 80) return "high";
     if (score >= 60) return "medium";

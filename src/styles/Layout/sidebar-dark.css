@@ -1,15 +1,9 @@
-/* =========================================
-   SIDEBAR – DARK MODE (VERSION 4, PREMIUM)
-   ========================================= */
-
-/* CONTAINER SIDEBAR*/
 html:not(.light) .sidebar {
   position: relative;
   display: flex;
   flex-direction: column;
   padding: 1.6rem 1.3rem;
 
-  /* layer utama: gradasi biru gelap */
   background:
     radial-gradient(
       circle at 0% 0%,
@@ -33,7 +27,6 @@ html:not(.light) .sidebar {
   overflow: hidden;
 }
 
-/* lapisan glass halus */
 html:not(.light) .sidebar::before {
   content: "";
   position: absolute;
@@ -48,7 +41,6 @@ html:not(.light) .sidebar::before {
   pointer-events: none;
 }
 
-/* highlight di belakang logo */
 html:not(.light) .sidebar::after {
   content: "";
   position: absolute;
@@ -67,15 +59,10 @@ html:not(.light) .sidebar::after {
   pointer-events: none;
 }
 
-/* pastikan semua isi di atas layer glass */
 html:not(.light) .sidebar > * {
   position: relative;
   z-index: 1;
 }
-
-/* =========================================
-   BRANDING (LOGO + TEXT BANKING PORTAL)
-   ========================================= */
 
 html:not(.light) .brand-badge {
   width: 42px;
@@ -112,7 +99,6 @@ html:not(.light) .brand-subtitle {
   font-size: 0.75rem;
 }
 
-/* garis accent di bawah judul */
 html:not(.light) .brand-title::after {
   content: "";
   display: block;
@@ -126,18 +112,12 @@ html:not(.light) .brand-title::after {
     0 0 18px rgba(15, 23, 42, 0.9);
 }
 
-/* =========================================
-   MENU ITEM – NORMAL, HOVER, ACTIVE
-   ========================================= */
-
-/* teks & ikon default */
 html:not(.light) .sidebar .nav-item,
 html:not(.light) .sidebar .nav-item span,
 html:not(.light) .sidebar .nav-item i {
   color: #e5e7eb;
 }
 
-/* nav item basic (kalau di base.css belum ada) */
 html:not(.light) .sidebar .nav-item {
   background: transparent;
   border-radius: 999px;
@@ -149,7 +129,6 @@ html:not(.light) .sidebar .nav-item {
     box-shadow 0.18s ease;
 }
 
-/* hover lembut */
 html:not(.light) .sidebar .nav-item:hover {
   background: rgba(15, 23, 42, 0.55);
   border-color: rgba(148, 163, 184, 0.45);
@@ -157,7 +136,6 @@ html:not(.light) .sidebar .nav-item:hover {
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.6);
 }
 
-/* ACTIVE pill */
 html:not(.light) .sidebar .nav-item.active {
   background:
     radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.6), transparent 60%),
@@ -182,10 +160,6 @@ html:not(.light) .sidebar .nav-item.active i,
 html:not(.light) .sidebar .nav-item.active span {
   color: #ffffff !important;
 }
-
-/* =========================================
-   FOOTER USER
-   ========================================= */
 
 html:not(.light) .sidebar-footer {
   margin-top: auto;

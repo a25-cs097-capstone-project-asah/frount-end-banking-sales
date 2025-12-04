@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { toggleTheme } from "../../theme";
 
 const LeadDetailHeader = ({ onBack }) => {
-  // Deteksi tema sekarang (light/dark)
   const [isLight, setIsLight] = useState(() => {
     if (typeof document === "undefined") return false;
     return document.documentElement.classList.contains("light");
