@@ -1,49 +1,137 @@
-# 🏦 Banking Sales Portal (Frontend)
+🏦 Banking Sales Portal – Fullstack Application
 
-Banking Sales Portal adalah aplikasi frontend berbasis **React + Vite** yang dirancang untuk membantu tim sales perbankan mengelola lead, melakukan follow up, melihat analitik, dan mencatat aktivitas nasabah dengan cepat dan efisien.
+Banking Sales Portal adalah aplikasi Fullstack (Frontend + Backend) berbasis Predictive Lead Scoring yang dirancang untuk membantu tim sales perbankan dalam mengelola nasabah, menentukan prioritas follow-up, serta memonitor performa akuisisi dengan dukungan Machine Learning.
 
-Aplikasi ini memiliki dukungan **Dark & Light Mode**, tampilan dashboard interaktif, daftar lead lengkap, detail nasabah, hingga fitur follow-up terpadu.
+Aplikasi terdiri dari:
 
----
+Backend API → Node.js + Express + PostgreSQL
 
-## 🚀 **Tech Stack**
+Frontend Web → React + Vite
 
-| Teknologi | Keterangan |
-|----------|------------|
-| **React.js** | Library UI utama |
-| **Vite** | Bundler & Dev Server super cepat |
-| **React Router DOM** | Sistem navigasi SPA |
-| **CSS Custom Styling** | Desain UI modern & responsif |
-| **FontAwesome Icons** | Icon pack |
+Sistem ini mendukung:
 
----
+Autentikasi JWT
 
-## 🔥 **Fitur Utama**
+Dashboard interaktif
 
-### 📊 **Dashboard Interaktif**
-- Statistik lead, konversi, prioritas tinggi, conversion rate
-- Grafik tren konversi
-- Donut chart distribusi lead score
+Manajemen lead & follow-up
 
-### 👤 **Manajemen Lead**
-- Daftar lead lengkap dengan sorting
-- Skor probabilitas (progress bar)
-- Kategori lead (Tinggi, Sedang, Rendah)
-- Status follow up
+Dark/Light mode
 
-### 📁 **Detail Nasabah**
-- Informasi lengkap nasabah
-- Riwayat aktivitas terbaru
-- Rekomendasi follow up
-- Aksi cepat:
-  - 📞 Telepon  
-  - ✉️ Email  
-  - 🗓️ Jadwalkan  
-  - 📝 Catatan  
+Riwayat aktivitas sales
 
-### 🌙 **Fitur Dark Mode & Light Mode**
-- Toggle tema sidebar
-- Warna tema disimpan otomatis
+📌 Arsitektur Sistem
+                ┌─────────────────────┐
+                │     Frontend        │
+                │ React + Vite        │
+                │                     │
+                └─────────▲───────────┘
+                          │ API Request (Axios)
+                          ▼
+                ┌─────────────────────┐
+                │      Backend        │
+                │ Node.js + Express   │
+                │ JWT Authentication   │
+                └─────────▲───────────┘
+                          │ Query
+                          ▼
+                ┌─────────────────────┐
+                │     PostgreSQL      │
+                │  banking_sales_db   │
+                └─────────────────────┘
 
-### 🔐 **Authentication**
-- Login & Register halaman modern
+🚀 1. Teknologi yang Digunakan
+🖥️ Frontend
+
+React.js
+
+Vite
+
+React Router
+
+Axios
+
+FontAwesome
+
+Custom CSS
+
+🔧 Backend
+
+Node.js / Express
+
+PostgreSQL
+
+JWT Authentication
+
+Joi Validation
+
+Middleware Authorization
+
+pg (node-postgres)
+
+🎨 2. Fitur Aplikasi
+🔐 Authentication
+
+Login dengan validasi
+
+Penyimpanan JWT (access & refresh token)
+
+Protected Routes di frontend
+
+📊 Dashboard
+
+Statistik total nasabah
+
+Statistik konversi
+
+Grafis tren konversi
+
+Distribusi skor probabilitas
+
+Daftar lead prioritas tinggi
+
+📁 Lead Management
+
+Daftar lead
+
+Sorting
+
+Filtering (skor, pekerjaan, usia, status)
+
+Search real-time
+
+Export CSV
+
+Aksi cepat (email/telepon)
+
+👤 Lead Detail
+
+Informasi lengkap nasabah
+
+Profil pekerjaan dan ekonomi
+
+Rekomendasi tindak lanjut
+
+Riwayat catatan follow-up
+
+Tambah catatan baru
+
+⭐ Priority Leads
+
+Lead kategori “High”
+
+Akses cepat untuk follow-up konsisten
+
+📞 Follow Up Center
+
+Daftar nasabah berstatus “Follow-Up”
+
+Filter terkait profil nasabah
+
+Tampilan mirip halaman Leads
+
+🌙 Dark & Light Mode
+
+Tersedia toggle tema
+
+Disimpan otomatis di localStorage
