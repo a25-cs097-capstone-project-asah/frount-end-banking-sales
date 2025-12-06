@@ -463,3 +463,9 @@
   background: rgba(239, 83, 80, 0.22);
   border-color: rgba(239, 83, 80, 0.55);
 }
+
+@media (max-width: 900px) {
+  .lead-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
