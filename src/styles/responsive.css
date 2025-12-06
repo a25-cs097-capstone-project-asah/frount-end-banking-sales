@@ -1,72 +1,61 @@
-/* ============================================
-   ≤ 1200px — Medium Screens
-   ============================================ */
-@media (max-width: 1200px) {
+/* ≥ 1536px — LARGE DESKTOP (High-Res Screens)*/
+@media (min-width: 1536px) {
+  .dashboard-content {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
+/* ≤ 1280px — STANDARD LAPTOP / DESKTOP*/
+@media (max-width: 1280px) {
   .leads-content {
     max-width: 100%;
-    margin: 10px 0 16px;
+  }
+
+  .charts-row {
+    gap: 1.4rem;
   }
 }
 
-/* ============================================
-   ≤ 980px — Tablet Layout
-   ============================================ */
-@media (max-width: 980px) {
-  .leads-content {
-    margin: 12px 0 18px;
-    border-radius: 18px;
-  }
-
-  .filters-section {
-    align-items: flex-start;
-  }
-
-  .filters-right {
-    width: 100%;
-    justify-content: flex-start;
-  }
-}
-
-/* ============================================
-   ≤ 960px — Tablet (Lead Detail Optimization)
-   ============================================ */
-@media (max-width: 960px) {
-  .lead-detail-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .lead-summary-main {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .lead-summary-score {
-    align-self: stretch;
-    justify-content: flex-start;
-  }
-}
-
-/* ============================================
-   ≤ 640px — Mobile Layout
-   ============================================ */
-@media (max-width: 640px) {
-  /* ----- Detail Page ----- */
-  .lead-summary-actions {
+/* ≤ 1200px — Medium Screens */
+@media (max-width: 1200px) {
+  .stats-grid,
+  .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .detail-header-row {
+  .charts-row,
+  .bottom-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ≤ 1024px — TABLET LANDSCAPE*/
+@media (max-width: 1024px) {
+  /* LOGIN */
+  .auth-container {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left {
+    padding: 1.4rem;
+  }
+
+  /* DASHBOARD CHART STACK */
+  .charts-row {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
+    gap: 1.4rem;
+  }
+}
+
+/* ≤ 768px — TABLET PORTRAIT */
+@media (max-width: 768px) {
+  /* Dashboard Layout Grid */
+  .dashboard-container {
+    grid-template-columns: 70px 1fr !important;
   }
 
-  .detail-header-actions {
-    align-self: stretch;
-    justify-content: flex-start;
-  }
-
-  /* ----- Sidebar Mobile Collapse ----- */
+  /* Sidebar collapse */
   .sidebar {
     width: 70px !important;
     padding: 1rem 0.5rem !important;
@@ -78,39 +67,427 @@
   .sidebar .nav-item span,
   .sidebar .badge,
   .sidebar-title-row h3,
+  .brand-text,
   .user-info {
     display: none !important;
   }
 
   .sidebar .nav-item {
     justify-content: center !important;
-    padding: 0.8rem !important;
     width: 100%;
   }
 
-  .theme-toggle-btn {
-    margin: 0 auto 1rem auto !important;
+  .main-content {
+    margin-left: 0 !important;
+    padding: 1rem !important;
   }
 
-  .sidebar-footer {
-    flex-direction: column !important;
-    align-items: center !important;
-    margin-top: auto !important;
-    gap: 0.6rem !important;
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .user-avatar {
-    width: 40px !important;
-    height: 40px !important;
+  .lead-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   ≤ 640px — Mobile Mid (Detail pages)
+   ============================================================ */
+@media (max-width: 640px) {
+  .lead-summary-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .btn-logout {
-    width: 35px !important;
-    height: 35px !important;
+  .detail-header-row {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .detail-header-actions {
+    align-self: stretch;
+  }
+}
+
+/* ============================================================
+   ≤ 480px — SMARTPHONE (PRIMARY BREAKPOINT)
+   ============================================================ */
+@media (max-width: 480px) {
+  /* Dashboard grid collapse */
+  .dashboard-container {
+    grid-template-columns: 64px 1fr !important;
+  }
+
+  /* Sidebar ultra-compact */
+  .sidebar {
+    width: 64px !important;
+    padding: 1rem 0.4rem !important;
   }
 
   .main-content {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+    margin-left: 0 !important;
+    padding: 0.75rem !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .charts-row,
+  .bottom-section {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* LOGIN PAGE */
+  .auth-left {
+    display: none !important;
+  }
+
+  .auth-right {
+    padding: 1.2rem !important;
+  }
+
+  input,
+  select {
+    font-size: 0.92rem !important;
+  }
+
+  .auth-theme-toggle {
+    width: 42px;
+    height: 42px;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* ============================================================
+   ≤ 360px — SMALL DEVICES (iPhone SE, older Android)
+   ============================================================ */
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+
+  .btn,
+  .btn-primary {
+    padding: 0.55rem 0.9rem;
+  }
+
+  .auth-form input {
+    padding: 0.55rem;
+  }
+
+  .auth-form-container h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ============================================================
+   Utility: ICON COLOR FIXES (if needed)
+   ============================================================ */
+
+.stat-icon.teal {
+  background: rgba(20, 184, 166, 0.15);
+  color: #0f766e;
+}
+
+/* ============================================================
+   LEAD DETAIL RESPONSIVE FIXES — UNIVERSAL
+   ============================================================ */
+
+/* ============ ≤ 1280px ============ */
+@media (max-width: 1280px) {
+  .lead-detail-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* ============ ≤ 1024px (Tablet Landscape) ============ */
+@media (max-width: 1024px) {
+  .lead-detail-page {
+    padding: 1.2rem 1rem;
+  }
+
+  .lead-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-panel {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .interaction-timeline {
+    padding: 1rem !important;
+  }
+}
+
+/* ============ ≤ 768px (Tablet Portrait) ============ */
+@media (max-width: 768px) {
+  .detail-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .lead-summary-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .lead-summary-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .score-circle.summary-score {
+    width: 60px;
+    height: 60px;
+    font-size: 1rem;
+  }
+
+  .lead-avatar.large {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+/* ============ ≤ 640px (Mobile Primary) ============ */
+@media (max-width: 640px) {
+  .lead-detail-page {
+    padding: 1rem 0.7rem;
+  }
+
+  .lead-detail-grid {
+    gap: 16px;
+  }
+
+  .chart-card,
+  .profile-card,
+  .contact-card,
+  .notes-card,
+  .interaction-timeline {
+    padding: 16px;
+  }
+
+  .note-item {
+    padding: 14px !important;
+  }
+
+  .email-modal-card {
+    width: 94% !important;
+  }
+}
+
+/* ============ ≤ 480px (Small Smartphones) ============ */
+@media (max-width: 480px) {
+  .lead-summary-info h2 {
+    font-size: 1.1rem;
+  }
+
+  .lead-summary-main {
+    padding-bottom: 0.8rem;
+  }
+
+  .summary-action-card {
+    padding: 0.55rem;
+    font-size: 0.8rem;
+  }
+
+  .detail-header-left h1 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============ ≤ 360px (SE devices) ============ */
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+
+  .summary-action-card {
+    font-size: 0.75rem;
+  }
+
+  .lead-avatar.large {
+    width: 50px;
+    height: 50px;
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================
+   LEADS HEADER — BASE STYLE (existing layout)
+   ========================================================== */
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.4rem;
+  width: 100%;
+}
+
+.header-left h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg, rgba(255, 255, 255, 0.06));
+  border-radius: 12px;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
+}
+
+.search-box i {
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: inherit;
+  font-size: 0.95rem;
+}
+
+.header-icon {
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  background: var(--card-bg, rgba(255, 255, 255, 0.12));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ==========================================================
+   ≤ 768px — TABLET RESPONSIVE
+   ========================================================== */
+@media (max-width: 768px) {
+  .header-left h1 {
+    font-size: 1.4rem;
+  }
+
+  .search-box input {
+    font-size: 0.85rem;
+  }
+
+  .header-right {
+    gap: 0.7rem;
+  }
+}
+
+/* ==========================================================
+   ≤ 480px — MOBILE RESPONSIVE
+   ========================================================== */
+@media (max-width: 480px) {
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  /* Title stays at left */
+  .header-left h1 {
+    font-size: 1.3rem;
+  }
+
+  /* Right side becomes full width stack */
+  .header-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Search box expands full width */
+  .search-box {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .search-box input {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  /* Theme toggle stays small & compact */
+  .header-icon {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================
+   SIDEBAR + LOGOUT RESPONSIVE FIX (UNIVERSAL)
+   ========================================================== */
+
+/* ≤ 768px — Sidebar collapse (ensure footer stays visible) */
+@media (max-width: 768px) {
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto !important;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .user-info {
+    display: none !important; /* sembunyikan nama di sidebar kecil */
+  }
+
+  .user-avatar {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .btn-logout {
+    width: 38px !important;
+    height: 38px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ≤ 480px — Ultra compact */
+@media (max-width: 480px) {
+  .sidebar-footer {
+    padding-bottom: 10px;
+  }
+
+  .btn-logout {
+    width: 34px !important;
+    height: 34px !important;
+    margin-bottom: 4px;
+  }
+
+  .main-content {
+    overflow-x: hidden !important;
+    margin-left: 64px !important; /* harus sama dengan width sidebar */
+    width: calc(100% - 64px) !important;
   }
 }
