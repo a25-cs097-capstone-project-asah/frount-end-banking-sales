@@ -1,0 +1,258 @@
+html.light .lead-detail-page {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #9bb8d4;
+  box-shadow: 0 10px 26px rgba(10, 25, 49, 0.08);
+}
+
+html.light .detail-header-left h1 {
+  color: #0a1931;
+}
+
+html.light .btn-back {
+  background: #ffffff !important;
+  color: #0a1931 !important;
+  border: 1px solid #8ba8c6 !important;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(10, 25, 49, 0.1);
+}
+
+html.light .btn-back i {
+  color: #0a1931 !important;
+}
+
+html.light .summary-score-text {
+  color: #0a1931 !important;
+}
+
+html.light .summary-score-level {
+  color: #0a1931 !important;
+  font-weight: 600;
+}
+
+html.light .summary-score-sub {
+  color: #4b5563 !important;
+  opacity: 1 !important;
+}
+
+html.light .lead-summary-card {
+  background: #f4f7fb;
+  border: 1px solid #c4d6eb;
+}
+
+html.light .lead-summary-main {
+  border-bottom-color: #c4d6eb;
+}
+
+html.light .lead-avatar.large {
+  background: #6f91c5;
+  color: #f0e8e8;
+}
+
+html.light .lead-summary-info h2 {
+  color: #0a1931;
+}
+
+html.light .lead-summary-info p {
+  color: #374151;
+}
+
+html.light .summary-score-text {
+  color: #526581;
+  font-weight: 500;
+}
+
+html.light .score-circle.summary-score.high {
+  background: #ffffff;
+  color: #166534;
+  border: 5px solid rgba(34, 197, 94, 0.85);
+}
+
+html.light .score-circle.summary-score.medium {
+  background: #ffffff;
+  color: #854d0e;
+  border: 5px solid rgba(234, 179, 8, 0.85);
+}
+
+html.light .score-circle.summary-score.low {
+  background: #ffffff;
+  color: #b91c1c;
+  border: 5px solid rgba(239, 68, 68, 0.85);
+}
+
+html.light .summary-action-card {
+  background: #ffffff;
+  border: 1px solid #0a3d64;
+  color: #0a1931;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+html.light .summary-action-card:hover {
+  background: #edf4ff;
+  border-color: #4a7fa7;
+}
+
+html.light .summary-action-icon {
+  background: #dce3ef;
+  color: #0a1931;
+}
+
+html.light .lead-main-info .chart-card,
+html.light .lead-activity-section .chart-card,
+html.light .lead-activity-section .activity-card {
+  background: #ffffff;
+  border: 1px solid #c4d6eb;
+  box-shadow: 0 6px 18px rgba(10, 25, 49, 0.06);
+}
+
+html.light .card-header h3 {
+  color: #0a1931;
+  font-weight: 600;
+}
+
+html.light .recommendation-list {
+  color: #374151;
+}
+
+html.light .recommendation-list li i {
+  color: #0a3d91;
+}
+
+html.light .activity-details strong {
+  color: #0a1931;
+}
+
+html.light .activity-details span {
+  color: #4b5563;
+}
+
+html.light .activity-icon.success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 3px solid rgba(34, 197, 94, 0.55);
+  color: #166534;
+}
+
+html.light .activity-icon.warning {
+  background: rgba(234, 179, 8, 0.12);
+  border: 3px solid rgba(234, 179, 8, 0.55);
+  color: #854d0e;
+}
+
+html.light .activity-icon.info {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.55);
+  color: #1e3a8a;
+}
+
+html.light .chart-card p,
+html.light .chart-card div,
+html.light .lead-main-info p,
+html.light .lead-main-info div {
+  color: #1f2a37 !important;
+}
+
+html.light .chart-card strong,
+html.light .lead-main-info strong {
+  color: #0a1931 !important;
+}
+
+html.light .lead-activity-section p,
+html.light .chart-card .note-empty {
+  color: #4b5563 !important;
+}
+
+html.light textarea {
+  color: #1f2a37 !important;
+  border-color: #b3cfe5 !important;
+}
+
+html.light .chart-card,
+html.light .activity-card {
+  border: 1px solid #b7c9dd !important;
+}
+
+html.light .activity-panel {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+html.light .note-item {
+  background: #f8faff;
+  border: 1px solid #dce4f2;
+  box-shadow: 0 2px 8px rgba(0, 40, 80, 0.05);
+  color: #2e3a4d;
+}
+
+html.light .note-header strong {
+  color: #1f2a3d;
+}
+
+html.light .note-date {
+  color: #6d7a90;
+}
+
+html.light .status-select-trigger {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #1a1a1a !important;
+}
+
+html.light .status-select-trigger:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+html.light .status-select-trigger i {
+  color: #444;
+  opacity: 0.8;
+}
+
+html.light .status-select-menu {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 6px 22px rgba(0, 0, 0, 0.18);
+}
+
+html.light .status-select-option {
+  color: #1a1a1a !important;
+}
+
+html.light .status-select-option:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+html.light .status-select-option .status-dot,
+html.light .status-select-trigger .status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+html.light .status-select.status-new .status-select-trigger {
+  background: rgba(77, 163, 255, 0.18);
+  border-color: rgba(77, 163, 255, 0.45);
+}
+
+html.light .status-select.status-contacted .status-select-trigger {
+  background: rgba(77, 208, 225, 0.18);
+  border-color: rgba(77, 208, 225, 0.45);
+}
+
+html.light .status-select.status-follow-up .status-select-trigger {
+  background: rgba(255, 213, 79, 0.18);
+  border-color: rgba(255, 213, 79, 0.45);
+}
+
+html.light .status-select.status-converted .status-select-trigger {
+  background: rgba(102, 187, 106, 0.18);
+  border-color: rgba(102, 187, 106, 0.45);
+}
+
+html.light .status-select.status-rejected .status-select-trigger {
+  background: rgba(239, 83, 80, 0.18);
+  border-color: rgba(239, 83, 80, 0.45);
+}
+
+html.light .interaction-timeline h3,
+html.light .interaction-timeline p {
+  color: #1a1a1a !important;
+}

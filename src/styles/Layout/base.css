@@ -1,0 +1,274 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --brand-primary: #001a9d;
+  --brand-secondary: #294762;
+  --brand-accent: #008080;
+  --brand-gray: #607d8b;
+  --brand-dark: #36454f;
+
+  --bg: #121821;
+  --bg-soft: #1a2432;
+  --bg-card: #1e2837;
+
+  --primary: var(--brand-primary);
+  --primary-soft: rgba(0, 26, 157, 0.22);
+  --primary-border: rgba(0, 26, 157, 0.45);
+
+  --accent: var(--brand-accent);
+  --accent-soft: rgba(0, 128, 128, 0.2);
+
+  --text: #f5f7fa;
+  --text-soft: #cfd8dc;
+
+  --border: rgba(255, 255, 255, 0.15);
+
+  --warning: #facc15;
+  --danger: #ef4444;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 16px 35px rgba(0, 0, 0, 0.6);
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Inter",
+    sans-serif;
+  background: radial-gradient(
+    circle at top,
+    #001a9d 0%,
+    #294762 40%,
+    #121821 100%
+  );
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+p {
+  color: var(--text-soft);
+}
+
+.full-width {
+  width: 100%;
+}
+.mb-16 {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid transparent;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary),
+    var(--brand-secondary)
+  );
+  color: #fff;
+  border-color: var(--primary-border);
+  box-shadow: 0 10px 30px rgba(0, 26, 157, 0.55);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 42px rgba(0, 128, 128, 0.7);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: rgba(245, 247, 250, 0.8);
+  color: #f5f7fa;
+}
+
+.btn-outline:hover {
+  background: rgba(245, 247, 250, 0.1);
+  border-color: #ffffff;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--brand-accent);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.sidebar {
+  width: 240px;
+  padding: 1.6rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-title-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-badge i {
+  font-size: 1.2rem;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-title {
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+}
+
+.brand-subtitle {
+  margin-top: 0.18rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+}
+
+.nav-item i {
+  font-size: 0.95rem;
+}
+
+.badge {
+  margin-left: auto;
+  padding: 0 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.badge-danger {
+  background: #ef4444 !important;
+  color: #fff !important;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar i {
+  font-size: 0.9rem;
+}
+
+.user-info h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.user-info p {
+  font-size: 0.75rem;
+}
+
+.btn-logout {
+  border-radius: 999px;
+  padding: 0.45rem 0.6rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-logout i {
+  font-size: 1rem;
+}

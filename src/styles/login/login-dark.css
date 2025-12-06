@@ -1,0 +1,82 @@
+html:not(.light) .auth-page {
+  background: radial-gradient(circle at top, #001a9d, #294762 40%, #121821);
+}
+
+html:not(.light) .auth-container {
+  background: linear-gradient(135deg, #1e2837, #121821);
+  border-color: rgba(96, 125, 139, 0.85);
+}
+
+html:not(.light) .auth-left {
+  background: radial-gradient(
+    circle at top left,
+    rgba(0, 26, 157, 0.95),
+    #121821 80%
+  );
+  color: white;
+}
+
+html:not(.light) .auth-branding i {
+  background: radial-gradient(
+    circle at 30% 30%,
+    #1f2937 0%,
+    #0f172a 60%,
+    #020617
+  );
+  color: #e5f3ff;
+  border: 2px solid rgba(148, 191, 255, 0.7);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.65),
+    0 0 0 2px rgba(15, 23, 42, 0.9);
+}
+
+html:not(.light) .feature-item {
+  background: rgba(18, 24, 33, 0.4);
+  border: 1px solid rgba(191, 219, 254, 0.25);
+}
+
+html:not(.light) .feature-item p,
+html:not(.light) .feature-item h3,
+html:not(.light) .feature-item i {
+  color: #e0f2fe;
+}
+
+html:not(.light) .auth-right {
+  background: #1a2533;
+}
+
+html:not(.light) .form-group label {
+  color: #e5e7eb;
+}
+
+html:not(.light) .form-group input {
+  background: #0f1625;
+  color: #e5e7eb;
+  border: 1px solid rgba(96, 125, 139, 0.8);
+}
+
+html:not(.light) .auth-divider {
+  color: #9ca3af;
+}
+
+html:not(.light) .auth-divider::before,
+html:not(.light) .auth-divider::after {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+html:not(.light) .btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+html:not(.light) .btn-social {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  color: #e5e7eb;
+}
+
+html:not(.light) .auth-theme-toggle {
+  background: rgba(18, 24, 33, 0.75);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
